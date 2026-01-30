@@ -1,75 +1,109 @@
-import React from 'react'
-import "../App.css"
+import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 function Comunidades() {
+  const [busqueda, setBusqueda] = useState("");
+
+  const navigate = useNavigate();
+
   const listaComunidades = [
     {
-      id:1,
-      nombre:"ARIES",
-      descripcion:"Somos un grupo que Aprendemos React, Node y diseño UX/UI",
-      miembros:21,
-      
+      id: 1,
+      nombre: "Club de Programación Web",
+      descripcion: "Aprendemos React, Node y diseño UX/UI.",
+      miembros: 42,
+      categoria: "Tecnología",
     },
-     {
-      id:2,
-      nombre:"TSI",
-      descripcion:"Somos un grupo que enseña Vue",
-      miembros:31,
-      
+    {
+      id: 2,
+      nombre: "Fútbol Sala Nebrija",
+      descripcion: "Partidos los jueves por la tarde.",
+      miembros: 15,
+      categoria: "Deportes",
     },
-     {
-      id:3,
-      nombre:"KTQM",
-      descripcion:"Somos un grupo especializado en react",
-      miembros:11,
-      
+    {
+      id: 3,
+      nombre: "Grupo de Debate",
+      descripcion: "Mejora tu oratoria y pensamiento crítico.",
+      miembros: 28,
+      categoria: "Cultura",
     },
-     {
-      id:4,
-      nombre:"DEJOITE",
-      descripcion:"Somos un grupo que enseña MongoDB",
-      miembros:41,
-      
+    {
+      id: 4,
+      nombre: "Ayuda Matemáticas I",
+      descripcion: "Grupo de estudio para preparar el examen final.",
+      miembros: 8,
+      categoria: "Estudio",
     },
-     {
-      id:5,
-      nombre:"AMGDN",
-      descripcion:"Somos un grupo que enseña Big Data",
-      miembros:4,
-      
-    }
-  ]
+  ];
+
+  const comunidadesFiltradas = listaComunidades.filter((grupo) => {
+    const nombreGrupo = grupo.nombre ? grupo.nombre.toLowerCase() : "";
+    const categoriaGrupo = grupo.categoria ? grupo.categoria.toLowerCase() : "";
+    const textoBusqueda = busqueda ? busqueda.toLowerCase() : "";
+
+    return (
+      nombreGrupo.includes(textoBusqueda) ||
+      categoriaGrupo.includes(textoBusqueda)
+    );
+  });
 
   return (
-    <div className='app-comunidades'>
+    <div className="app-comunidades">
       <nav className="navbar">
-        <div className='navbar-logo'>NEBRIMATCH</div>
-        <div className='navbar-menu'>
+        <div className="navbar-logo">NEBRIMATCH</div>
+        <div className="navbar-menu">
           <span>Comunidades</span>
           <span>Mis chats</span>
           <span>Perfil</span>
         </div>
       </nav>
-      <section className="principal-content">
-        <h1>Tablón de comunidades</h1>
-        <p>¡Bienvenido!. Aquí aparecerán los grupos de estudio y actividades.</p>
-        <div className="target-groups">
-          {listaComunidades.map((grupo) =>(
-            <div key={grupo.id} className="card-comunidad">
-              <div className="card-header">
-                <span className='miembros'>{grupo.miembros}</span>
-              </div>
-              <h3>{grupo.nombre}</h3>
-              <p>{grupo.descripcion}</p>
 
-              <button className="btn-unirse">Ver más</button>
-            </div>
-          ))}
+      <section className="principal-content">
+        <div className="header-section">
+          <div>
+            <h1>Tablón de comunidades</h1>
+            <p>¡Bienvenido! Encuentra tu grupo ideal.</p>
+          </div>
+
+          <input
+            type="text"
+            placeholder="🔍 Buscar comunidad..."
+            className="search-bar"
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </div>
+
+        <div className="target-groups">
+          {comunidadesFiltradas.length > 0 ? (
+            comunidadesFiltradas.map((grupo) => (
+              <div key={grupo.id} className="card-comunidad">
+                <div className="card-header">
+                  <span className="tag-categoria">{grupo.categoria}</span>
+                  <span className="num-miembros">👥 {grupo.miembros}</span>
+                </div>
+
+                <h3>{grupo.nombre}</h3>
+                <p>{grupo.descripcion}</p>
+
+                <button
+                  className="btn-unirse"
+                  onClick={() => navigate(`/comunidad/${grupo.id}`)}
+                >
+                  Ver más
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>No hemos encontrado ninguna comunidad con ese nombre :(</p>
+          )}
         </div>
       </section>
     </div>
-  )
-
+  );
 }
 
-export default Comunidades
+export default Comunidades;
