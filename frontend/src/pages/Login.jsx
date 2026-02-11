@@ -19,7 +19,7 @@ function Login() {
     rol: ""
   });
 
-  const handleLogin = async () => {
+const handleLogin = async () => {
     setError(null);
     try {
       const res = await login(email, password);
@@ -27,10 +27,10 @@ function Login() {
         localStorage.setItem("usuario", JSON.stringify(res.usuario));
         navigate("/comunidades");
       } else {
-        setError(res.mensaje);
+        alert("Usuario no registrado");
       }
     } catch (err) {
-      setError("Error de conexión con el servidor");
+      alert("Error de conexión con el servidor");
     }
   };
 

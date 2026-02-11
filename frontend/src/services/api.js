@@ -67,3 +67,35 @@ export const getPreguntasFrecuentes = async () => {
   const res = await fetch(`${API_URL}/api/ayuda/preguntas-frecuentes`);
   return res.json();
 };
+
+// ============ COMUNIDADES ============
+
+export const getComunidades = async () => {
+  const res = await fetch(`${API_URL}/api/comunidades`);
+  return res.json();
+};
+
+export const crearComunidad = async (datos) => {
+  const res = await fetch(`${API_URL}/api/comunidades`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos)
+  });
+  return res.json();
+};
+
+export const unirseComunidad = async (comunidadId, usuarioId) => {
+  const res = await fetch(`${API_URL}/api/comunidades/${comunidadId}/unirse`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: usuarioId })
+  });
+  return res.json();
+};
+
+// detalles de las comunidades
+
+export const getComunidad = async (id) => {
+  const res = await fetch(`${API_URL}/api/comunidades/${id}`);
+  return res.json();
+};

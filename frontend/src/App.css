@@ -506,6 +506,29 @@ body {
 .main-footer span:hover {
   text-decoration: underline;
 }
+
+/*diseño para unirse a comunidad*/
+.ya-miembro {
+  color: green;
+  font-weight: bold;
+}
+
+.mensaje {
+  color: orange;
+  padding: 10px;
+}
+
+.miembros-section {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.miembro-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
 /* --- Estilos del Buscador y Cabecera --- */
 
 .header-section {

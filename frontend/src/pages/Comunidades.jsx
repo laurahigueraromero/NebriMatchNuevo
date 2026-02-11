@@ -1,63 +1,48 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getComunidades } from "../services/api";
 import "../App.css";
 
 function Comunidades() {
   const [busqueda, setBusqueda] = useState("");
-
+  const [comunidades, setComunidades] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const listaComunidades = [
-    {
-      id: 1,
-      nombre: "Club de Programación Web",
-      descripcion: "Aprendemos React, Node y diseño UX/UI.",
-      miembros: 42,
-      categoria: "Tecnología",
-    },
-    {
-      id: 2,
-      nombre: "Fútbol Sala Nebrija",
-      descripcion: "Partidos los jueves por la tarde.",
-      miembros: 15,
-      categoria: "Deportes",
-    },
-    {
-      id: 3,
-      nombre: "Grupo de Debate",
-      descripcion: "Mejora tu oratoria y pensamiento crítico.",
-      miembros: 28,
-      categoria: "Cultura",
-    },
-    {
-      id: 4,
-      nombre: "Ayuda Matemáticas I",
-      descripcion: "Grupo de estudio para preparar el examen final.",
-      miembros: 8,
-      categoria: "Estudio",
-    },
-  ];
+ useEffect(() => {
+    getComunidades()
+      .then(data => {
+        console.log("DATOS:", data);  
+        setComunidades(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
-  const comunidadesFiltradas = listaComunidades.filter((grupo) => {
+  const comunidadesFiltradas = comunidades.filter((grupo) => {
     const nombreGrupo = grupo.nombre ? grupo.nombre.toLowerCase() : "";
-    const categoriaGrupo = grupo.categoria ? grupo.categoria.toLowerCase() : "";
+    const lenguaje = grupo.lenguaje_asociado ? grupo.lenguaje_asociado.toLowerCase() : "";
     const textoBusqueda = busqueda ? busqueda.toLowerCase() : "";
 
     return (
       nombreGrupo.includes(textoBusqueda) ||
-      categoriaGrupo.includes(textoBusqueda)
+      lenguaje.includes(textoBusqueda)
     );
   });
+
+  if (loading) return <p>Cargando comunidades...</p>;
 
   return (
     <div className="app-comunidades">
       <nav className="navbar">
         <div className="navbar-logo">NEBRIMATCH</div>
         <div className="navbar-menu">
-          <span>Comunidades</span>
-          <span>Mis chats</span>
-          <span>Perfil</span>
+          <span onClick={() => navigate("/comunidades")}>Comunidades</span>
+          <span onClick={() => navigate("/chats")}>Mis chats</span>
+          <span onClick={() => navigate("/perfil")}>Perfil</span>
         </div>
       </nav>
 
@@ -82,8 +67,8 @@ function Comunidades() {
             comunidadesFiltradas.map((grupo) => (
               <div key={grupo.id} className="card-comunidad">
                 <div className="card-header">
-                  <span className="tag-categoria">{grupo.categoria}</span>
-                  <span className="num-miembros">👥 {grupo.miembros}</span>
+                  <span className="tag-categoria">{grupo.lenguaje_asociado}</span>
+                  <span className="num-miembros">👤 {grupo.creador}</span>
                 </div>
 
                 <h3>{grupo.nombre}</h3>

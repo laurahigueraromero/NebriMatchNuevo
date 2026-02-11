@@ -218,6 +218,125 @@ app.get("/api/ayuda/preguntas-frecuentes", (req, res) => {
   });
 });
 
+// PARTE DE COMUNIDADES=>
+  // Obtener todas las comunidades
+app.get("/api/comunidades", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const [comunidades] = await pool.query(
+      `SELECT c.*, u.nombre_usuario AS creador 
+       FROM comunidades c 
+       JOIN usuario u ON c.creador_id = u.id 
+       ORDER BY c.fecha_creacion DESC`
+    );
+    res.json(comunidades);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Crear comunidad
+app.post("/api/comunidades", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { nombre, descripcion, lenguaje_asociado, creador_id } = req.body;
+
+    const [result] = await pool.query(
+      "INSERT INTO comunidades (nombre, descripcion, lenguaje_asociado, creador_id) VALUES (?, ?, ?, ?)",
+      [nombre, descripcion, lenguaje_asociado, creador_id]
+    );
+
+    // El creador se une automáticamente
+    await pool.query(
+      "INSERT INTO comunidad_miembros (comunidad_id, usuario_id) VALUES (?, ?)",
+      [result.insertId, creador_id]
+    );
+
+    res.status(201).json({ id: result.insertId, mensaje: "Comunidad creada" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Unirse a comunidad
+app.post("/api/comunidades/:id/unirse", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { id } = req.body;
+
+    await pool.query(
+      "INSERT INTO comunidad_miembros (comunidad_id, usuario_id) VALUES (?, ?)",
+      [req.params.id, id]
+    );
+
+    res.json({ mensaje: "Te has unido a la comunidad" });
+  } catch (error) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(400).json({ error: "Ya eres miembro" });
+    }
+    res.status(500).json({ error: error.message });
+  }
+});
+// Ruta temporal para insertar comunidades de prueba
+app.get("/api/seed/comunidades", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const [usuarios] = await pool.query("SELECT id FROM usuario LIMIT 1");
+
+    if (usuarios.length === 0) {
+      return res.status(400).json({ error: "No hay usuarios, crea uno primero" });
+    }
+
+    const creadorId = usuarios[0].id;
+
+    await pool.query(
+      `INSERT INTO comunidades (nombre, descripcion, lenguaje_asociado, creador_id) VALUES 
+      ('Club de Programación Web', 'Aprendemos React, Node y diseño UX/UI', 'JavaScript', ?),
+      ('Grupo de Python', 'Automatización y data science', 'Python', ?),
+      ('Java Lovers', 'POO y patrones de diseño', 'Java', ?),
+      ('React Lovers', 'Hooks, componentes y todo sobre React', 'React', ?),
+      ('Node.js Backend', 'APIs REST, Express y bases de datos', 'Node.js', ?),
+      ('CSS Masters', 'Flexbox, Grid y animaciones avanzadas', 'CSS', ?),
+      ('SQL y Bases de Datos', 'Consultas, diseño de tablas y optimización', 'MySQL', ?)`,
+      [creadorId, creadorId, creadorId, creadorId, creadorId, creadorId, creadorId]
+    );
+
+    res.json({ mensaje: "Comunidades insertadas correctamente" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// para la parte de ver detalles de las comunidades
+// Obtener una comunidad por ID
+app.get("/api/comunidades/:id", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const [comunidad] = await pool.query(
+      `SELECT c.*, u.nombre_usuario AS creador 
+       FROM comunidades c 
+       JOIN usuario u ON c.creador_id = u.id 
+       WHERE c.id = ?`, [req.params.id]
+    );
+
+    if (comunidad.length === 0) {
+      return res.status(404).json({ mensaje: "Comunidad no encontrada" });
+    }
+
+    // Obtener miembros
+    const [miembros] = await pool.query(
+      `SELECT u.id, u.nombre_usuario, cm.fecha_union 
+       FROM comunidad_miembros cm 
+       JOIN usuario u ON cm.usuario_id = u.id 
+       WHERE cm.comunidad_id = ?`, [req.params.id]
+    );
+
+    res.json({ ...comunidad[0], miembros });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // ========== INICIAR SERVIDOR ==========
 app.listen(port, () => {
