@@ -1,15 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom'; 
+import '../App.css'; 
+
+
 
 function Footer() {
   return (
     <footer className='main-footer'>
-        <span>Términos</span>
-        <span>Privacidad</span>
-        <span>Ayuda</span>
-        <span>Contacto</span>
-
+ 
+      <Link to="/terminos" className="footer-link">Términos</Link>
+      <Link to="/privacidad" className="footer-link">Privacidad</Link>
+      <Link to="/ayuda" className="footer-link">Ayuda</Link>
+      <Link to="/contacto" className="footer-link">Contacto</Link>
     </footer>
-  )
+  );
 }
 
 export default Footer;
