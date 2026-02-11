@@ -6,15 +6,20 @@ import Para_ti from "../pages/Para_ti";
 import NotFound from "../pages/NotFound";
 import Comunidades from "../pages/Comunidades";
 import DetallesComunidades from "../pages/DetallesComunidades";
-import Ayuda from "./pagesFooter/Ayuda";
-import Contacto from "./pagesFooter/Contacto";
-import Privacidad from "./pagesFooter/Privacidad";
-import Terminos from "./pagesFooter/terminos";
+import Ayuda from "../pagesFooter/Ayuda";
+import Contacto from "../pagesFooter/Contacto";
+import Privacidad from "../pagesFooter/Privacidad";
+import Terminos from "../pagesFooter/terminos";
+import Footer from "../componentes/Footer";
 
 function AppRouter() {
   return (
+
     <BrowserRouter>
-      <Routes>
+      <div className="app-container">
+  <div className="content-wrap">
+     <Routes>
+
         <Route path="/" element={<Login />} />
         <Route path="/Usuario" element={<Users />} />
         <Route path="/Para_ti" element={<Para_ti />} />
@@ -26,8 +31,15 @@ function AppRouter() {
             <Route path="/contacto" element={<Contacto />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+    
+  </div>
+</div>
+    
+    
+      <Footer/>
     </BrowserRouter>
   );
+  
 }
 
 export default AppRouter;
