@@ -10,6 +10,7 @@ import Contacto from "../pagesFooter/Contacto";
 import Privacidad from "../pagesFooter/Privacidad";
 import Terminos from "../pagesFooter/terminos";
 import Footer from "../componentes/Footer";
+import Users from '../pages/Users'
 
 function AppRouter() {
   return (
@@ -21,6 +22,7 @@ function AppRouter() {
 
             <Route path="/" element={<Login />} />
             <Route path="/comunidades" element={<Comunidades />} />
+            <Route path="/users/:id" element={<Users/>}></Route>
             <Route path="/comunidad/:id" element={<DetallesComunidades />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />
