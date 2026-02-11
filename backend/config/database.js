@@ -15,6 +15,7 @@ const usuario =
   "id INT NOT NULL AUTO_INCREMENT, " +
   "nombre_usuario VARCHAR(50) NOT NULL UNIQUE, " +
   "email VARCHAR(100) NOT NULL UNIQUE, " +
+  "password VARCHAR(255) NOT NULL,"+
   "descripcion TEXT, " +
   "lenguajes_a_ensenar VARCHAR(200), " +
   "lenguajes_a_aprender VARCHAR(200), " +
@@ -104,12 +105,27 @@ const crearTablas = async () => {
     
     console.log(" Todas las tablas creadas exitosamente");
 
+
     // para liberar conexiones:
     connection.release();
   } catch (error) {
     console.error(" Error al crear tablas:", error);
   }
 };
+
+/* const insert = async () => {
+  const { pool } = require("./config/database");
+  try {
+    await pool.query(
+      "ALTER TABLE usuario ADD COLUMN password VARCHAR(255) NOT NULL AFTER email"
+    );
+    console.log("Columna password añadida correctamente");
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}; */
+
+//insert();
 
 // ============ EXPORTAR ============
 

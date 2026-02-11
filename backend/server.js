@@ -10,6 +10,10 @@ app.use(express.json());
 
 crearTablas();
 
+
+
+
+
 // ========== RUTA PRINCIPAL ==========
 app.get("/", (req, res) => {
   res.json({
@@ -27,6 +31,46 @@ app.get("/", (req, res) => {
 
 // ========== RUTAS ============
 
+
+
+// crear ususario ==>
+
+  // Crear usuario
+app.post("/api/usuarios", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const {
+      nombre_usuario,
+      email,
+      password,
+      descripcion,
+      lenguajes_a_ensenar,
+      lenguajes_a_aprender,
+      rol,
+    } = req.body;
+
+    const [result] = await pool.query(
+      "INSERT INTO usuario (nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender) VALUES (?, ?, ?, ?, ?, ?)",
+      [nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender]
+    );
+
+    if (rol) {
+      await pool.query(
+        "INSERT INTO rol_usuario (usuario_id, rol) VALUES (?, ?)",
+        [result.insertId, rol]
+      );
+    }
+
+    res.status(201).json({
+      id: result.insertId,
+      nombre_usuario,
+      mensaje: "Usuario creado exitosamente",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Obtener todos los usuarios
 app.get("/api/usuarios", async (req, res) => {
   const { pool } = require("./config/database");
@@ -34,6 +78,29 @@ app.get("/api/usuarios", async (req, res) => {
     const [usuarios] = await pool.query("SELECT * FROM usuario");
     //Envía los datos como respuesta JSON al cliente (React)=>    res.json(usuarios);
     res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// Login de usuario
+app.post("/api/login", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { email, password } = req.body;
+
+    const [result] = await pool.query(
+      "SELECT u.*, r.rol FROM usuario u LEFT JOIN rol_usuario r ON u.id = r.usuario_id WHERE u.email = ? AND u.password = ?",
+      [email, password]
+    );
+
+    if (result.length === 0) {
+      return res.status(401).json({ mensaje: "Email o contraseña incorrectos" });
+    }
+
+    res.json({
+      mensaje: "Login exitoso",
+      usuario: result[0]
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -61,47 +128,7 @@ app.get("/api/usuarios/:usuario", async (req, res) => {
   }
 });
 
-// Crear usuario
-app.post("/api/usuarios", async (req, res) => {
-  const { pool } = require("./config/database");
-  try {
-    // req.body : lo que recibimos del front
-    const {
-      nombre_usuario,
-      email,
-      descripcion,
-      lenguajes_a_ensenar,
-      lenguajes_a_aprender,
-      rol,
-    } = req.body;
 
-    const [result] = await pool.query(
-      "INSERT INTO usuario (nombre_usuario, email, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender) VALUES (?, ?, ?, ?, ?)",
-      [
-        nombre_usuario,
-        email,
-        descripcion,
-        lenguajes_a_ensenar,
-        lenguajes_a_aprender,
-      ]
-    );
-
-    if (rol) {
-      await pool.query(
-        "INSERT INTO rol_usuario (usuario_id, rol) VALUES (?, ?)",
-        [result.insertId, rol]
-      );
-    }
-
-    res.status(201).json({
-      id: result.insertId,
-      nombre_usuario,
-      mensaje: "Usuario creado exitosamente",
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 // Chats del usuario
 app.get("/api/usuarios/:usuario/chats", async (req, res) => {
@@ -190,6 +217,7 @@ app.get("/api/ayuda/preguntas-frecuentes", (req, res) => {
     ],
   });
 });
+
 
 // ========== INICIAR SERVIDOR ==========
 app.listen(port, () => {
