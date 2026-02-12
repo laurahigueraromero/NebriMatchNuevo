@@ -36,38 +36,82 @@ app.get("/", (req, res) => {
 // crear ususario ==>
 
   // Crear usuario
+// Crear usuario
 app.post("/api/usuarios", async (req, res) => {
+  console.log("🔥 === INICIANDO POST /api/usuarios ===");
+  console.log("📦 Body recibido:", req.body);
+  console.log("📋 Content-Type:", req.headers['content-type']);
+  
   const { pool } = require("./config/database");
+  
   try {
     const {
       nombre_usuario,
       email,
       password,
-      descripcion,
-      lenguajes_a_ensenar,
-      lenguajes_a_aprender,
+      descripcion = null,
+      lenguajes_a_ensenar = null,
+      lenguajes_a_aprender = null,
       rol,
     } = req.body;
 
+    console.log("✅ Datos extraídos:", {
+      nombre_usuario,
+      email,
+      password: password ? "***" : undefined,
+      descripcion,
+      lenguajes_a_ensenar,
+      lenguajes_a_aprender,
+      rol
+    });
+
+    // Verificar campos requeridos
+    if (!nombre_usuario || !email || !password) {
+      console.log("❌ Faltan campos requeridos");
+      return res.status(400).json({ 
+        error: "Faltan campos requeridos: nombre_usuario, email, password" 
+      });
+    }
+
+    console.log("🗄️ Intentando conectar con la base de datos...");
+    console.log("🔍 Pool disponible:", !!pool);
+
+    console.log("📝 Ejecutando query INSERT...");
     const [result] = await pool.query(
       "INSERT INTO usuario (nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender) VALUES (?, ?, ?, ?, ?, ?)",
       [nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender]
     );
 
+    console.log("✅ Usuario insertado correctamente, ID:", result.insertId);
+
     if (rol) {
+      console.log("🔑 Insertando rol...");
       await pool.query(
         "INSERT INTO rol_usuario (usuario_id, rol) VALUES (?, ?)",
         [result.insertId, rol]
       );
+      console.log("✅ Rol insertado correctamente");
     }
 
+    console.log("🎉 Enviando respuesta exitosa");
     res.status(201).json({
       id: result.insertId,
       nombre_usuario,
       mensaje: "Usuario creado exitosamente",
     });
+
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("💥 === ERROR COMPLETO ===");
+    console.error("🔍 Error message:", error.message);
+    console.error("📋 Error code:", error.code);
+    console.error("🔢 Error errno:", error.errno);
+    console.error("📍 Stack trace:", error.stack);
+    console.error("========================");
+    
+    res.status(500).json({ 
+      error: error.message,
+      code: error.code || "UNKNOWN"
+    });
   }
 });
 

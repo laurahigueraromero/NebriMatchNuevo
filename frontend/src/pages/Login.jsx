@@ -34,24 +34,27 @@ const handleLogin = async () => {
     }
   };
 
-  const handleRegistro = async () => {
-    setError(null);
-    try {
-      const res = await crearUsuario(registro);
-      if (res.id) {
-        setVista("login");
-        
-        setEmail(registro.email);
-        setPassword(registro.password)
-        
-     /*    alert('tu usuario se ha creado correctamente') */
-      } else {
-        setError(res.error);
-      }
-    } catch (err) {
-      setError("Error de conexión con el servidor");
+ const handleRegistro = async () => {
+  setError(null);
+  console.log("📋 Datos a enviar:", registro);
+  
+  try {
+    const res = await crearUsuario(registro);
+    console.log("✅ Respuesta recibida:", res);
+    
+    if (res.id) {
+      setVista("login");
+      setEmail(registro.email);
+      setPassword(registro.password);
+    } else {
+      console.error("❌ Error en respuesta:", res.error);
+      setError(res.error);
     }
-  };
+  } catch (err) {
+    console.error("💥 Error de conexión:", err);
+    setError("Error de conexión con el servidor");
+  }
+};
 
   const handleRegistroChange = (e) => {
     setRegistro({ ...registro, [e.target.name]: e.target.value });

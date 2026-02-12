@@ -13,12 +13,32 @@ export const login = async (email, password) => {
 
 // POST crear usuario (registro)
 export const crearUsuario = async (datos) => {
-  const res = await fetch(`${API_URL}/api/usuarios`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(datos)
-  });
-  return res.json();
+  try {
+    console.log("🌐 Enviando a:", `${API_URL}/api/usuarios`);
+    console.log("📦 Datos:", datos);
+    
+    const res = await fetch(`${API_URL}/api/usuarios`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    
+    console.log("📡 Response status:", res.status);
+    console.log("📡 Response ok:", res.ok);
+    
+    const data = await res.json();
+    console.log("📋 Response data:", data);
+    
+    // Si hay error HTTP, lanzar excepción
+    if (!res.ok) {
+      throw new Error(data.error || `HTTP ${res.status}`);
+    }
+    
+    return data;
+  } catch (error) {
+    console.error("🔥 Error en crearUsuario:", error);
+    throw error;
+  }
 };
 
 
