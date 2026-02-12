@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getComunidades } from "../services/api";
 import "../App.css";
+import Header from "../componentes/Header";
 
 function Comunidades() {
   const [busqueda, setBusqueda] = useState("");
@@ -38,12 +39,7 @@ function Comunidades() {
   return (
     <div className="app-comunidades">
       <nav className="navbar">
-        <div className="navbar-logo">NEBRIMATCH</div>
-        <div className="navbar-menu">
-          <span onClick={() => navigate("/comunidades")}>Comunidades</span>
-          <span onClick={() => navigate("/chats")}>Mis chats</span>
-          <span onClick={() => navigate("/perfil")}>Perfil</span>
-        </div>
+        <Header/>
       </nav>
 
       <section className="principal-content">

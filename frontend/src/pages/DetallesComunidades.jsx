@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getComunidad, unirseComunidad } from '../services/api';
-import '../App.css';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getComunidad, unirseComunidad } from "../services/api";
+import "../App.css";
+import Header from "../componentes/Header";
 
 function DetallesComunidades() {
   const { id } = useParams();
@@ -14,11 +15,11 @@ function DetallesComunidades() {
 
   useEffect(() => {
     getComunidad(id)
-      .then(data => {
+      .then((data) => {
         setComunidad(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         setLoading(false);
       });
@@ -43,22 +44,23 @@ function DetallesComunidades() {
   // Comprobar si el usuario ya es miembro
   // "si comunidad existe, accede a miembros, y si miembros existe, ejecuta some() ==> esto lo metemos en la ternaria que si es miembro ya eres y si no puedes serlo
   // el some lo utilizamos porque si cumple con algo de la condicion nos devuelve true
-  const yaMiembro = comunidad?.miembros?.some(m => m.id === usuario?.id);
+  const yaMiembro = comunidad?.miembros?.some((m) => m.id === usuario?.id);
 
   if (loading) return <p>Cargando...</p>;
   if (!comunidad || comunidad.mensaje) return <p>Comunidad no encontrada</p>;
 
   return (
-    <div className='app-layout'>
-      <nav className="navbar">
-        <div className='navbar-logo'>NEBRIMATCH</div>
-      </nav>
+    <div className="app-layout">
+      <Header />
 
       <div className="detalle-content">
         <h1>{comunidad.nombre}</h1>
         <span className="tag-categoria">{comunidad.lenguaje_asociado}</span>
         <p>{comunidad.descripcion}</p>
-        <p>Fecha de creación: {new Date(comunidad.fecha_creacion).toLocaleDateString('es-ES')}</p>
+        <p>
+          Fecha de creación:{" "}
+          {new Date(comunidad.fecha_creacion).toLocaleDateString("es-ES")}
+        </p>
 
         {mensaje && <p className="mensaje">{mensaje}</p>}
 
@@ -71,12 +73,16 @@ function DetallesComunidades() {
         )}
 
         <div className="miembros-section">
-          <h3>Miembros ({comunidad.miembros ? comunidad.miembros.length : 0})</h3>
+          <h3>
+            Miembros ({comunidad.miembros ? comunidad.miembros.length : 0})
+          </h3>
           {comunidad.miembros && comunidad.miembros.length > 0 ? (
-            comunidad.miembros.map(m => (
+            comunidad.miembros.map((m) => (
               <div key={m.id} className="miembro-item">
                 <span>👤 {m.nombre_usuario}</span>
-                <span>Unido: {new Date(m.fecha_union).toLocaleDateString('es-ES')}</span>
+                <span>
+                  Unido: {new Date(m.fecha_union).toLocaleDateString("es-ES")}
+                </span>
               </div>
             ))
           ) : (
@@ -86,7 +92,7 @@ function DetallesComunidades() {
 
         <button
           className="btn-black btn-margin-top"
-          onClick={() => navigate('/comunidades')}
+          onClick={() => navigate("/comunidades")}
         >
           Volver atrás
         </button>

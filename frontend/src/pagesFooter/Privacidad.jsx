@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import Header from "../componentes/Header";
 
 function Privacidad() {
   const navigate = useNavigate();
@@ -8,12 +9,7 @@ function Privacidad() {
   return (
     <div className="app-layout">
       
-      <nav className="navbar">
-        <div className='navbar-logo'>NEBRIMATCH</div>
-        <div className='navbar-menu'>
-          <span onClick={() => navigate('/comunidades')} className="nav-link">Volver al tablón</span>
-        </div>
-      </nav>
+     <Header />
 
       <div className="legal-page">
         <h1>Política de Privacidad</h1>
