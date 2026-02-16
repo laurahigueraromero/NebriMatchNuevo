@@ -1,64 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../componentes/Header';
-import { getMentores } from '../services/api'; // ✅ Cambiar de datos estáticos a API
+import { getMentores } from '../services/api';
 import { X, Heart, Maximize2, Minimize2 } from 'lucide-react'; 
 import '../App.css';
 import './ParaTi.css'
 
 function ParaTi() {
-  const [mentoresData, setMentoresData] = useState([]); // ✅ Estado para mentores de la DB
-  const [loading, setLoading] = useState(true); // ✅ Estado de carga
+  const [mentoresData, setMentoresData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState('');
   const [isOpened, setIsOpened] = useState(false);
 
-  // ✅ Cargar mentores desde la base de datos
+  // Cargar mentores desde la base de datos
   useEffect(() => {
     getMentores()
       .then(data => {
+        console.log('Mentores recibidos de la DB:', data);
+        
         // Transformar datos de la DB al formato que espera tu componente
         const mentoresTransformados = data.map(mentor => ({
           id: mentor.id,
           nombre: mentor.nombre_usuario,
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
-          imagen: `https://ui-avatars.com/api/?name=${mentor.nombre_usuario}&background=d71820&color=fff&size=400`, // ✅ Avatar generado
-          online: Math.random() > 0.5, // ✅ Estado online aleatorio
+          imagen: `https://ui-avatars.com/api/?name=${encodeURIComponent(mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
+          online: Math.random() > 0.3, // 70% probabilidad de estar online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
-          email: mentor.email
+          email: mentor.email,
+          numero_matches: mentor.numero_matches || 0
         }));
-        setMentoresData(mentoresTransformados);
+        
+        // Mezclar mentores aleatoriamente para variedad
+        const mentoresMezclados = mentoresTransformados.sort(() => Math.random() - 0.5);
+        
+        setMentoresData(mentoresMezclados);
         setLoading(false);
       })
       .catch(err => {
         console.error('Error al cargar mentores:', err);
+        setError('No se pudieron cargar los mentores');
         setLoading(false);
       });
   }, []);
 
-  // LOGICA MATCH (IZQUIERDA)
-  const handleMatch = () => {
+  // LOGICA MATCH
+  const handleMatch = async () => {
     if (!isOpened) setIsOpened(true);
     setSwipeDirection('slide-out-left');
     
-    // Guardar en LocalStorage
     const mentorActual = mentoresData[currentIndex];
     const chatsGuardados = JSON.parse(localStorage.getItem('mis_chats_nebrimatch')) || [];
     
     if (!chatsGuardados.find(c => c.id === mentorActual.id)) {
-        chatsGuardados.push({
+        const matchData = {
           ...mentorActual,
-          fechaMatch: new Date().toISOString() // ✅ Añadir fecha del match
-        });
+          fechaMatch: new Date().toISOString(),
+          ultimoMensaje: `¡Hola! Me interesa aprender ${mentorActual.lenguajes_a_ensenar?.split(',')[0]?.trim()}`,
+          tipoMatch: 'mentor'
+        };
+        
+        chatsGuardados.push(matchData);
         localStorage.setItem('mis_chats_nebrimatch', JSON.stringify(chatsGuardados));
-        console.log(`¡Match con ${mentorActual.nombre}!`); // ✅ Log para debug
+        
+        console.log(`✅ Match guardado con ${mentorActual.nombre}`);
+        
+        // Opcional: Actualizar contador de matches en la BD
+        // actualizarMatches(mentorActual.id);
     }
 
     setTimeout(() => { avanzarCarta(); }, 400);
   };
 
-  // LOGICA PASS (DERECHA)
+  // LOGICA PASS
   const handlePass = () => {
     if (!isOpened) setIsOpened(true);
     setSwipeDirection('slide-out-right');
@@ -70,37 +86,56 @@ function ParaTi() {
     if (currentIndex < mentoresData.length - 1) {
         setCurrentIndex(currentIndex + 1);
     } else {
-        alert("¡No hay más mentores por hoy!");
+        // Reiniciar o mostrar mensaje
+        alert("¡Has visto todos los mentores! Reiniciando...");
         setCurrentIndex(0);
     }
   };
 
-  // ✅ Mostrar loading mientras cargan los datos
+  // Estados de loading y error
   if (loading) {
     return (
       <div className="app-layout">
         <Header />
         <div className="loading-container">
-          <h2>⏳ Cargando mentores...</h2>
+          <div className="loading-spinner">⏳</div>
+          <h2>Cargando mentores...</h2>
+          <p>Conectando con la base de datos</p>
         </div>
       </div>
     );
   }
 
-  // ✅ Mostrar mensaje si no hay mentores
+  if (error) {
+    return (
+      <div className="app-layout">
+        <Header />
+        <div className="error-container">
+          <h2>❌ {error}</h2>
+          <button onClick={() => window.location.reload()}>
+            🔄 Intentar de nuevo
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (mentoresData.length === 0) {
     return (
       <div className="app-layout">
         <Header />
         <div className="no-mentores-container">
           <h2>😔 No hay mentores disponibles</h2>
-          <p>Vuelve más tarde para encontrar nuevos mentores</p>
+          <p>No se encontraron mentores en la base de datos</p>
+          <button onClick={() => window.location.reload()}>
+            🔄 Recargar
+          </button>
         </div>
       </div>
     );
   }
 
-  // Definimos las 3 cartas visibles
+  // Definir cartas visibles
   const card1 = mentoresData[currentIndex];
   const card2 = mentoresData[currentIndex + 1] || null;
   const card3 = mentoresData[currentIndex + 2] || null;
@@ -111,7 +146,7 @@ function ParaTi() {
       
       <div className="stack-container">
         <h1>Para Ti 🔥</h1>
-        <p className="subtitle-stack">Encuentra a tu mentor ideal</p>
+        <p className="subtitle-stack">Conecta con mentores de tu base de datos</p>
 
         {/* CONTENEDOR DEL MAZO */}
         <div className={`card-stack ${isOpened ? 'opened' : ''}`}>
@@ -146,7 +181,7 @@ function ParaTi() {
                     <span className="card-role">{card1.especialidad}</span>
                     <p className="card-bio">{card1.bio}</p>
 
-                    {/* ✅ Mostrar habilidades del mentor */}
+                    {/* Mostrar habilidades del mentor */}
                     <div className="mentor-skills-preview">
                       <strong>🎯 Enseña:</strong>
                       <div className="skills-mini">
@@ -154,6 +189,12 @@ function ParaTi() {
                           <span key={i} className="skill-mini">{skill.trim()}</span>
                         ))}
                       </div>
+                    </div>
+
+                    {/* Mostrar estadísticas */}
+                    <div className="mentor-stats-mini">
+                      <span>🤝 {card1.numero_matches} matches</span>
+                      <span>📧 {card1.email}</span>
                     </div>
 
                     <div className="action-buttons-row">
@@ -176,9 +217,14 @@ function ParaTi() {
         
         <p className="hint-text">{isOpened ? "Modo Panorámico" : "Modo Pila"}</p>
 
-        {/* ✅ Contador de mentores */}
+        {/* Contador de mentores */}
         <p className="mentor-counter">
           {currentIndex + 1} de {mentoresData.length} mentores
+        </p>
+
+        {/* Indicador de conexión DB */}
+        <p className="db-indicator">
+          🔗 Conectado a NebriMatch DB
         </p>
 
       </div>
