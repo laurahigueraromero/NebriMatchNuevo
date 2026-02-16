@@ -13,6 +13,7 @@ import Footer from "../componentes/Footer";
 import Users from '../pages/Users'
 import MiPerfil from "../pages/MiPerfil"; 
 import Home from "../pages/Home";
+import ParaTi from "../pages/ParaTi";
 
 function AppRouter() {
   return (
@@ -29,6 +30,7 @@ function AppRouter() {
 
 
             <Route path="/comunidades" element={<Comunidades />} />
+            <Route path="/parati" element={<ParaTi />} />
             <Route path="/users/:id" element={<Users/>}></Route>
             <Route path="/comunidad/:id" element={<DetallesComunidades />} />
             <Route path="/terminos" element={<Terminos />} />

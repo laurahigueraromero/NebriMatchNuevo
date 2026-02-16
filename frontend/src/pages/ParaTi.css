@@ -1,0 +1,260 @@
+/* =========================================
+   PARA TI (DISEÑO ALAS LATERALES + ROJO)
+   ========================================= */
+
+.stack-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden; /* Evita que las alas creen scroll horizontal */
+  background-color: #f8f9fa;
+}
+
+.subtitle-stack {
+  color: #888;
+  margin-bottom: 20px;
+  font-weight: 500;
+  z-index: 5;
+}
+
+/* CONTENEDOR CENTRAL DEL MAZO */
+.card-stack {
+  width: 320px;
+  height: 500px;
+  position: relative;
+  margin-bottom: 60px;
+  display: grid;
+  place-items: center; /* Centra las cartas */
+}
+
+/* ESTILO BASE DE LAS CARTAS */
+.card {
+  width: 320px;
+  height: 500px;
+  border-radius: 20px;
+  position: absolute;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: white;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform-origin: center center;
+}
+
+/* EL VELO ROJO (Capa roja encima de la foto) */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(191, 42, 42, 0.6); /* Rojo Nebrimatch */
+  opacity: 0; /* Invisible por defecto */
+  transition: opacity 0.6s;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* --- ESTADO CERRADO (TODO APILADO) --- */
+
+.card-top {
+  z-index: 10;
+  transform: scale(1);
+}
+
+.card-middle {
+  z-index: 9;
+  transform: scale(0.95) translateY(10px); /* Un poco abajo */
+  opacity: 0.8;
+}
+
+.card-bottom {
+  z-index: 8;
+  transform: scale(0.9) translateY(20px); /* Un poco más abajo */
+  opacity: 0.6;
+}
+
+/* --- ESTADO ABIERTO (ALAS DESPLEGADAS) --- */
+
+/* 1. PRINCIPAL (Centro) */
+.card-stack.opened .card-top {
+  transform: scale(1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+/* 2. SIGUIENTE (Se va a la DERECHA) */
+.card-stack.opened .card-middle {
+  transform: translateX(280px) scale(0.9) rotate(5deg);
+  opacity: 1;
+  filter: blur(2px);
+  z-index: 10;
+}
+.card-stack.opened .card-middle::after {
+  opacity: 1;
+} /* Rojo ON */
+
+/* 3. FONDO (Se va a la IZQUIERDA - Simetría) */
+.card-stack.opened .card-bottom {
+  transform: translateX(-280px) scale(0.9) rotate(-5deg);
+  opacity: 1;
+  filter: blur(2px);
+  z-index: 10;
+}
+.card-stack.opened .card-bottom::after {
+  opacity: 1;
+} /* Rojo ON */
+
+/* --- ESTILOS DEL CONTENIDO --- */
+.card-image-area {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0;
+}
+.card-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-online {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(47, 230, 166, 0.9);
+  color: #0b3d29;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  z-index: 2;
+}
+
+.card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 120px 20px 20px 20px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent 100%
+  );
+  color: white;
+  text-align: left;
+  box-sizing: border-box;
+  z-index: 6;
+}
+.card-details h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.card-role {
+  color: #ffcccc;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.card-bio {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Botones */
+.action-buttons-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
+}
+.btn-action {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  transition: transform 0.2s;
+  backdrop-filter: blur(5px);
+}
+.btn-action.match {
+  background: rgba(191, 42, 42, 0.9);
+  color: white;
+}
+.btn-action.pass {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.btn-action:hover {
+  transform: translateY(-3px);
+}
+
+/* Animaciones */
+.slide-out-left {
+  transform: translateX(-150%) rotate(-20deg) !important;
+  opacity: 0;
+}
+.slide-out-right {
+  transform: translateX(150%) rotate(20deg) !important;
+  opacity: 0;
+}
+
+/* Botón Redondo */
+.nav-circle {
+  width: 60px;
+  height: 60px;
+  background: #222;
+  position: absolute;
+  bottom: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 30;
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.nav-circle:hover {
+  scale: 1.1;
+}
+.nav-circle.opened {
+  transform: rotate(180deg);
+  background: #bf2a2a;
+}
+
+.hint-text {
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.8rem;
+  color: #999;
+  opacity: 0.6;
+}

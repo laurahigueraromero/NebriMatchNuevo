@@ -1,6 +1,6 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../App.css'; 
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 function Header() {
   const navigate = useNavigate();
@@ -8,22 +8,25 @@ function Header() {
   return (
     <nav className="navbar">
       {/* El logo ahora es clicable y te lleva al inicio de la app */}
-      <div 
-        className='navbar-logo' 
-        onClick={() => navigate('/comunidades')} 
-        style={{cursor: 'pointer'}}
+      <div
+        className="navbar-logo"
+        onClick={() => navigate("/comunidades")}
+        style={{ cursor: "pointer" }}
       >
         NEBRIMATCH
       </div>
-      
-      <div className='navbar-menu'>
-        <span className="nav-link" onClick={() => navigate('/comunidades')}>
+
+      <div className="navbar-menu">
+        <span className="nav-link" onClick={() => navigate("/parati")}>
+          Para Ti
+        </span>
+        <span className="nav-link" onClick={() => navigate("/comunidades")}>
           Comunidades
         </span>
         <span className="nav-link" onClick={() => alert("")}>
           Mis chats
         </span>
-        <span className="nav-link" onClick={() =>  navigate('/miperfil')}>
+        <span className="nav-link" onClick={() => navigate("/miperfil")}>
           Perfil
         </span>
       </div>
