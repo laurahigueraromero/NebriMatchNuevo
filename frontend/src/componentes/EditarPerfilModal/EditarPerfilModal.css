@@ -1,0 +1,141 @@
+/* Fondo del modal */
+.modal-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Contenido del modal */
+.modal-contenido {
+  position: relative;
+  background-color: white; /* color claro del modal */
+  border-radius: 15px;
+  padding: 40px 50px;
+  max-width: 650px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Encabezado */
+.modal-contenido header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #d71820; /* rojo acento */
+}
+
+/* Botón de cerrar X */
+.cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #d71820;
+  transition: color 0.2s;
+}
+
+.cerrar-modal:hover {
+  color: #a51418;
+}
+
+/* Inputs y textarea */
+.grande,
+select.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d71820;
+  font-size: 1rem;
+  margin-bottom: 20px; /* separación entre campos */
+  background-color: #fff;
+}
+
+textarea.grande {
+  resize: vertical;
+}
+
+/* Botón enviar */
+.boton-enviar-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.boton-enviar {
+  background-color: #d71820;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.boton-enviar:hover {
+  background-color: #a51418;
+}
+
+/* Checkboxes en grupo */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px; /* separación final del grupo */
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  background-color: #edd1d1; /* gris claro de fondo */
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+
+.checkbox-item:hover {
+  background-color: #f29f9f; /* gris más oscuro al pasar el mouse */
+}
+
+/* Tabla para mayor separación */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px; /* separación vertical entre filas */
+}
+
+td {
+  vertical-align: top;
+  padding: 5px 10px;
+}
+
+td:first-child {
+  font-weight: bold;
+  width: 35%;
+  color: #333;
+}
+
+td:last-child {
+  width: 65%;
+}

@@ -1,0 +1,25 @@
+.faq-home {
+  max-width: 600px;
+  margin: 4rem auto;
+}
+
+.faq-item {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  
+}
+
+.faq-answer {
+  margin-top: .5rem;
+  color: #555;
+}

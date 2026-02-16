@@ -781,3 +781,871 @@ body {
     padding: 15px 20px;
   }
 }
+.grupo-banner {
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.grupo-icono-grande {
+  font-size: 4rem; /* Icono gigante */
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Tarjeta principal de información */
+.grupo-info-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra elegante */
+  max-width: 600px;
+  margin: 0 auto; /* Centrado */
+  text-align: left; /* Texto alineado a la izquierda dentro de la tarjeta */
+}
+
+.grupo-info-card h3 {
+  color: #bf2a2a;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botón grande de Unirse */
+.btn-red-large {
+  background-color: #bf2a2a;
+  color: white;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-red-large:hover {
+  background-color: #a01e1e;
+}
+
+.btn-link-back {
+  background: none;
+  border: none;
+  color: #666;
+  margin-top: 20px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.target-groups {
+  display: grid;
+  /* Esto crea columnas automáticas. Mínimo 300px ancho, si cabe más, pone más columnas */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Diseño de cada Tarjeta Individual */
+.card-comunidad {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Para que el botón se vaya al fondo si hay poco texto */
+}
+
+/* Efecto al pasar el ratón por encima */
+.card-comunidad:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15);
+  border-color: #bf2a2a;
+}
+
+/* Cabecera de la tarjeta (Categoría y Miembros) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+.num-miembros {
+  color: #888;
+}
+
+.card-comunidad h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.card-comunidad p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.btn-unirse {
+  background-color: white;
+  color: #bf2a2a;
+  border: 2px solid #bf2a2a;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-unirse:hover {
+  background-color: #bf2a2a;
+  color: white;
+}
+
+.main-footer span:hover {
+  text-decoration: underline;
+}
+
+/*diseño para unirse a comunidad*/
+.ya-miembro {
+  color: green;
+  font-weight: bold;
+}
+
+.mensaje {
+  color: orange;
+  padding: 10px;
+}
+
+.miembros-section {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.miembro-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+/* =========================================
+   DETALLES DE COMUNIDAD (TABS & CONTENIDO)
+   ========================================= */
+
+/* Header tipo "Banner" */
+.grupo-header-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Para móviles */
+}
+
+.grupo-icono-wrapper {
+  font-size: 3.5rem;
+  background: #f4f4f4;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.grupo-header-info {
+  flex: 1; /* Ocupa el espacio central */
+  text-align: left;
+}
+
+.grupo-header-info h1 {
+  margin: 5px 0;
+  color: #333;
+}
+
+.badge-categoria {
+  background: #bf2a2a;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-join {
+  background-color: #222;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-join:hover {
+  background-color: #000;
+  transform: scale(1.05);
+}
+
+
+/* =========================================
+   ESTILO CHAT TIPO DISCORD
+   ========================================= */
+
+/* Contenedor Principal (El marco gris) */
+.chat-container-full {
+  background-color: #f2f3f5; /* Gris muy clarito tipo fondo de app */
+  border-radius: 12px;
+  height: 500px; /* Altura fija importante para el scroll */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e3e5e8;
+  overflow: hidden; /* Para que nada se salga de las esquinas redondeadas */
+}
+
+/* Área de mensajes (Donde sucede la conversación) */
+.chat-messages-area {
+  flex: 1; /* Ocupa todo el espacio menos el input */
+  padding: 20px;
+  overflow-y: auto; /* Scroll vertical si hay muchos mensajes */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Divisor de fecha */
+.chat-date-divider {
+  text-align: center;
+  margin: 10px 0;
+  position: relative;
+}
+.chat-date-divider span {
+  background: #e3e5e8;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: bold;
+}
+
+/* FILA DE MENSAJE */
+.chat-row {
+  display: flex;
+  align-items: flex-end; /* Alinear avatar abajo */
+  gap: 10px;
+  max-width: 80%;
+}
+
+.chat-row-me {
+  align-self: flex-end; /* Mandar a la derecha si soy yo */
+  flex-direction: row-reverse; /* Invertir orden (Avatar - Burbuja) */
+}
+
+/* Avatar circular con letra */
+.chat-avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #5865F2; /* Azul Discord */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* La burbuja de texto */
+.chat-bubble {
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 18px;
+  border-bottom-left-radius: 2px; /* Efecto bocadillo */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.chat-row-me .chat-bubble {
+  background-color: #bf2a2a; /* Rojo Nebrimatch */
+  color: white;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 2px; /* Efecto bocadillo invertido */
+}
+
+/* Nombre del usuario encima del mensaje */
+.chat-username {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #5865F2;
+  margin-bottom: 2px;
+}
+
+.chat-time {
+  display: block;
+  font-size: 0.65rem;
+  text-align: right;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* BARRA DE INPUT (Escribir) */
+.chat-input-bar {
+  background-color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #e3e5e8;
+}
+
+.chat-input-bar input {
+  flex: 1;
+  background-color: #f2f3f5;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.chat-input-bar input:focus {
+  background-color: #ebedef;
+}
+
+.btn-send-chat {
+  background-color: #bf2a2a;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-send-chat:hover {
+  transform: scale(1.1);
+}
+
+.btn-icon-chat {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+}
+
+
+/* --- SISTEMA DE PESTAÑAS (TABS) --- */
+.tabs-container {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 25px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tab-btn:hover {
+  color: #bf2a2a;
+}
+
+/* La pestaña activa tiene una línea roja debajo */
+.tab-btn.active {
+  color: #bf2a2a;
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Justo encima de la línea gris */
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #bf2a2a;
+}
+
+/* --- CONTENIDO DE LAS PESTAÑAS --- */
+.section-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Admin Profile */
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #bf2a2a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lista de normas */
+.rules-list {
+  padding-left: 20px;
+  color: #555;
+}
+
+.rules-list li {
+  margin-bottom: 8px;
+}
+
+/* Tarjetas de Eventos */
+.event-card {
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+}
+
+.date-box {
+  background: #fdf2f2;
+  color: #bf2a2a;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-right: 20px;
+  min-width: 60px;
+}
+
+.date-day {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.date-month {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.event-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+.event-meta {
+  display: flex;
+  gap: 15px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Lista de Recursos */
+.resource-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.resource-icon {
+  margin-right: 15px;
+  color: #666;
+}
+.resource-info {
+  flex: 1;
+  text-align: left;
+}
+.resource-info strong {
+  display: block;
+  color: #333;
+}
+.resource-info span {
+  font-size: 0.85rem;
+  color: #888;
+}
+.btn-download {
+  border: none;
+  background: #eee;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animación suave al cambiar pestaña */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+/* --- Estilos del Buscador y Cabecera --- */
+
+.header-section {
+  display: flex;
+  justify-content: space-between; /* Título a la izq, Buscador a la der */
+  align-items: center; /* Centrados verticalmente */
+  flex-wrap: wrap; /* Si es móvil, que baje el buscador */
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.search-bar {
+  padding: 12px 20px;
+  width: 300px; /* Ancho fijo bonito */
+  border: 1px solid #ddd;
+  border-radius: 50px; /* Bordes muy redondos (estilo píldora) */
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar:focus {
+  border-color: #bf2a2a; /* Se pone rojo al escribir */
+  box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
+  width: 320px; /* Pequeño efecto de "crecer" al clicar */
+}
+
+/* Ajuste Responsive para móvil */
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-bar {
+    width: 100%; /* En móvil que ocupe todo el ancho */
+  }
+}
+
+/*CSS DETALLES-COMUNIDADES*/
+.detalle-content {
+  text-align: center;
+  margin-top: 50px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.construction-card {
+  margin-top: 30px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px dashed #ccc;
+}
+
+.construction-title {
+  color: #bf2a2a;
+  margin-bottom: 10px;
+}
+
+.btn-margin-top {
+  margin-top: 30px;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+/*HOME*/
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+html,
+.body-home {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.info-home {
+    width: 100%;
+    height: 450px;
+    background-image: url('./assets/imagenes/imagen-home.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.eslogan-home {
+    width: 40%;
+    height: auto;
+    padding: 40px;
+    background-color: blanchedalmond;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin-top: -100px;
+}
+
+.preguntas-home {
+    width: auto;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.pregunta-home {
+    width: auto;
+    height: 100px;
+    font-size: 40px;
+    color: #d71820;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.DistribucionTarjetas {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    padding-top: 20px;
+    margin-bottom: 50px;
+}
+
+.filaImagen2-home {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    gap: 5%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.imagen2-home {
+    width: 40%;
+    height: auto;
+}
+
+.unete-home {
+    width: 40%;
+    height: auto;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 2px solid gray;
+    padding: 20px;
+}
+
+.botones-home {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.distribuccionFAQ-home {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-top: 40px;
+    padding-bottom: 50px;
+
+}
+
+.body-perfil {
+    width: 100vw;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 5%;
+}
+
+.contenido-perfil {
+    width: 50%;
+    height: auto;
+    border-radius: 2%;
+    border: 1px solid gray;
+}
+
+.sugerencias-perfil {
+    width: 25%;
+    height: auto;
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* 👈 arriba */
+    align-items: stretch;
+    /* 👈 ancho completo */
+    gap: 30px;
+    background-image: url("./assets/imagenes/fondo.jpg");
+}
+
+.editar-perfil button {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10%;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editar-perfil {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+}
+
+.intereses-perfil {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.titulo-intereses {
+    font-size: 1.5rem;
+    font-family: cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.fila1-perfil {
+    width: 100%;
+    height: 100px;
+    background-image: url("./assets/imagenes/fondo.jpg");
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border-radius: 2%;
+}
+
+.fila2-perfil {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-left: 110px;
+    font-size: 1.3rem;
+   
+}
+
+.fila3-perfil {
+    width: 100%;
+    height: auto;
+    text-align: left;
+    align-items: center;
+    display: flex;
+    padding: 20px;
+}
+
+.fila3-perfil p {
+    font-family: cursive;
+}
+.fila4-perfil{
+    width: 100%;
+    height: auto;          /* deja que el contenido defina la altura */
+    display: flex;
+    flex-wrap: wrap;       /* 🔹 permite que bajen si no caben */
+    justify-content: center;
+    align-items: flex-start; /* mejor que center para que tarjetas no se desalineen verticalmente */
+    gap: 20px;
+    padding-bottom: 20px;
+}
+.img2-perfil img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: 75px;
+}
+
+.img2-perfil {
+    width: 50%;
+    height: 200px;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50px;
+}
+
+.col2-perfil {
+    width: 50%;
+    height: auto;
+    justify-content: flex-end;
+}

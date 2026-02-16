@@ -20,10 +20,10 @@ function Header() {
         <span className="nav-link" onClick={() => navigate('/comunidades')}>
           Comunidades
         </span>
-        <span className="nav-link" onClick={() => alert("Próximamente: Tus chats")}>
+        <span className="nav-link" onClick={() => alert("")}>
           Mis chats
         </span>
-        <span className="nav-link" onClick={() => alert("Próximamente: Tu perfil")}>
+        <span className="nav-link" onClick={() =>  navigate('/miperfil')}>
           Perfil
         </span>
       </div>

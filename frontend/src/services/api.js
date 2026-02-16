@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:4004';
 
-// para el login==>
+// ============ AUTENTICACIÓN ============
 
 export const login = async (email, password) => {
   const res = await fetch(`${API_URL}/api/login`, {
@@ -41,7 +41,6 @@ export const crearUsuario = async (datos) => {
   }
 };
 
-
 // ============ USUARIOS ============
 
 // GET todos los usuarios
@@ -51,12 +50,37 @@ export const getUsuarios = async () => {
 };
 
 // GET perfil por nombre de usuario
-export const getPerfil = async (nombreUsuario) => {
+export const getPerfilPorNombre = async (nombreUsuario) => {
   const res = await fetch(`${API_URL}/api/usuarios/${nombreUsuario}`);
   return res.json();
 };
 
+// GET perfil por ID
+export const getPerfil = async (id) => {
+  const response = await fetch(`${API_URL}/api/usuarios/id/${id}`);
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.mensaje || 'Error al obtener perfil');
+  }
+  return response.json();
+};
 
+// PUT editar perfil
+export const editarPerfil = async (id, datos) => {
+  const response = await fetch(`${API_URL}/api/usuarios/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(datos)
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Error al actualizar perfil');
+  }
+  return response.json();
+};
 
 // ============ CHATS ============
 
@@ -95,6 +119,11 @@ export const getComunidades = async () => {
   return res.json();
 };
 
+export const getComunidad = async (id) => {
+  const res = await fetch(`${API_URL}/api/comunidades/${id}`);
+  return res.json();
+};
+
 export const crearComunidad = async (datos) => {
   const res = await fetch(`${API_URL}/api/comunidades`, {
     method: 'POST',
@@ -110,12 +139,5 @@ export const unirseComunidad = async (comunidadId, usuarioId) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: usuarioId })
   });
-  return res.json();
-};
-
-// detalles de las comunidades
-
-export const getComunidad = async (id) => {
-  const res = await fetch(`${API_URL}/api/comunidades/${id}`);
   return res.json();
 };

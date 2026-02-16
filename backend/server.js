@@ -380,6 +380,92 @@ app.get("/api/comunidades/:id", async (req, res) => {
   }
 });
 
+// Editar perfil de usuario (PUT)
+app.put("/api/usuarios/:id", async (req, res) => {
+  const { pool } = require("./config/database");
+  
+  try {
+    const { id } = req.params;
+    const { 
+      nombre_usuario, 
+      descripcion, 
+      lenguajes_a_ensenar, 
+      lenguajes_a_aprender 
+    } = req.body;
+
+    console.log("🔄 Actualizando usuario ID:", id);
+    console.log("📝 Datos recibidos:", req.body);
+
+    // Verificar que el usuario existe
+    const [usuarioExiste] = await pool.query(
+      "SELECT id FROM usuario WHERE id = ?", 
+      [id]
+    );
+
+    if (usuarioExiste.length === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Actualizar usuario
+    const [result] = await pool.query(
+      `UPDATE usuario 
+       SET nombre_usuario = ?, descripcion = ?, 
+           lenguajes_a_ensenar = ?, lenguajes_a_aprender = ?
+       WHERE id = ?`,
+      [nombre_usuario, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender, id]
+    );
+
+    console.log("✅ Usuario actualizado correctamente");
+
+    res.json({ 
+      mensaje: "Perfil actualizado correctamente",
+      usuario: {
+        id,
+        nombre_usuario,
+        descripcion,
+        lenguajes_a_ensenar,
+        lenguajes_a_aprender
+      }
+    });
+
+  } catch (error) {
+    console.error("💥 Error al actualizar perfil:", error);
+    
+    if (error.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ error: "Ese nombre de usuario ya existe" });
+    }
+    
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// También mejora la ruta GET para obtener perfil por ID
+app.get("/api/usuarios/id/:id", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { id } = req.params;
+    
+    const [result] = await pool.query(
+      `SELECT u.*, r.rol 
+       FROM usuario u 
+       LEFT JOIN rol_usuario r ON u.id = r.usuario_id 
+       WHERE u.id = ?`,
+      [id]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({ mensaje: "Usuario no encontrado" });
+    }
+
+    // No enviar password al frontend
+    const { password, ...usuarioSinPassword } = result[0];
+    res.json(usuarioSinPassword);
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ========== INICIAR SERVIDOR ==========
 app.listen(port, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${port}`);

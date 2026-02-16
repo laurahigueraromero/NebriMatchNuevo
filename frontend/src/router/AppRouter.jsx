@@ -11,6 +11,8 @@ import Privacidad from "../pagesFooter/Privacidad";
 import Terminos from "../pagesFooter/terminos";
 import Footer from "../componentes/Footer";
 import Users from '../pages/Users'
+import MiPerfil from "../pages/MiPerfil"; 
+import Home from "../pages/Home";
 
 function AppRouter() {
   return (
@@ -19,8 +21,13 @@ function AppRouter() {
       <div className="app-container">
         <div className="content-wrap"> 
          <Routes>
+        <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+          
+<Route path="/miPerfil" element={<MiPerfil />} />
+<Route path="/miPerfil/editarPerfil" element={<MiPerfil />} />
 
-            <Route path="/" element={<Login />} />
+
             <Route path="/comunidades" element={<Comunidades />} />
             <Route path="/users/:id" element={<Users/>}></Route>
             <Route path="/comunidad/:id" element={<DetallesComunidades />} />
