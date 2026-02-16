@@ -141,3 +141,9 @@ export const unirseComunidad = async (comunidadId, usuarioId) => {
   });
   return res.json();
 };
+
+// mentores ==>
+  export const getMentores = async () => {
+  const res = await fetch(`${API_URL}/api/mentores`);
+  return res.json();
+};

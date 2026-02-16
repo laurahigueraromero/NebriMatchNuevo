@@ -127,6 +127,32 @@ const crearTablas = async () => {
 
 //insert();
 
+
+
+// hemos hecho la siguiente consulta en workbench ==>
+
+  /*
+  -- Usar tu base de datos
+USE nebri_match;
+
+-- Insertar mentores
+INSERT INTO usuario (nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender) VALUES
+('carlos_react', 'carlos@nebrimatch.com', 'password123', 'Senior Full-Stack Developer con 8 años de experiencia. Especializado en React, Node.js y arquitecturas escalables.', 'JavaScript, React, Node.js, PostgreSQL', 'GraphQL, TypeScript'),
+('ana_frontend', 'ana@nebrimatch.com', 'password123', 'Frontend Developer especializada en interfaces modernas y UX/UI. Experta en CSS avanzado y frameworks.', 'HTML5, CSS3, JavaScript, Vue.js, Figma', 'React Native, Three.js'),
+('david_backend', 'david@nebrimatch.com', 'password123', 'Backend Engineer con experiencia en microservicios y bases de datos. Mentor en arquitectura de software.', 'Python, Django, FastAPI, Docker, AWS', 'Kubernetes, Go'),
+('maria_fullstack', 'maria@nebrimatch.com', 'password123', 'Full-Stack Developer y mentora con pasión por enseñar. Experiencia en startups y empresas tech.', 'Java, Spring Boot, Angular, MySQL', 'React, MongoDB'),
+('luis_devops', 'luis@nebrimatch.com', 'password123', 'DevOps Engineer especializado en automatización y despliegues. Mentor en buenas prácticas de desarrollo.', 'Linux, Docker, Jenkins, AWS, Terraform', 'Azure, GCP'),
+('sofia_mobile', 'sofia@nebrimatch.com', 'password123', 'Mobile Developer especializada en apps nativas y híbridas. Mentora en desarrollo móvil.', 'React Native, Flutter, Swift, Kotlin', 'SwiftUI, Compose'),
+('miguel_ai', 'miguel@nebrimatch.com', 'password123', 'Data Scientist y ML Engineer. Especializado en inteligencia artificial y análisis de datos.', 'Python, TensorFlow, Pandas, SQL', 'PyTorch, Scala'),
+('laura_ux', 'laura@nebrimatch.com', 'password123', 'UX/UI Designer con background técnico. Mentora en diseño centrado en el usuario y prototipado.', 'Figma, Adobe XD, HTML, CSS, JavaScript', 'After Effects, Principle');
+
+-- Asignar rol de profesor a cada mentor
+INSERT INTO rol_usuario (usuario_id, rol) 
+SELECT id, 'profesor' FROM usuario WHERE nombre_usuario IN (
+    'carlos_react', 'ana_frontend', 'david_backend', 'maria_fullstack', 
+    'luis_devops', 'sofia_mobile', 'miguel_ai', 'laura_ux'
+);*/ 
+
 // ============ EXPORTAR ============
 
 module.exports = { pool, crearTablas };

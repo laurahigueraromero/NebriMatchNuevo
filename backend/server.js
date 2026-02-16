@@ -466,6 +466,29 @@ app.get("/api/usuarios/id/:id", async (req, res) => {
   }
 });
 
+
+// mentores==>
+  // En server.js
+app.get("/api/mentores", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const [mentores] = await pool.query(`
+      SELECT u.id, u.nombre_usuario, u.email, u.descripcion, 
+             u.lenguajes_a_ensenar, u.lenguajes_a_aprender, u.numero_matches
+      FROM usuario u 
+      JOIN rol_usuario r ON u.id = r.usuario_id 
+      WHERE r.rol = 'profesor' AND u.lenguajes_a_ensenar IS NOT NULL
+      ORDER BY u.numero_matches DESC, RAND()
+    `);
+    
+    res.json(mentores);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
 // ========== INICIAR SERVIDOR ==========
 app.listen(port, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
