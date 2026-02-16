@@ -33,9 +33,7 @@ app.get("/", (req, res) => {
 
 
 
-// crear ususario ==>
 
-  // Crear usuario
 // Crear usuario
 app.post("/api/usuarios", async (req, res) => {
   console.log("🔥 === INICIANDO POST /api/usuarios ===");
