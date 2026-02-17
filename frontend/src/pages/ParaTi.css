@@ -15,7 +15,122 @@
 
 
 
+/* =========================================
+   ESTILOS NUEVOS PARA PARA TI (DATA REAL)
+   ========================================= */
 
+/* --- PANTALLA DE CARGA --- */
+.loading-container, .error-container, .no-mentores-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  color: #555;
+  gap: 20px;
+}
+
+.loading-spinner {
+  font-size: 3rem;
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #bf2a2a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* --- TÍTULO CON FUEGO --- */
+.texto-inicial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.emoji-fire {
+  width: 45px; 
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+/* --- DETALLES EXTRA EN LA CARTA --- */
+.mentor-skills-preview {
+  margin-top: 15px;
+  text-align: left;
+  background: rgba(0,0,0,0.2);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.mentor-skills-preview strong {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #ffcccc;
+}
+
+.skills-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-mini {
+  background: rgba(255,255,255,0.2);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.mentor-stats-mini {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #ddd;
+  padding: 0 5px;
+}
+
+/* --- INDICADORES INFERIORES --- */
+.mentor-counter {
+  position: absolute;
+  top: -40px; /* Encima del mazo */
+  right: 0;
+  background: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.db-indicator {
+  position: absolute;
+  bottom: -40px;
+  font-size: 0.75rem;
+  color: #27ae60; /* Verde éxito */
+  font-weight: bold;
+  opacity: 0.8;
+  background: rgba(255,255,255,0.8);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
 
 
 
