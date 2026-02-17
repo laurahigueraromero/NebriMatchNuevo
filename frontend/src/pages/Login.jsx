@@ -2,6 +2,7 @@ import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, crearUsuario } from "../services/api";
 import "../App.css";
+import { User, Plus , Check } from "lucide-react";
 
 function Login() {
   const navigate = useNavigate();
@@ -72,8 +73,8 @@ const handleLogin = async () => {
         {vista === "inicio" && (
           <>
             <div className="icons-container">
-              <span>👤✓</span>
-              <span>👤+</span>
+              <span><User/> <Check/></span>
+              <span><User/> <Plus/></span>
             </div>
             <div className="buttons-container">
               <button className="btn-red" onClick={() => { setVista("login"); setError(null); }}>
