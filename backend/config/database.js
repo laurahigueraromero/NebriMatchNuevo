@@ -94,6 +94,8 @@ const tablas = [
 
 // ============ FUNCIÓN CREAR TABLAS ============
 
+
+
 const crearTablas = async () => {
   try {
     const connection = await pool.getConnection();
@@ -113,6 +115,9 @@ const crearTablas = async () => {
   }
 };
 
+
+
+
 /* const insert = async () => {
   const { pool } = require("./config/database");
   try {
@@ -123,9 +128,9 @@ const crearTablas = async () => {
   } catch (error) {
     console.error("Error:", error.message);
   }
-}; */
+};
 
-//insert();
+insert(); */
 
 
 
@@ -154,5 +159,5 @@ SELECT id, 'profesor' FROM usuario WHERE nombre_usuario IN (
 );*/ 
 
 // ============ EXPORTAR ============
-
+crearTablas()
 module.exports = { pool, crearTablas };
