@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getPerfil } from "../services/api";
 import EditarPerfilModal from "../componentes/EditarPerfilModal/EditarPerfilModal";
-import InteresPerfil from '../componentes/InteresPerfil/InteresPerfil';
+import InteresPerfil from "../componentes/InteresPerfil/InteresPerfil";
 import persona1 from "../assets/imagenes/Captura.JPG";
-import TarjetaHome from '../componentes/TarjetaHome';
+import TarjetaHome from "../componentes/TarjetaHome";
 import Header from "../componentes/Header";
 
 function MiPerfil() {
@@ -31,7 +31,7 @@ function MiPerfil() {
           setLoading(false);
         })
         .catch((err) => {
-          console.error('Error al cargar perfil:', err);
+          console.error("Error al cargar perfil:", err);
           // Si falla la API, usar datos del localStorage
           setPerfilData(usuario);
           setLoading(false);
@@ -43,60 +43,66 @@ function MiPerfil() {
 
   // Función para actualizar el perfil cuando se edita
   const actualizarPerfil = (datosNuevos) => {
-    setPerfilData(prev => ({ ...prev, ...datosNuevos }));
+    setPerfilData((prev) => ({ ...prev, ...datosNuevos }));
   };
 
   if (loading) return <div className="loading">⏳ Cargando perfil...</div>;
-  if (!perfilData && !usuario) return <div className="error">❌ No se pudo cargar el perfil</div>;
+  if (!perfilData && !usuario)
+    return <div className="error">❌ No se pudo cargar el perfil</div>;
 
   const datosActuales = perfilData || usuario;
 
   // Convertir strings de lenguajes a arrays para mostrar como tarjetas
-  const lenguajesEnsenar = datosActuales.lenguajes_a_ensenar 
-    ? datosActuales.lenguajes_a_ensenar.split(',').map(l => l.trim()) 
+  const lenguajesEnsenar = datosActuales.lenguajes_a_ensenar
+    ? datosActuales.lenguajes_a_ensenar.split(",").map((l) => l.trim())
     : [];
-  const lenguajesAprender = datosActuales.lenguajes_a_aprender 
-    ? datosActuales.lenguajes_a_aprender.split(',').map(l => l.trim()) 
+  const lenguajesAprender = datosActuales.lenguajes_a_aprender
+    ? datosActuales.lenguajes_a_aprender.split(",").map((l) => l.trim())
     : [];
 
   return (
     <div className="app-layout">
       <Header />
-      
-      <div className='body-perfil'>
-        <div className='contenido-perfil'>
+
+      <div className="body-perfil">
+        <div className="contenido-perfil">
           <div className="fila1-perfil">
-            <div className='img2-perfil'>
-              <img src={persona1} alt={`Foto de perfil de ${datosActuales.nombre_usuario}`} />
+            <div className="img2-perfil">
+              <img
+                src={persona1}
+                alt={`Foto de perfil de ${datosActuales.nombre_usuario}`}
+              />
             </div>
 
-            <div className='col2-perfil'>
-              <div className='editar-perfil'>
-                <button onClick={() => {
-                  setModalAbierto(true);
-                  navigate("/miPerfil/editarPerfil");
-                }}>
+            <div className="col2-perfil">
+              <div className="editar-perfil">
+                <button
+                  onClick={() => {
+                    setModalAbierto(true);
+                    navigate("/miPerfil/editarPerfil");
+                  }}
+                >
                   ✏️ Editar perfil
                 </button>
               </div>
             </div>
           </div>
 
-          <div className='fila2-perfil'>
+          <div className="fila2-perfil">
             <h2>{datosActuales.nombre_usuario}</h2>
             <p className="email-perfil">📧 {datosActuales.email}</p>
           </div>
 
-          <div className='fila3-perfil'>
-            <p>{datosActuales.descripcion || 'Sin descripción disponible'}</p>
+          <div className="fila3-perfil">
+            <p>{datosActuales.descripcion || "Sin descripción disponible"}</p>
           </div>
 
           {lenguajesAprender.length > 0 && (
             <>
-              <div className='fila4-perfil'>
+              <div className="fila4-perfil">
                 <h2>🎯 Quiero aprender:</h2>
               </div>
-              <div className='fila4-perfil'>
+              <div className="fila4-perfil">
                 {lenguajesAprender.map((lenguaje, index) => (
                   <TarjetaHome key={index} title={lenguaje} />
                 ))}
@@ -106,10 +112,10 @@ function MiPerfil() {
 
           {lenguajesEnsenar.length > 0 && (
             <>
-              <div className='fila4-perfil'>
+              <div className="fila4-perfil">
                 <h2>🏆 Puedo enseñar:</h2>
               </div>
-              <div className='fila4-perfil'>
+              <div className="fila4-perfil">
                 {lenguajesEnsenar.map((lenguaje, index) => (
                   <TarjetaHome key={index} title={lenguaje} />
                 ))}
@@ -119,26 +125,40 @@ function MiPerfil() {
         </div>
 
         <div className="sugerencias-perfil">
-          <div className='intereses-perfil'>
-            <p className="titulo-intereses">Podría interesarte</p>
-            {/* Datos de ejemplo - podrías conectar esto a tu API también */}
-            <InteresPerfil
-              nombre="Carlos"
-              info="Experto en React y Node.js. Disponible para sesiones de estudio."
-            />
-            <InteresPerfil
-              nombre="Ana"
-              info="Frontend developer con experiencia en CSS y JavaScript."
-            />
-            <InteresPerfil
-              nombre="David"
-              info="Backend developer especializado en Python y bases de datos."
-            />
+          <div className="intereses-perfil">
+            <p className="titulo-intereses" style={{ color: "white" }}>
+              Podría interesarte
+            </p>
+
+            {/* INICIO DE LA LISTA 3D */}
+            <ul className="lista-3d-container">
+              {/* Tarjeta 1 (Fondo) - Usamos var(--i) para el retraso */}
+              <li className="item-3d" style={{ "--i": 1 }}>
+                <InteresPerfil
+                  nombre="Carlos"
+                  info="Experto en React y Node.js."
+                />
+              </li>
+
+              {/* Tarjeta 2 (Medio) */}
+              <li className="item-3d" style={{ "--i": 2 }}>
+                <InteresPerfil nombre="Ana" info="Frontend developer y CSS." />
+              </li>
+
+              {/* Tarjeta 3 (Frente) */}
+              <li className="item-3d" style={{ "--i": 3 }}>
+                <InteresPerfil
+                  nombre="David"
+                  info="Backend y Bases de datos."
+                />
+              </li>
+            </ul>
+            {/* FIN DE LA LISTA */}
           </div>
         </div>
 
         {modalAbierto && (
-          <EditarPerfilModal 
+          <EditarPerfilModal
             cerrar={() => {
               setModalAbierto(false);
               navigate("/miPerfil");

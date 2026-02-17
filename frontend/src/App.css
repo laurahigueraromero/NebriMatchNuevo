@@ -1652,6 +1652,76 @@ html,
     justify-content: flex-end;
 }
 
+/* =========================================
+   LISTA 3D PARA INTERESES
+   ========================================= */
+
+/* El contenedor (ul) */
+.lista-3d-container {
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Empiezan pegados */
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+    transition: 0.5s ease-in-out;
+}
+
+/* Al pasar el ratón por la zona roja, se separan */
+.sugerencias-perfil:hover .lista-3d-container {
+    gap: 15px; 
+    transform: translateY(10px);
+}
+
+/* Cada elemento de la lista (li) que envuelve a tu componente */
+.item-3d {
+    list-style: none;
+    width: 100%;
+    position: relative;
+    transition: 0.5s;
+    transition-delay: calc(var(--i) * 100ms); /* Efecto cascada */
+    cursor: pointer;
+}
+
+/* --- ESTADOS APILADOS (INICIO) --- */
+
+/* 1. La de más atrás (Fondo) */
+.item-3d:nth-child(1) {
+    transform: translateZ(-60px) translateY(40px) scale(0.9);
+    opacity: 0.6;
+    z-index: 1;
+}
+
+/* 2. La de en medio */
+.item-3d:nth-child(2) {
+    transform: translateZ(-30px) translateY(20px) scale(0.95);
+    opacity: 0.8;
+    z-index: 2;
+}
+
+/* 3. La de enfrente */
+.item-3d:nth-child(3) {
+    transform: translateZ(0) translateY(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+}
+
+/* --- ESTADO DESPLEGADO (HOVER) --- */
+.sugerencias-perfil:hover .item-3d {
+    transform: translateZ(0) translateY(0) scale(1);
+    opacity: 1;
+    /* Quitamos filtros si los hubiera */
+}
+
+/* Ajuste para que tu componente ocupe todo el li */
+.item-3d > .Perfiles-interesantes {
+    width: 100%; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra extra para profundidad */
+}
+
 
 
 
