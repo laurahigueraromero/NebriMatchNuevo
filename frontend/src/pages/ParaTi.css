@@ -1,3 +1,24 @@
+.texto-inicial{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;          
+}
+.emoji-fire{
+  width: 45px;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================
    PARA TI (DISEÑO ALAS LATERALES + ROJO)
    ========================================= */

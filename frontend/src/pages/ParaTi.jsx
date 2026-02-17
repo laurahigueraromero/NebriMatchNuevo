@@ -4,6 +4,8 @@ import { getMentores } from '../services/api';
 import { X, Heart, Maximize2, Minimize2 } from 'lucide-react'; 
 import '../App.css';
 import './ParaTi.css'
+import Lottie from "lottie-react";
+import fireAnim from "../assets/Fireeee.json";
 
 function ParaTi() {
   const [mentoresData, setMentoresData] = useState([]);
@@ -145,7 +147,16 @@ function ParaTi() {
       <Header />
       
       <div className="stack-container">
-        <h1>Para Ti 🔥</h1>
+        <h1 className="texto-inicial"
+          
+        >
+          Para Ti
+          <div className="emoji-fire">
+            
+            {/* Controlamos el tamaño aquí */}
+            <Lottie animationData={fireAnim} loop={true} />
+          </div>
+        </h1>
         <p className="subtitle-stack">Conecta con mentores de tu base de datos</p>
 
         {/* CONTENEDOR DEL MAZO */}
