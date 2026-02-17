@@ -1651,3 +1651,109 @@ html,
     height: auto;
     justify-content: flex-end;
 }
+
+
+
+
+
+
+
+/* =========================================
+   RESPONSIVE (MÓVIL) - APP.CSS
+   ========================================= */
+
+@media (max-width: 768px) {
+  
+  /* 1. Ajustar el Layout principal */
+  .app-layout, .app-comunidades {
+    flex-direction: column; /* Pone el menú arriba y el contenido abajo */
+    width: 100vw;
+    overflow-x: hidden; /* Evita scroll lateral indeseado */
+  }
+
+  /* 2. El contenido principal ocupa todo el ancho */
+  .principal-content, .detalle-content {
+    width: 100%;
+    padding: 15px; /* Menos padding en móvil */
+    padding-bottom: 80px; /* Espacio para que no se corte el final */
+  }
+
+  /* 3. Cabecera de Grupo (Banner) */
+  .grupo-header-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .grupo-icono-wrapper {
+    margin: 0 auto; /* Centrar el icono */
+  }
+
+  .grupo-header-info h1 {
+    font-size: 1.5rem; /* Título un poco más pequeño */
+  }
+
+  /* 4. Pestañas (Tabs) scrolleables */
+  .tabs-container {
+    display: flex;
+    overflow-x: auto; /* Permite deslizar si no caben */
+    white-space: nowrap;
+    padding-bottom: 5px;
+    gap: 10px;
+    justify-content: flex-start; /* Alineados a la izquierda para scroll */
+  }
+
+  .tab-btn {
+    flex: 0 0 auto; /* No encoger botones */
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  /* 5. Chat */
+  .chat-container-full {
+    height: calc(100vh - 250px); /* Ajuste de altura para móvil */
+  }
+  
+  .chat-input-bar {
+    padding: 10px;
+  }
+
+  .chat-input-bar input {
+    font-size: 16px; /* Evita que el iPhone haga zoom al escribir */
+  }
+  
+  /* 6. Grid de Eventos y Recursos (1 columna) */
+  .events-grid, .resources-list {
+    grid-template-columns: 1fr; /* Una sola columna */
+  }
+}
+
+/* =========================================
+   RESPONSIVE (MÓVIL) - COMUNIDADES
+   ========================================= */
+
+@media (max-width: 768px) {
+  
+  /* 1. Header de búsqueda */
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .search-bar {
+    width: 100%; /* La barra ocupa todo el ancho */
+  }
+
+  /* 2. Grid de tarjetas (Lo más importante) */
+  .target-groups {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 20px;
+  }
+
+  /* 3. Ajuste de tarjetas */
+  .card-comunidad {
+    padding: 20px;
+  }
+}
