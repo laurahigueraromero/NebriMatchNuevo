@@ -1,0 +1,111 @@
+USE nebri_match;
+
+-- Insertamos 100 comunidades de golpe
+INSERT INTO comunidades (nombre, descripcion, lenguaje_asociado, creador_id) VALUES 
+
+-- ==================== FRONTEND & WEB ====================
+('Maestros del CSS', 'Un espacio para perfeccionar el arte del diseño web. Discutimos sobre Flexbox, Grid, animaciones complejas y arquitecturas CSS escalables como BEM o Tailwind.', 'CSS', 1),
+('React Avanzado', 'Comunidad dedicada a desarrolladores que ya conocen lo básico. Profundizamos en patrones de renderizado, optimización de performance, Next.js y gestión de estado compleja.', 'React', 2),
+('Vue.js Vixens', 'Grupo de apoyo para desarrolladores del ecosistema Vue. Compartimos recursos sobre Nuxt, Pinia y la Composition API. Ideal para quienes buscan simplicidad y potencia.', 'Vue.js', 1),
+('Angular Enterprise', 'Enfocado en el desarrollo de aplicaciones empresariales grandes con Angular. Hablamos de TypeScript estricto, RxJS y arquitectura hexagonal en frontend.', 'Angular', 3),
+('Accesibilidad Web A11Y', 'Porque la web debe ser para todos. Aprendemos a usar correctamente ARIA, contrastes de color y navegación por teclado para hacer sitios inclusivos.', 'HTML', 2),
+('JavaScript Moderno (ES6+)', 'Deja atrás var y los callbacks. Aquí discutimos las últimas novedades del estándar ECMAScript, promesas, async/await y las features que llegan cada año.', 'JavaScript', 1),
+('Svelte Society', 'Para los que creen que menos código es mejor. Exploramos la reactividad sin virtual DOM y cómo construir interfaces ultra rápidas con SvelteKit.', 'Svelte', 3),
+('Three.js & WebGL', 'Llevando el 3D al navegador. Compartimos experimentos, shaders y mundos inmersivos creados con JavaScript y matemáticas.', 'JavaScript', 1),
+('Micro-Frontends', 'Arquitectura para equipos grandes. Cómo dividir tu aplicación monolítica en piezas pequeñas, desplegables independientemente usando Module Federation.', 'Arquitectura', 2),
+('Tailwind CSS Fanatics', 'Odiado por unos, amado por nosotros. Compartimos componentes, configuraciones y trucos para maquetar a la velocidad de la luz sin salir del HTML.', 'CSS', 1),
+('Web Performance Ops', 'Si tu web tarda más de 2 segundos, estás perdiendo dinero. Técnicas de Core Web Vitals, lazy loading y optimización de recursos.', 'Web', 3),
+('TypeScript Wizards', 'Tipado estricto o muerte. Aprendemos a usar genéricos avanzados, tipos condicionales y cómo evitar el temido "any" en nuestros proyectos.', 'TypeScript', 2),
+('Figma a Código', 'El puente entre diseño y desarrollo. Cómo interpretar prototipos, design systems y tokens para traducirlos a código limpio.', 'Diseño', 1),
+('PWA Builders', 'Haciendo que la web se sienta nativa. Service Workers, modo offline e instalación en escritorio y móvil.', 'JavaScript', 3),
+('WebAssembly Explorers', 'Rompiendo los límites de velocidad de JS. Compilando Rust, C++ o Go para correr en el navegador con rendimiento casi nativo.', 'Wasm', 2),
+
+-- ==================== BACKEND & ARQUITECTURA ====================
+('Node.js a Escala', 'Construyendo APIs que aguanten millones de peticiones. Event loop, streams, clusters y microservicios con NestJS o Express.', 'Node.js', 1),
+('Python Backend Pro', 'Más allá de los scripts. Django Rest Framework, FastAPI y arquitecturas asíncronas para servidores robustos.', 'Python', 3),
+('Java Spring Boot', 'El estándar empresarial. Inyección de dependencias, seguridad con Spring Security y conexión a bases de datos relacionales.', 'Java', 2),
+('C# .NET Core', 'Desarrollo moderno con Microsoft. Minimal APIs, Blazor y todo el ecosistema de Azure para despliegues rápidos.', 'C#', 1),
+('Go Gophers', 'Simplicidad y concurrencia. Escribimos backends eficientes, herramientas de CLI y sistemas distribuidos usando Goroutines.', 'Go', 3),
+('PHP Moderno (Laravel)', 'PHP no ha muerto, está mejor que nunca. Eloquent, Blade, Livewire y cómo crear aplicaciones full-stack en tiempo récord.', 'PHP', 2),
+('Arquitectura de Microservicios', 'Desacoplando el monolito. Patrones de comunicación, consistencia eventual, sagas y cómo no morir en el intento.', 'Arquitectura', 1),
+('APIs RESTful y GraphQL', 'Diseño de interfaces de datos. ¿Cuándo usar REST? ¿Cuándo GraphQL? Versionado, documentación con Swagger y buenas prácticas.', 'API', 3),
+('Rustacean Station', 'Seguridad de memoria y velocidad. Aprendiendo Rust para sistemas, herramientas de terminal y componentes críticos de backend.', 'Rust', 2),
+('Serverless Architects', 'Olvídate de gestionar servidores. AWS Lambda, Vercel Functions y arquitecturas orientadas a eventos en la nube.', 'Cloud', 1),
+('Ruby on Rails Way', 'Convención sobre configuración. Desarrollo rápido de prototipos y MVPs siguiendo la filosofía Omakase.', 'Ruby', 3),
+('Elixir & Phoenix', 'Para sistemas de alta disponibilidad y tiempo real. Tolerancia a fallos usando la máquina virtual de Erlang (BEAM).', 'Elixir', 2),
+('Clean Architecture', 'Independiente de frameworks. Cómo estructurar tu código en capas (Dominio, Aplicación, Infraestructura) para que sea mantenible.', 'Arquitectura', 1),
+('System Design Interview', 'Preparación para entrevistas técnicas en Big Tech. Diseño de sistemas escalables como Twitter, Uber o Netflix.', 'Carrera', 3),
+('Docker para Developers', 'Si funciona en mi máquina, funciona en producción. Creación de Dockerfiles eficientes y docker-compose para desarrollo.', 'Docker', 2),
+
+-- ==================== DATOS & IA ====================
+('Machine Learning 101', 'Tu punto de partida en IA. Regresión lineal, clasificación y conceptos básicos antes de saltar al Deep Learning.', 'Python', 1),
+('Deep Learning con PyTorch', 'Redes neuronales profundas. Visión por computador, generación de texto y modelos avanzados de investigación.', 'Python', 3),
+('Data Science con Pandas', 'Limpieza y manipulación de datos. Deja el Excel y pásate a Dataframes, NumPy y visualización con Matplotlib.', 'Data', 2),
+('SQL Masters', 'Consultas complejas, optimización de índices, procedimientos almacenados y diseño de bases de datos normalizadas.', 'SQL', 1),
+('Big Data Engineering', 'Cuando los datos no caben en un excel. Hadoop, Spark, Kafka y pipelines de procesamiento masivo.', 'Big Data', 3),
+('NLP Procesamiento de Lenguaje', 'Haciendo que las máquinas entiendan texto. Chatbots, análisis de sentimiento y modelos tipo Transformer (BERT, GPT).', 'IA', 2),
+('Computer Vision', 'Detección de objetos, reconocimiento facial y segmentación de imágenes usando OpenCV y redes convolucionales.', 'IA', 1),
+('MongoDB & NoSQL', 'Bases de datos orientadas a documentos. Modelado de datos sin esquema y escalabilidad horizontal.', 'NoSQL', 3),
+('PowerBI & Tableau', 'Visualización de datos para negocio. Dashboards interactivos y storytelling con datos.', 'Data', 2),
+('R para Estadística', 'Análisis estadístico riguroso. Modelos predictivos, series temporales y bioestadística.', 'R', 1),
+('Kaggle Competitors', 'Grupo para formar equipos y participar en competiciones de ciencia de datos. Aprendemos resolviendo retos reales.', 'Data', 3),
+('MLOps Engineering', 'Llevando modelos a producción. Pipelines de entrenamiento, monitorización de modelos y despliegue automatizado.', 'DevOps', 2),
+('Generative AI Art', 'Explorando Stable Diffusion y Midjourney. Cómo usar prompts y scripts para generar arte y assets para juegos.', 'IA', 1),
+('Redis & Caching', 'Haciendo todo más rápido. Estrategias de caché, colas de mensajes y estructuras de datos en memoria.', 'Bases de Datos', 3),
+('PostgreSQL Advanced', 'Mucho más que una base de datos. JSONB, extensiones geospaciales (PostGIS) y optimización de queries.', 'SQL', 2),
+
+-- ==================== MÓVIL ====================
+('React Native Universe', 'Una base de código, dos plataformas. Puentes nativos, animaciones a 60fps y despliegue en tiendas.', 'React Native', 1),
+('Flutter Devs', 'Desarrollo multiplataforma con Dart. Widgets personalizados, gestión de estado con Bloc/Riverpod y UI hermosa.', 'Flutter', 3),
+('SwiftUI & iOS', 'Desarrollo nativo moderno para Apple. Sintaxis declarativa, Combine y las últimas APIs de iOS.', 'Swift', 2),
+('Kotlin para Android', 'El estándar moderno de Google. Jetpack Compose, Corrutinas y arquitectura MVVM limpia.', 'Kotlin', 1),
+('Mobile UX/UI', 'Diseñando para pantallas pequeñas. Patrones de navegación, gestos y adaptación a diferentes tamaños de dispositivo.', 'Diseño', 3),
+('Ionic Framework', 'Apps híbridas usando tecnologías web. Angular/React/Vue empaquetados con Capacitor.', 'Web', 2),
+('Despliegue en Stores', 'Sobreviviendo al proceso de revisión de Apple y Google. Certificados, capturas de pantalla y ASO.', 'Mobile', 1),
+('Xamarin & MAUI', 'El ecosistema móvil de Microsoft. Llevando .NET a Android e iOS.', 'C#', 3),
+('Juegos Móviles', 'Optimización extrema. Cómo crear juegos que no drenen la batería y funcionen en gama baja.', 'Game Dev', 2),
+
+-- ==================== DEVOPS & INFRAESTRUCTURA ====================
+('Kubernetes Sailors', 'Orquestación de contenedores a gran escala. Helm charts, operadores y gestión de clústers en producción.', 'Kubernetes', 1),
+('Terraform & IaC', 'Infraestructura como código. Define tus servidores, redes y permisos en archivos versionables.', 'DevOps', 3),
+('AWS Cloud Club', 'Dominando la nube de Amazon. EC2, S3, RDS y preparación para las certificaciones oficiales.', 'AWS', 2),
+('Linux SysAdmin', 'La terminal es tu amiga. Scripting en Bash, permisos, SSH y gestión de servidores Linux.', 'Linux', 1),
+('CI/CD Pipelines', 'Automatiza todo. GitHub Actions, Jenkins o GitLab CI para testear y desplegar código con cada commit.', 'DevOps', 3),
+('Ciberseguridad Defensiva', 'Blue Team. Hardening de servidores, configuración de firewalls y monitoreo de logs.', 'Seguridad', 2),
+('SRE (Site Reliability)', 'Cuando el sistema se cae. Gestión de incidentes, post-mortems y SLOs/SLAs.', 'DevOps', 1),
+('Azure Cloud', 'La nube de Microsoft. Integración con Active Directory, App Services y Azure Functions.', 'Azure', 3),
+('Ansible Automation', 'Gestión de configuración simple. Playbooks para configurar cientos de servidores en minutos.', 'DevOps', 2),
+('Redes para Devs', 'Entendiendo HTTP, DNS, TCP/IP y balanceadores de carga. Lo que todo programador debería saber sobre redes.', 'Redes', 1),
+
+-- ==================== VIDEOJUEGOS ====================
+('Unity Developers', 'Motor líder en la industria. C#, física, iluminación y desarrollo tanto 2D como 3D.', 'Unity', 3),
+('Unreal Engine 5', 'Gráficos de nueva generación. Blueprints, C++ y el sistema Nanite/Lumen.', 'Unreal', 2),
+('Indie Game Devs', 'Haciéndolo todo tú solo. Programación, arte, música y marketing para desarrolladores independientes.', 'Game Dev', 1),
+('Godot Engine', 'La alternativa Open Source. Ligero, potente y con su propio lenguaje GDScript.', 'Godot', 3),
+('Game Design Theory', 'Qué hace divertido a un juego. Mecánicas, bucles de juego, recompensas y psicología del jugador.', 'Diseño', 2),
+('Shaders & VFX', 'Magia visual. Programación gráfica en GLSL/HLSL para crear efectos de fuego, agua y partículas.', 'Gráficos', 1),
+('C++ para Juegos', 'Rendimiento crítico. Gestión de memoria manual, punteros y optimización de bajo nivel.', 'C++', 3),
+('Pixel Art & Code', 'Estética retro. Herramientas de dibujo y cómo implementarlas en motores de juego.', 'Arte', 2),
+
+-- ==================== HACKING & SEGURIDAD ====================
+('Ethical Hacking', 'Red Team. Pentesting, uso de Kali Linux, Metasploit y búsqueda de vulnerabilidades.', 'Hacking', 1),
+('CTF Players', 'Capture The Flag. Resolvemos retos de criptografía, esteganografía y explotación web.', 'Hacking', 3),
+('Web Security (OWASP)', 'Protegiendo aplicaciones web. XSS, SQL Injection, CSRF y cómo arreglarlos.', 'Seguridad', 2),
+('Criptografía Aplicada', 'No inventes tu propia cripto. Uso correcto de algoritmos de hash, cifrado simétrico y asimétrico.', 'Cripto', 1),
+('Malware Analysis', 'Ingeniería inversa. Desamblando binarios para entender cómo funcionan los virus y troyanos.', 'Assembly', 3),
+
+-- ==================== CARRERA & APRENDIZAJE ====================
+('100 Días de Código', 'Grupo de responsabilidad. Comparte tu progreso diario y mantén la racha de programación.', 'General', 2),
+('Primer Empleo Tech', 'Consejos para juniors. Revisión de CVs, preparación de LinkedIn y cómo pasar la primera entrevista.', 'Carrera', 1),
+('Inglés para Devs', 'Mejora tu vocabulario técnico. Practicamos lectura de documentación y comunicación en equipos internacionales.', 'Idiomas', 3),
+('Freelancing Tech', 'Viviendo por tu cuenta. Cómo encontrar clientes, poner precio a tu trabajo y gestionar contratos.', 'Carrera', 2),
+('Proyectos Open Source', 'Cómo contribuir a código libre. Pull requests, issues y etiqueta en GitHub.', 'Git', 1),
+('Algoritmos (LeetCode)', 'Entrenamiento mental. Resolvemos problemas algorítmicos complejos para mejorar la lógica.', 'Algoritmos', 3),
+('Refactoring Club', 'El arte de limpiar código. Code smells, principios SOLID y cómo mejorar código legacy.', 'Clean Code', 2),
+('Hardware Hacking', 'Arduino y Raspberry Pi. Conectando el software con el mundo físico, sensores y robótica.', 'Hardware', 1),
+('Blockchain Devs', 'Más allá de la especulación. Smart Contracts con Solidity, Web3.js y DApps.', 'Blockchain', 3),
+('Productividad Dev', 'Herramientas, atajos de teclado, configuración de VS Code y gestión del tiempo.', 'General', 2),
+('Mentores y Mentees', 'Conectando experiencia. Si quieres enseñar o necesitas guía, este es tu lugar.', 'Mentoring', 1),
+('Tech Lead Circle', 'Gestión de equipos técnicos. Liderazgo, estimación de proyectos y resolución de conflictos.', 'Liderazgo', 3),
+('Testing QA', 'Calidad de software. Tests unitarios, de integración y E2E con Cypress o Selenium.', 'Testing', 2),
+('Vim Users', 'Saliendo de la consola... si puedes. Trucos y configuración para ser ultra productivo sin ratón.', 'Herramientas', 1);

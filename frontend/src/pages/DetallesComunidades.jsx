@@ -241,7 +241,7 @@ function DetallesComunidades() {
                     </div>
 
                     <form className="chat-input-bar" onSubmit={enviarMensaje}>
-                        <button type="button" className="btn-icon-chat"><Plus/></button>
+                        <button ref={fileInputRef} type="file" className="btn-icon-chat" onChange={handleFileUpload}><Plus/></button>
                         <input 
                             type="text" 
                             placeholder="Escribe un mensaje..."
@@ -252,7 +252,7 @@ function DetallesComunidades() {
                            <Send size={20} color="white" />
                         </button>
                     </form>
-                    <input ref={fileInputRef} type="file"  onChange={handleFileUpload} />
+                    
                 </div>
             )}
 
