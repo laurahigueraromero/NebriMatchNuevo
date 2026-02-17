@@ -124,6 +124,8 @@ export const getComunidad = async (id) => {
   return res.json();
 };
 
+
+// esto aún falta por implantar ==>
 export const crearComunidad = async (datos) => {
   const res = await fetch(`${API_URL}/api/comunidades`, {
     method: 'POST',
