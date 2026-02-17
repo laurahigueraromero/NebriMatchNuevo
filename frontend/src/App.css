@@ -1139,21 +1139,23 @@ body {
 }
 
 .btn-send-chat {
-  background-color: #bf2a2a;
-  color: white;
+  background-color: #bf2a2a; /* Rojo Nebrimatch */
+  color: white;              /* Hace que el icono Send sea blanco */
   border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 55px;               /* IMPORTANTE: Dale ancho */
+  height: 55px;              /* IMPORTANTE: Dale alto */
+  border-radius: 50%;        /* Para que sea redondo */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-left: 10px;         /* Separación del input */
   transition: transform 0.2s;
 }
 
 .btn-send-chat:hover {
-  transform: scale(1.1);
+  transform: scale(1.1);     /* Efecto al pasar el ratón */
+  background-color: #a01e1e;
 }
 
 .btn-icon-chat {

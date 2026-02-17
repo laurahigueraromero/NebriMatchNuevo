@@ -27,7 +27,7 @@ function ParaTi() {
           nombre: mentor.nombre_usuario,
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
-          imagen: `https://ui-avatars.com/api/?name=${encodeURIComponent(mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
+          imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent(mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
           online: Math.random() > 0.3, // 70% probabilidad de estar online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
