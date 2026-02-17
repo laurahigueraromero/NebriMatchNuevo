@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../componentes/Header';
 import { getMentores } from '../services/api';
-import { X, Heart, Maximize2, Minimize2 } from 'lucide-react'; 
+import { X, Heart, Maximize2, Minimize2, Cross } from 'lucide-react'; 
 import '../App.css';
 import './ParaTi.css'
 import Lottie from "lottie-react";
@@ -27,7 +27,7 @@ function ParaTi() {
           nombre: mentor.nombre_usuario,
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
-          imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent(mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
+          imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent (mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
           online: Math.random() > 0.3, // 70% probabilidad de estar online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
@@ -113,7 +113,7 @@ function ParaTi() {
       <div className="app-layout">
         <Header />
         <div className="error-container">
-          <h2>❌ {error}</h2>
+          <h2><Cross/> {error}</h2>
           <button onClick={() => window.location.reload()}>
             🔄 Intentar de nuevo
           </button>
