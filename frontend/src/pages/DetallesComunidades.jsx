@@ -93,6 +93,7 @@ function DetallesComunidades() {
     }
   };
 
+  // --- AQUÍ ESTÁ LA CORRECCIÓN: HEMOS VUELTO A PONER LA RESPUESTA AUTOMÁTICA ---
   const enviarMensaje = (e) => {
     e.preventDefault();
     if (!mensajeInput.trim()) return;
@@ -105,9 +106,23 @@ function DetallesComunidades() {
       hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMensajes([...mensajes, nuevoMsg]);
+    // Añadimos nuestro mensaje
+    setMensajes(prev => [...prev, nuevoMsg]);
     setMensajeInput("");
+
+    // Simulamos la respuesta del bot a los 2 segundos
+    setTimeout(() => {
+        const respuestaBot = {
+            id: Date.now() + 1,
+            usuario: "Carlos (Mentor)",
+            texto: "¡Buena aportación!",
+            esMio: false,
+            hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        setMensajes(prev => [...prev, respuestaBot]);
+    }, 2000);
   };
+  // ---------------------------------------------------------------------------
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -145,7 +160,7 @@ function DetallesComunidades() {
         
         {/* BANNER */}
         <div className="grupo-header-card">
-            <div className="grupo-icono-wrapper" style={{fontSize: '40px'}}>
+            <div className="grupo-icono-wrapper" >
               {/* Usamos la función de emojis segura */}
               {getIconoTecnologia(comunidad.lenguaje_asociado)}
             </div>
@@ -237,7 +252,7 @@ function DetallesComunidades() {
                            <Send size={20} color="white" />
                         </button>
                     </form>
-                    <input ref={fileInputRef} type="file" style={{ display: 'none' }} onChange={handleFileUpload} />
+                    <input ref={fileInputRef} type="file"  onChange={handleFileUpload} />
                 </div>
             )}
 
