@@ -1012,15 +1012,13 @@ body {
 }
 
 
-/* =========================================
-   ESTILO CHAT TIPO DISCORD
-   ========================================= */
+/*ESTILO DEL CHAT*/
 
-/* Contenedor Principal (El marco gris) */
+
 .chat-container-full {
-  background-color: #f2f3f5; /* Gris muy clarito tipo fondo de app */
+  background-color: #f2f3f5; 
   border-radius: 12px;
-  height: 500px; /* Altura fija importante para el scroll */
+  height: 500px; 
   display: flex;
   flex-direction: column;
   border: 1px solid #e3e5e8;
@@ -1332,8 +1330,8 @@ body {
 .header-section {
   display: flex;
   justify-content: space-between; /* Título a la izq, Buscador a la der */
-  align-items: center; /* Centrados verticalmente */
-  flex-wrap: wrap; /* Si es móvil, que baje el buscador */
+  align-items: center; 
+  flex-wrap: wrap; 
   gap: 20px;
   margin-bottom: 30px;
 }
@@ -1342,7 +1340,7 @@ body {
   padding: 12px 20px;
   width: 300px; /* Ancho fijo bonito */
   border: 1px solid #ddd;
-  border-radius: 50px; /* Bordes muy redondos (estilo píldora) */
+  border-radius: 50px; 
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
@@ -1350,9 +1348,9 @@ body {
 }
 
 .search-bar:focus {
-  border-color: #bf2a2a; /* Se pone rojo al escribir */
+  border-color: #bf2a2a; 
   box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
-  width: 320px; /* Pequeño efecto de "crecer" al clicar */
+  width: 320px; 
 }
 
 /* Ajuste Responsive para móvil */
@@ -1362,7 +1360,7 @@ body {
     align-items: flex-start;
   }
   .search-bar {
-    width: 100%; /* En móvil que ocupe todo el ancho */
+    width: 100%; 
   }
 }
 
@@ -1623,7 +1621,7 @@ html,
     width: 100%;
     height: auto;          /* deja que el contenido defina la altura */
     display: flex;
-    flex-wrap: wrap;       /* 🔹 permite que bajen si no caben */
+    flex-wrap: wrap;       /*  permite que bajen si no caben */
     justify-content: center;
     align-items: flex-start; /* mejor que center para que tarjetas no se desalineen verticalmente */
     gap: 20px;
@@ -1713,13 +1711,13 @@ html,
 .sugerencias-perfil:hover .item-3d {
     transform: translateZ(0) translateY(0) scale(1);
     opacity: 1;
-    /* Quitamos filtros si los hubiera */
+   
 }
 
-/* Ajuste para que tu componente ocupe todo el li */
+
 .item-3d > .Perfiles-interesantes {
     width: 100%; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra extra para profundidad */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
 }
 
 
