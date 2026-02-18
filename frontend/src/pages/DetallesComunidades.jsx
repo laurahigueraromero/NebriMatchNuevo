@@ -150,7 +150,8 @@ function DetallesComunidades() {
 
   const recursos = [
     { tipo: "PDF", nombre: "Guía de estudio 2024", tamano: "2.4 MB", url: "/docs/guia.pdf" },
-    { tipo: "PDF", nombre: "Normativa del Grupo", tamano: "1.1 MB", url: "/docs/normas.pdf" }
+    { tipo: "PDF", nombre: "Normativa del Grupo", tamano: "1.1 MB", url: "/docs/normas.pdf" },
+    {tipo: "PDF", nombre: "Ejercicios para principiantes", tamano: "3.4MB", url:"/docs/ejercicios.pdf"}
   ];
 
   return (

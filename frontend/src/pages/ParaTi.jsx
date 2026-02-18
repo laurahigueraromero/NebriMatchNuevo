@@ -28,14 +28,14 @@ function ParaTi() {
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
           imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent (mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
-          online: Math.random() > 0.3, // 70% probabilidad de estar online
+          online: Math.random() > 0.3, // Para que no siempre este online, sino que haya un pequeño porcentaje de que no haya online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
           email: mentor.email,
           numero_matches: mentor.numero_matches || 0
         }));
         
-        // Mezclar mentores aleatoriamente para variedad
+        // Para poder mezclar los mentores
         const mentoresMezclados = mentoresTransformados.sort(() => Math.random() - 0.5);
         
         setMentoresData(mentoresMezclados);

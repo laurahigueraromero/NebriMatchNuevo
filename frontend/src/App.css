@@ -1415,9 +1415,8 @@ html,
    SECCIÓN HERO (Banner principal)
    ========================================= */
 .info-home {
-    width: 100%;
-    
-    height: 0;
+    width: auto; 
+    height: auto;
     padding-bottom: 56.25%; 
     background-image: url('./assets/imagenes/imagen-home.jpg');
     background-size: cover;
