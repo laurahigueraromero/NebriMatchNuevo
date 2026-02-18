@@ -82,7 +82,7 @@ function MiPerfil() {
                     navigate("/miPerfil/editarPerfil");
                   }}
                 >
-                  ✏️ Editar perfil
+                   Editar perfil
                 </button>
               </div>
             </div>
@@ -94,13 +94,13 @@ function MiPerfil() {
           </div>
 
           <div className="fila3-perfil">
-            <p>{datosActuales.descripcion || "Sin descripción disponible"}</p>
+            <p >{datosActuales.descripcion || "Sin descripción disponible"}</p>
           </div>
 
           {lenguajesAprender.length > 0 && (
             <>
               <div className="fila4-perfil">
-                <h2>🎯 Quiero aprender:</h2>
+                <h2> Quiero aprender:</h2>
               </div>
               <div className="fila4-perfil">
                 {lenguajesAprender.map((lenguaje, index) => (
@@ -113,7 +113,7 @@ function MiPerfil() {
           {lenguajesEnsenar.length > 0 && (
             <>
               <div className="fila4-perfil">
-                <h2>🏆 Puedo enseñar:</h2>
+                <h2> Puedo enseñar:</h2>
               </div>
               <div className="fila4-perfil">
                 {lenguajesEnsenar.map((lenguaje, index) => (
@@ -130,7 +130,7 @@ function MiPerfil() {
               Podría interesarte
             </p>
 
-            {/* INICIO DE LA LISTA 3D */}
+          
             <ul className="lista-3d-container">
               {/* Tarjeta 1 (Fondo) - Usamos var(--i) para el retraso */}
               <li className="item-3d" style={{ "--i": 1 }}>

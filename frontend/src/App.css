@@ -8,40 +8,36 @@ body {
 /*APP.JSX*/
 .app-container {
   display: flex;
-  flex-direction: column; 
-  min-height: 100vh;      
+  flex-direction: column;
+  min-height: 100vh;
 }
-
 
 .content-wrap {
-  flex: 1;  
-  width: 100%; 
+  flex: 1;
+  width: 100%;
 }
 
-
 .main-footer {
-  
-  flex-shrink: 0; 
+  flex-shrink: 0;
   width: 100%;
 }
 /* =========================================
    ESTILOS PÁGINAS LEGALES Y CONTACTO
    ========================================= */
 
-
 .legal-content {
-  text-align: left;      
+  text-align: left;
   margin-top: 20px;
-  line-height: 1.6;      
-  color: #444;           
-  background: white;    
+  line-height: 1.6;
+  color: #444;
+  background: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .legal-content h3 {
-  color: #bf2a2a;        
+  color: #bf2a2a;
   margin-top: 25px;
   margin-bottom: 10px;
   font-size: 1.2rem;
@@ -63,14 +59,14 @@ body {
   margin-bottom: 20px;
 } */
 .legal-page {
-  padding: 40px 20px;     /* Espacio arriba/abajo y a los lados */
-  max-width: 800px;       /* Ancho máximo para que sea legible */
-  margin: 0 auto;         /* Centrado horizontal */
-  text-align: center;     /* Título y botón centrados */
+  padding: 40px 20px; /* Espacio arriba/abajo y a los lados */
+  max-width: 800px; /* Ancho máximo para que sea legible */
+  margin: 0 auto; /* Centrado horizontal */
+  text-align: center; /* Título y botón centrados */
 }
 
 .legal-page h1 {
-  color: #bf2a2a;         /* Rojo Nebrimatch */
+  color: #bf2a2a; /* Rojo Nebrimatch */
   margin-bottom: 10px;
   font-size: 2.5rem;
 }
@@ -85,20 +81,20 @@ body {
 
 /* 3. La caja blanca con el texto (El contenido) */
 .legal-content {
-  text-align: left;       /* El texto de lectura mejor a la izquierda */
-  background: white;      /* Fondo blanco */
-  padding: 40px;          /* Espacio interior amplio */
-  border-radius: 12px;    /* Bordes redondeados */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Sombra suave */
-  line-height: 1.6;       /* Altura de línea para leer cómodo */
-  color: #444;            /* Gris oscuro */
+  text-align: left; /* El texto de lectura mejor a la izquierda */
+  background: white; /* Fondo blanco */
+  padding: 40px; /* Espacio interior amplio */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  line-height: 1.6; /* Altura de línea para leer cómodo */
+  color: #444; /* Gris oscuro */
   margin-bottom: 30px;
 }
 
 /* Títulos dentro del texto (1. Responsable, 2. Datos...) */
 .legal-content h3 {
   color: #333;
-  margin-top: 25px;       /* Separación superior */
+  margin-top: 25px; /* Separación superior */
   margin-bottom: 15px;
   font-size: 1.2rem;
   border-bottom: 2px solid #f0f0f0; /* Una línea sutil debajo del título */
@@ -115,30 +111,27 @@ body {
   margin-bottom: 10px;
 }
 
-
-
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;            
+  gap: 15px;
   margin-top: 30px;
-  max-width: 500px;      
-  margin-left: auto;    
-  margin-right: auto;   
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
   background: white;
   padding: 30px;
   border-radius: 55px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
-
 
 .contact-form textarea.input-field {
-  resize: vertical;     
+  resize: vertical;
   min-height: 120px;
-  font-family: inherit;  
+  font-family: inherit;
 }
 
-.input-field{
+.input-field {
   border-radius: 5px;
   border: solid #888;
 }
@@ -339,20 +332,20 @@ body {
 }
 /* Barra de Navegación */
 .navbar {
-  background-color: #bf2a2a;     /* Rojo Nebrimatch */
+  background-color: #bf2a2a; /* Rojo Nebrimatch */
   color: white;
-  padding: 15px 50px;            /* Espacio arriba/abajo y a los lados */
-  
+  padding: 15px 50px; /* Espacio arriba/abajo y a los lados */
+
   /* Flexbox para mandar a los extremos */
   display: flex;
   justify-content: space-between; /* ESTO ES LA MAGIA: Logo izq, Menú der */
-  align-items: center;            /* Centrado vertical */
-  
+  align-items: center; /* Centrado vertical */
+
   /* Obligamos a que ocupe toda la pantalla de lado a lado */
   width: 100%;
-  box-sizing: border-box;        /* Evita que el padding sume ancho extra */
+  box-sizing: border-box; /* Evita que el padding sume ancho extra */
   margin: 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* El Logo a la izquierda */
@@ -367,7 +360,7 @@ body {
 /* El contenedor del menú a la derecha */
 .navbar-menu {
   display: flex;
-  gap: 30px;              /* Espacio de 30px entre cada botón */
+  gap: 30px; /* Espacio de 30px entre cada botón */
   align-items: center;
   margin: 0;
   background-color: transparent; /* Quitamos ese fondo rojo oscuro raro */
@@ -407,12 +400,12 @@ body {
 
 /* --- Estilos del Footer --- */
 .main-footer {
-  background-color: #bf2a2a; 
+  background-color: #bf2a2a;
   padding: 20px;
   display: flex;
   justify-content: center;
-  gap: 30px; 
-  margin-top: auto; 
+  gap: 30px;
+  margin-top: auto;
   width: 100%;
 }
 
@@ -469,9 +462,11 @@ body {
   border-radius: 8px;
   padding: 20px 25px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra suave */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
   border-left: 5px solid #bf2a2a; /* Detalle rojo a la izquierda muy pro */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* Efecto Hover: La tarjeta avanza un poquito hacia la derecha */
@@ -515,13 +510,12 @@ body {
   min-height: 100vh;
 }
 
-
 /*PÁGINA COMUNIDADES*/
 .target-groups {
   display: grid;
   /* Esto crea columnas automáticas. Mínimo 300px ancho, si cabe más, pone más columnas */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-  gap: 20px;      
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
   margin-top: 30px;
 }
 
@@ -530,8 +524,10 @@ body {
   background: white;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra suave */
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border: 1px solid #eee;
   display: flex;
   flex-direction: column;
@@ -540,8 +536,8 @@ body {
 
 /* Efecto al pasar el ratón por encima */
 .card-comunidad:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15); 
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15);
   border-color: #bf2a2a;
 }
 
@@ -556,7 +552,6 @@ body {
   color: #888;
 }
 
-
 .card-comunidad h3 {
   margin: 0 0 10px 0;
   color: #333;
@@ -569,7 +564,6 @@ body {
   line-height: 1.5;
   margin-bottom: 20px;
 }
-
 
 .btn-unirse {
   background-color: white;
@@ -618,27 +612,27 @@ body {
 .header-section {
   display: flex;
   justify-content: space-between; /* Título a la izq, Buscador a la der */
-  align-items: center;            /* Centrados verticalmente */
-  flex-wrap: wrap;                /* Si es móvil, que baje el buscador */
+  align-items: center; /* Centrados verticalmente */
+  flex-wrap: wrap; /* Si es móvil, que baje el buscador */
   gap: 20px;
   margin-bottom: 30px;
 }
 
 .search-bar {
   padding: 12px 20px;
-  width: 300px;             /* Ancho fijo bonito */
+  width: 300px; /* Ancho fijo bonito */
   border: 1px solid #ddd;
-  border-radius: 50px;      /* Bordes muy redondos (estilo píldora) */
+  border-radius: 50px; /* Bordes muy redondos (estilo píldora) */
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .search-bar:focus {
-  border-color: #bf2a2a;    /* Se pone rojo al escribir */
+  border-color: #bf2a2a; /* Se pone rojo al escribir */
   box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
-  width: 320px;             /* Pequeño efecto de "crecer" al clicar */
+  width: 320px; /* Pequeño efecto de "crecer" al clicar */
 }
 
 /* Ajuste Responsive para móvil */
@@ -652,15 +646,13 @@ body {
   }
 }
 
-
-
 /*CSS DETALLES-COMUNIDADES*/
 .detalle-content {
   text-align: center;
   margin-top: 50px;
-  max-width: 800px;   
-  margin-left: auto;  
-  margin-right: auto; 
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 20px;
 }
 
@@ -669,20 +661,18 @@ body {
   padding: 30px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  border: 1px dashed #ccc; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px dashed #ccc;
 }
 
 .construction-title {
-  color: #bf2a2a;     
+  color: #bf2a2a;
   margin-bottom: 10px;
 }
-
 
 .btn-margin-top {
   margin-top: 30px;
 }
-
 
 .nav-link {
   cursor: pointer;
@@ -735,7 +725,6 @@ body {
   background-color: #a01e1e;
   transform: translateY(-3px);
 }
-
 
 /* =========================================
    DISEÑO RESPONSIVE (Móviles y Tablets)
@@ -1011,14 +1000,12 @@ body {
   transform: scale(1.05);
 }
 
-
 /*ESTILO DEL CHAT*/
 
-
 .chat-container-full {
-  background-color: #f2f3f5; 
+  background-color: #f2f3f5;
   border-radius: 12px;
-  height: 500px; 
+  height: 500px;
   display: flex;
   flex-direction: column;
   border: 1px solid #e3e5e8;
@@ -1067,7 +1054,7 @@ body {
 .chat-avatar {
   width: 35px;
   height: 35px;
-  background-color: #5865F2; /* Azul Discord */
+  background-color: #5865f2; /* Azul Discord */
   color: white;
   border-radius: 50%;
   display: flex;
@@ -1084,7 +1071,7 @@ body {
   padding: 10px 15px;
   border-radius: 18px;
   border-bottom-left-radius: 2px; /* Efecto bocadillo */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
@@ -1100,7 +1087,7 @@ body {
   display: block;
   font-size: 0.75rem;
   font-weight: bold;
-  color: #5865F2;
+  color: #5865f2;
   margin-bottom: 2px;
 }
 
@@ -1138,21 +1125,21 @@ body {
 
 .btn-send-chat {
   background-color: #bf2a2a; /* Rojo Nebrimatch */
-  color: white;              /* Hace que el icono Send sea blanco */
+  color: white; /* Hace que el icono Send sea blanco */
   border: none;
-  width: 55px;               /* IMPORTANTE: Dale ancho */
-  height: 55px;              /* IMPORTANTE: Dale alto */
-  border-radius: 50%;        /* Para que sea redondo */
+  width: 55px; /* IMPORTANTE: Dale ancho */
+  height: 55px; /* IMPORTANTE: Dale alto */
+  border-radius: 50%; /* Para que sea redondo */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-left: 10px;         /* Separación del input */
+  margin-left: 10px; /* Separación del input */
   transition: transform 0.2s;
 }
 
 .btn-send-chat:hover {
-  transform: scale(1.1);     /* Efecto al pasar el ratón */
+  transform: scale(1.1); /* Efecto al pasar el ratón */
   background-color: #a01e1e;
 }
 
@@ -1163,7 +1150,6 @@ body {
   cursor: pointer;
   color: #666;
 }
-
 
 /* --- SISTEMA DE PESTAÑAS (TABS) --- */
 .tabs-container {
@@ -1317,8 +1303,14 @@ body {
   cursor: pointer;
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Animación suave al cambiar pestaña */
@@ -1330,8 +1322,8 @@ body {
 .header-section {
   display: flex;
   justify-content: space-between; /* Título a la izq, Buscador a la der */
-  align-items: center; 
-  flex-wrap: wrap; 
+  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 30px;
 }
@@ -1340,7 +1332,7 @@ body {
   padding: 12px 20px;
   width: 300px; /* Ancho fijo bonito */
   border: 1px solid #ddd;
-  border-radius: 50px; 
+  border-radius: 50px;
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
@@ -1348,9 +1340,9 @@ body {
 }
 
 .search-bar:focus {
-  border-color: #bf2a2a; 
+  border-color: #bf2a2a;
   box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
-  width: 320px; 
+  width: 320px;
 }
 
 /* Ajuste Responsive para móvil */
@@ -1360,7 +1352,7 @@ body {
     align-items: flex-start;
   }
   .search-bar {
-    width: 100%; 
+    width: 100%;
   }
 }
 
@@ -1398,317 +1390,321 @@ body {
 
 /*HOME*/
 * {
-    font-family: 'Segoe UI', system-ui, sans-serif; /* Fuente más moderna */
-    box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif; /* Fuente más moderna */
+  box-sizing: border-box;
 }
 
 html,
 .body-home {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    overflow-x: hidden;
-    background-color: #fafbfc; /* Fondo apenas gris para que las cajas blancas destaquen */
+  width: 100%;
+  height: auto;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #fafbfc; /* Fondo apenas gris para que las cajas blancas destaquen */
 }
 
 /* =========================================
    SECCIÓN HERO (Banner principal)
    ========================================= */
 .info-home {
-    width: auto; 
-    height: auto;
-    padding-bottom: 56.25%; 
-    background-image: url('./assets/imagenes/imagen-home.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative; 
+  width: auto;
+  height: auto;
+  padding-bottom: 56.25%;
+  background-image: url("./assets/imagenes/imagen-home.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 .eslogan-home {
-    width: 50%;
-    max-width: 600px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px); 
-    border-radius: 24px;
-    
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    text-align: center;
-    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 50%;
+  max-width: 600px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .eslogan-home h1 {
-    color: #1a1a1a;
-    font-size: 2.5rem;
-    margin: 0;
-    font-weight: 800;
+  color: #1a1a1a;
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 800;
 }
 
 /* =========================================
    TÍTULOS DE SECCIÓN
    ========================================= */
 .Preguntas-home {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 60px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
 }
 
 .pregunta-home {
-    font-size: 2.2rem;
-    color: #d71820; /* Tu color de marca */
-    font-weight: 800;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-size: 2.2rem;
+  color: #d71820; /* Tu color de marca */
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* =========================================
+/* 
    TARJETAS DE DISTRIBUCIÓN
-   ========================================= */
+    */
 .DistribucionTarjetas {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* Espaciado fijo en vez de % para que no se separen demasiado */
-    padding: 20px;
-    margin-bottom: 50px;
-    flex-wrap: wrap; /* Para que en pantallas pequeñas bajen a otra línea */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 10%; 
+  padding: 20px;
+  margin-bottom: 50px;
+  flex-wrap: wrap; /* Para que en pantallas pequeñas bajen a otra línea */
 }
 
-/* =========================================
+/* 
    SECCIÓN ÚNETE A LA FAMILIA (Imagen + Caja)
-   ========================================= */
+   */
 .filaImagen2-home {
-    width: 100%;
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 20px;
-    gap: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap; /* Responsive amigable */
+  width: 100%;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 20px;
+  gap: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Responsive amigable */
 }
 
 .imagen2-home {
-    width: 45%;
-    min-width: 300px;
-    height: auto;
-    border-radius: 24px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Sombra a la imagen */
-    transition: transform 0.3s ease;
+  width: 45%;
+  min-width: 300px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* Sombra a la imagen */
+  transition: transform 0.3s ease;
 }
 
 .imagen2-home:hover {
-    transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
+  transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
 }
 
 /* Caja de registro */
 .unete-home {
-    width: 40%;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    border-radius: 24px;
-    /* Cambiamos el borde gris feo por una sombra limpia */
-    border: none;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-    padding: 50px 30px;
+  width: 40%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 24px;
+  /* Cambiamos el borde gris feo por una sombra limpia */
+  border: none;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  padding: 50px 30px;
 }
 
 .unete-home h3 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-top: 0;
-    text-align: center;
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-top: 0;
+  text-align: center;
 }
 
 /* Botón de Registro moderno */
 .botones-home {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
 }
 
 .botones-home button {
-    background-color: #d71820; /* Color Nebrimatch */
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 15px 35px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(215, 24, 32, 0.3); /* Sombra roja brillante */
-    transition: all 0.3s ease;
+  background-color: #d71820; /* Color Nebrimatch */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(215, 24, 32, 0.3); /* Sombra roja brillante */
+  transition: all 0.3s ease;
 }
 
 .botones-home button:hover {
-    background-color: #b51219;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(215, 24, 32, 0.4);
+  background-color: #b51219;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(215, 24, 32, 0.4);
 }
 
 /* =========================================
    SECCIÓN FAQ
    ========================================= */
 .distribuccionFAQ-home {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    padding-bottom: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 80px;
 }
 .body-perfil {
-    width: 100vw;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    gap: 5%;
+ 
+  width: 100vw;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 5%;
 }
 
 .contenido-perfil {
-    width: 50%;
-    height: auto;
-    border-radius: 2%;
-    border: 1px solid gray;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  width: 50%;
+  height: auto;
+  border-radius: 2%;
+  border: 1px solid gray;
 }
 
 .sugerencias-perfil {
-    width: 25%;
-    height: auto;
-    border-radius: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* 👈 arriba */
-    align-items: stretch;
-    /* 👈 ancho completo */
-    gap: 30px;
-    background-image: url("./assets/imagenes/fondo.jpg");
+  width: 25%;
+  height: auto;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* 👈 arriba */
+  align-items: stretch;
+  /* 👈 ancho completo */
+  gap: 30px;
+  background-image: url("./assets/imagenes/fondo.jpg");
 }
 
 .editar-perfil button {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 10%;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .editar-perfil {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 40px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
 }
 
 .intereses-perfil {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
 }
 
 .titulo-intereses {
-    font-size: 1.5rem;
-    font-family: cursive;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin-bottom: 30px;
+  font-size: 1.5rem;
+  font-family: cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 30px;
 }
 
 .fila1-perfil {
-    width: 100%;
-    height: 100px;
-    background-image: url("./assets/imagenes/fondo.jpg");
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    border-radius: 2%;
+  width: 100%;
+  height: 100px;
+  background-image: url("./assets/imagenes/fondo.jpg");
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  border-radius: 2%;
 }
 
 .fila2-perfil {
-    width: 100%;
-    height: 80px;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding-left: 110px;
-    font-size: 1.3rem;
-   
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-left: 110px;
+  font-size: 1.3rem;
 }
 
 .fila3-perfil {
-    width: 100%;
-    height: auto;
-    text-align: left;
-    align-items: center;
-    display: flex;
-    padding: 20px;
+  
+  width: 100%;
+  height: auto;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  padding: 20px;
 }
 
 .fila3-perfil p {
-    font-family: cursive;
+   font-family: 'Segoe UI', system-ui, sans-serif;
 }
-.fila4-perfil{
-    width: 100%;
-    height: auto;          /* deja que el contenido defina la altura */
-    display: flex;
-    flex-wrap: wrap;       /*  permite que bajen si no caben */
-    justify-content: center;
-    align-items: flex-start; /* mejor que center para que tarjetas no se desalineen verticalmente */
-    gap: 20px;
-    padding-bottom: 20px;
+.fila4-perfil {
+  width: 100%;
+  height: auto; /* deja que el contenido defina la altura */
+  display: flex;
+  flex-wrap: wrap; /*  permite que bajen si no caben */
+  justify-content: center;
+  align-items: flex-start; /* mejor que center para que tarjetas no se desalineen verticalmente */
+  gap: 20px;
+  padding-bottom: 20px;
 }
 .img2-perfil img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    position: relative;
-    top: 75px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  top: 75px;
 }
 
 .img2-perfil {
-    width: 50%;
-    height: 200px;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 50px;
+  width: 50%;
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 50px;
 }
 
 .col2-perfil {
-    width: 50%;
-    height: auto;
-    justify-content: flex-end;
+  width: 50%;
+  height: auto;
+  justify-content: flex-end;
 }
 
 /* =========================================
@@ -1717,91 +1713,84 @@ html,
 
 /* El contenedor (ul) */
 .lista-3d-container {
-    position: relative;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    display: flex;
-    flex-direction: column;
-    gap: 0; /* Empiezan pegados */
-    padding: 0;
-    margin-top: 20px;
-    width: 100%;
-    transition: 0.5s ease-in-out;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Empiezan pegados */
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  transition: 0.5s ease-in-out;
 }
 
 /* Al pasar el ratón por la zona roja, se separan */
 .sugerencias-perfil:hover .lista-3d-container {
-    gap: 15px; 
-    transform: translateY(10px);
+  gap: 15px;
+  transform: translateY(10px);
 }
 
 /* Cada elemento de la lista (li) que envuelve a tu componente */
 .item-3d {
-    list-style: none;
-    width: 100%;
-    position: relative;
-    transition: 0.5s;
-    transition-delay: calc(var(--i) * 100ms); /* Efecto cascada */
-    cursor: pointer;
+  list-style: none;
+  width: 100%;
+  position: relative;
+  transition: 0.5s;
+  transition-delay: calc(var(--i) * 100ms); /* Efecto cascada */
+  cursor: pointer;
 }
 
 /* --- ESTADOS APILADOS (INICIO) --- */
 
 /* 1. La de más atrás (Fondo) */
 .item-3d:nth-child(1) {
-    transform: translateZ(-60px) translateY(40px) scale(0.9);
-    opacity: 0.6;
-    z-index: 1;
+  transform: translateZ(-60px) translateY(40px) scale(0.9);
+  opacity: 0.6;
+  z-index: 1;
 }
 
 /* 2. La de en medio */
 .item-3d:nth-child(2) {
-    transform: translateZ(-30px) translateY(20px) scale(0.95);
-    opacity: 0.8;
-    z-index: 2;
+  transform: translateZ(-30px) translateY(20px) scale(0.95);
+  opacity: 0.8;
+  z-index: 2;
 }
 
 /* 3. La de enfrente */
 .item-3d:nth-child(3) {
-    transform: translateZ(0) translateY(0) scale(1);
-    opacity: 1;
-    z-index: 3;
+  transform: translateZ(0) translateY(0) scale(1);
+  opacity: 1;
+  z-index: 3;
 }
 
 /* --- ESTADO DESPLEGADO (HOVER) --- */
 .sugerencias-perfil:hover .item-3d {
-    transform: translateZ(0) translateY(0) scale(1);
-    opacity: 1;
-   
+  transform: translateZ(0) translateY(0) scale(1);
+  opacity: 1;
 }
-
 
 .item-3d > .Perfiles-interesantes {
-    width: 100%; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
-
-
-
-
-
 
 /* =========================================
    RESPONSIVE (MÓVIL) - APP.CSS
    ========================================= */
 
 @media (max-width: 768px) {
-  
   /* 1. Ajustar el Layout principal */
-  .app-layout, .app-comunidades {
+  .app-layout,
+  .app-comunidades {
     flex-direction: column; /* Pone el menú arriba y el contenido abajo */
     width: 100vw;
     overflow-x: hidden; /* Evita scroll lateral indeseado */
   }
 
   /* 2. El contenido principal ocupa todo el ancho */
-  .principal-content, .detalle-content {
+  .principal-content,
+  .detalle-content {
     width: 100%;
     padding: 15px; /* Menos padding en móvil */
     padding-bottom: 80px; /* Espacio para que no se corte el final */
@@ -1843,7 +1832,7 @@ html,
   .chat-container-full {
     height: calc(100vh - 250px); /* Ajuste de altura para móvil */
   }
-  
+
   .chat-input-bar {
     padding: 10px;
   }
@@ -1851,9 +1840,10 @@ html,
   .chat-input-bar input {
     font-size: 16px; /* Evita que el iPhone haga zoom al escribir */
   }
-  
+
   /* 6. Grid de Eventos y Recursos (1 columna) */
-  .events-grid, .resources-list {
+  .events-grid,
+  .resources-list {
     grid-template-columns: 1fr; /* Una sola columna */
   }
 }
@@ -1863,7 +1853,6 @@ html,
    ========================================= */
 
 @media (max-width: 768px) {
-  
   /* 1. Header de búsqueda */
   .header-section {
     flex-direction: column;

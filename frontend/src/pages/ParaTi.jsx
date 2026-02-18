@@ -161,7 +161,7 @@ function ParaTi() {
         
         <div className={`card-stack ${isOpened ? 'opened' : ''}`}>
           
-            //La carta de la izquierda
+            
             {card3 && (
                 <div className="card card-bottom">
                     <div className="card-image-area">
@@ -170,7 +170,7 @@ function ParaTi() {
                 </div>
             )}
 
-            //La carta de la derecha
+           
             {card2 && (
                 <div className="card card-middle">
                     <div className="card-image-area">
@@ -179,7 +179,7 @@ function ParaTi() {
                 </div>
             )}
 
-            //La carta Principal
+            
             <div className={`card card-top ${swipeDirection}`}>
                 <div className="card-image-area">
                     <img src={card1.imagen} alt={card1.nombre} />
@@ -220,19 +220,19 @@ function ParaTi() {
 
         </div>
 
-        /* BOTÓN REDONDO */
+        
         <nav className={`nav-circle ${isOpened ? 'opened' : ''}`} onClick={() => setIsOpened(!isOpened)}>
             {isOpened ? <Minimize2 size={28} color="white"/> : <Maximize2 size={28} color="white"/>}
         </nav>
         
         <p className="hint-text">{isOpened ? "Modo Panorámico" : "Modo Pila"}</p>
 
-        /* Contador de mentores */
+        
         <p className="mentor-counter">
           {currentIndex + 1} de {mentoresData.length} mentores
         </p>
 
-        //Aviso de que estamos conectados a la BDD
+        
         <p className="db-indicator">
           🔗 Conectado a NebriMatch DB
         </p>

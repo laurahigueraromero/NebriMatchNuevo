@@ -7,7 +7,7 @@ function Header() {
 
   return (
     <nav className="navbar">
-      {/* El logo ahora es clicable y te lleva al inicio de la app */}
+      
       <div
         className="navbar-logo"
         onClick={() => navigate("/comunidades")}
@@ -23,7 +23,7 @@ function Header() {
         <span className="nav-link" onClick={() => navigate("/comunidades")}>
           Comunidades
         </span>
-        <span className="nav-link" onClick={() => alert("")}>
+        <span className="nav-link" onClick={() => navigate("/Chats")}>
           Mis chats
         </span>
         <span className="nav-link" onClick={() => navigate("/miperfil")}>
