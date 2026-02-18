@@ -141,8 +141,8 @@ function DetallesComunidades() {
 
   const yaMiembro = comunidad?.miembros?.some((m) => m.id === usuario?.id);
 
-  if (loading) return <div className="app-layout"><Header /><p style={{padding: '20px'}}>Cargando...</p></div>;
-  if (!comunidad || comunidad.mensaje) return <div className="app-layout"><Header /><p style={{padding: '20px'}}>Comunidad no encontrada</p></div>;
+  if (loading) return <div className="app-layout"><Header /><p>Cargando...</p></div>;
+  if (!comunidad || comunidad.mensaje) return <div className="app-layout"><Header /><p>Comunidad no encontrada</p></div>;
 
   const eventos = [
     { dia: "15", mes: "OCT", titulo: "Taller de Iniciación", hora: "17:30", lugar: "Aula 204" },

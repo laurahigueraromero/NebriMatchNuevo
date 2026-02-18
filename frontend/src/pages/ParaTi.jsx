@@ -191,7 +191,7 @@ function ParaTi() {
                     <span className="card-role">{card1.especialidad}</span>
                     <p className="card-bio">{card1.bio}</p>
 
-                    //Habilidades
+                    
                     <div className="mentor-skills-preview">
                       <strong>🎯 Enseña:</strong>
                       <div className="skills-mini">

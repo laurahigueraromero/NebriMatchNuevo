@@ -14,6 +14,7 @@ import Footer from "../componentes/Footer";
 import MiPerfil from "../pages/MiPerfil"; 
 import Home from "../pages/Home";
 import ParaTi from "../pages/ParaTi";
+import Chats from "../pages/Chats";
 
 function AppRouter() {
   return (
@@ -31,6 +32,8 @@ function AppRouter() {
 
             <Route path="/comunidades" element={<Comunidades />} />
             <Route path="/parati" element={<ParaTi />} />
+            <Route path="/chats" element={<Chats />} />
+            
            
             <Route path="/comunidad/:id" element={<DetallesComunidades />} />
             <Route path="/terminos" element={<Terminos />} />

@@ -1,22 +1,24 @@
 .nm-page {
   width: 100%;
-
-  height: calc(100vh - 80px);
+  height: calc(100vh - 80px); /* 100% de la pantalla menos lo que ocupa el Header */
   display: flex;
-  background-color: #fafbfc;
+  justify-content: center; /* Centramos la caja del chat */
   padding: 20px;
+  box-sizing: border-box;
+  background-color: #fafbfc;
 }
 
+/* La caja gigante del chat */
 .nm-chat-layout {
-  flex: 1;
-  display: flex;
   width: 100%;
+  max-width: 1300px; /* Para que en pantallas gigantes no se deforme */
+  height: 100%; /* Ocupa todo el alto disponible del nm-page */
+  display: flex;
   background-color: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   overflow: hidden;
 }
-
 /* 
    BARRA LATERAL (LISTA DE CHATS)
     */

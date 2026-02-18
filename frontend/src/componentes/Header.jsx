@@ -23,7 +23,7 @@ function Header() {
         <span className="nav-link" onClick={() => navigate("/comunidades")}>
           Comunidades
         </span>
-        <span className="nav-link" onClick={() => navigate("/Chats")}>
+        <span className="nav-link" onClick={() => navigate("/chats")}>
           Mis chats
         </span>
         <span className="nav-link" onClick={() => navigate("/miperfil")}>
