@@ -1,8 +1,8 @@
 .nm-page {
   width: 100%;
-  height: calc(100vh - 80px); /* 100% de la pantalla menos lo que ocupa el Header */
+  height: calc(100vh - 80px); 
   display: flex;
-  justify-content: center; /* Centramos la caja del chat */
+  justify-content: center;
   padding: 20px;
   box-sizing: border-box;
   background-color: #fafbfc;
@@ -11,8 +11,8 @@
 /* La caja gigante del chat */
 .nm-chat-layout {
   width: 100%;
-  max-width: 1300px; /* Para que en pantallas gigantes no se deforme */
-  height: 100%; /* Ocupa todo el alto disponible del nm-page */
+  max-width: 1300px; 
+  height: 100%; 
   display: flex;
   background-color: #ffffff;
   border-radius: 20px;
