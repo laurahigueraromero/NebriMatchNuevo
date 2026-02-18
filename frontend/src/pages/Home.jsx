@@ -1,10 +1,10 @@
 import TarjetaHome from "../componentes/TarjetaHome";
 import imagen2 from "../assets/imagenes/imagen2-home.jpg";
-import FAQItem from "../componentes/FAQItem/FAQItem"; // ⚠️ Corrige la mayúscula
+import FAQItem from "../componentes/FAQItem/FAQItem"; 
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate(); // ✅ Así se usa useNavigate
+  const navigate = useNavigate(); 
 
 
 

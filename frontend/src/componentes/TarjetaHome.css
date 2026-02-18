@@ -1,12 +1,22 @@
 .TarjetaHome {
     width: 20%;
+    min-width: 250px;
     height: auto;
     text-align: center;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px;
+    padding: 30px 20px;
     border-radius: 20px;
     border: 1px solid gray;
+    background: #ffffff; 
+    border: none; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    transition: all 0.3s ease;
+    
+}
+.TarjetaHome:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); 
 }

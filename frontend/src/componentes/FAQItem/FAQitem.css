@@ -1,25 +1,69 @@
+/* Contenedor padre general de FAQs */
 .faq-home {
-  max-width: 600px;
-  margin: 4rem auto;
+  width: 100%;
+  max-width: 800px; /* Un poco más ancho para que respire */
+  margin: 2rem auto;
+  padding: 0 20px;
 }
 
+/* Cada tarjeta individual de pregunta */
 .faq-item {
+  width: 100%;
   background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
+  padding: 1.2rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 1.2rem;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  /* Sombra inicial suave */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #f5f5f5;
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
 }
 
+/* Efecto al pasar el ratón */
+.faq-item:hover {
+  transform: translateY(-4px); /* Se levanta un poco */
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1); /* Sombra más fuerte al levantarse */
+  border-color: rgba(215, 24, 32, 0.2); /* Borde sutil rojo */
+}
+
+/* Zona de la pregunta y el icono */
 .faq-question {
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
-  
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2c3e50;
 }
 
+/* El icono + o - */
+.faq-question span:last-child {
+  font-size: 1.5rem;
+  color: #d71820; /* Color rojo de tu marca */
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+/* Zona de la respuesta */
 .faq-answer {
-  margin-top: .5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee; /* Línea separadora */
   color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  animation: fadeIn 0.4s ease-out; /* Animación al abrirse */
+}
+
+/* Animación de desvanecimiento para el texto */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
