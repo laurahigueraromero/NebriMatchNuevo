@@ -126,14 +126,14 @@ function MiPerfil() {
 
         <div className="sugerencias-perfil">
           <div className="intereses-perfil">
-            <p className="titulo-intereses" style={{ color: "white" }}>
+            <p className="titulo-intereses" >
               Podría interesarte
             </p>
 
           
             <ul className="lista-3d-container">
-              {/* Tarjeta 1 (Fondo) - Usamos var(--i) para el retraso */}
-              <li className="item-3d" style={{ "--i": 1 }}>
+              
+              <li className="item-3d" >
                 <InteresPerfil
                   nombre="Carlos"
                   info="Experto en React y Node.js."
@@ -141,19 +141,19 @@ function MiPerfil() {
               </li>
 
               {/* Tarjeta 2 (Medio) */}
-              <li className="item-3d" style={{ "--i": 2 }}>
+              <li className="item-3d" >
                 <InteresPerfil nombre="Ana" info="Frontend developer y CSS." />
               </li>
 
               {/* Tarjeta 3 (Frente) */}
-              <li className="item-3d" style={{ "--i": 3 }}>
+              <li className="item-3d" >
                 <InteresPerfil
                   nombre="David"
                   info="Backend y Bases de datos."
                 />
               </li>
             </ul>
-            {/* FIN DE LA LISTA */}
+            
           </div>
         </div>
 
