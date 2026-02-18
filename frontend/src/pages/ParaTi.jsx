@@ -21,7 +21,7 @@ function ParaTi() {
       .then(data => {
         console.log('Mentores recibidos de la DB:', data);
         
-        // Transformar datos de la DB al formato que espera tu componente
+        
         const mentoresTransformados = data.map(mentor => ({
           id: mentor.id,
           nombre: mentor.nombre_usuario,
@@ -69,8 +69,7 @@ function ParaTi() {
         
         console.log(`✅ Match guardado con ${mentorActual.nombre}`);
         
-        // Opcional: Actualizar contador de matches en la BD
-        // actualizarMatches(mentorActual.id);
+        
     }
 
     setTimeout(() => { avanzarCarta(); }, 400);
@@ -153,16 +152,16 @@ function ParaTi() {
           Para Ti
           <div className="emoji-fire">
             
-            {/* Controlamos el tamaño aquí */}
+            
             <Lottie animationData={fireAnim} loop={true} />
           </div>
         </h1>
         <p className="subtitle-stack">Conecta con mentores de tu base de datos</p>
 
-        {/* CONTENEDOR DEL MAZO */}
+        
         <div className={`card-stack ${isOpened ? 'opened' : ''}`}>
           
-            {/* CARTA 3 (FONDO - IZQUIERDA) */}
+            //La carta de la izquierda
             {card3 && (
                 <div className="card card-bottom">
                     <div className="card-image-area">
@@ -171,7 +170,7 @@ function ParaTi() {
                 </div>
             )}
 
-            {/* CARTA 2 (FONDO - DERECHA) */}
+            //La carta de la derecha
             {card2 && (
                 <div className="card card-middle">
                     <div className="card-image-area">
@@ -180,7 +179,7 @@ function ParaTi() {
                 </div>
             )}
 
-            {/* CARTA 1 (PRINCIPAL - CENTRO) */}
+            //La carta Principal
             <div className={`card card-top ${swipeDirection}`}>
                 <div className="card-image-area">
                     <img src={card1.imagen} alt={card1.nombre} />
@@ -192,7 +191,7 @@ function ParaTi() {
                     <span className="card-role">{card1.especialidad}</span>
                     <p className="card-bio">{card1.bio}</p>
 
-                    {/* Mostrar habilidades del mentor */}
+                    //Habilidades
                     <div className="mentor-skills-preview">
                       <strong>🎯 Enseña:</strong>
                       <div className="skills-mini">
@@ -221,19 +220,19 @@ function ParaTi() {
 
         </div>
 
-        {/* BOTÓN REDONDO */}
+        /* BOTÓN REDONDO */
         <nav className={`nav-circle ${isOpened ? 'opened' : ''}`} onClick={() => setIsOpened(!isOpened)}>
             {isOpened ? <Minimize2 size={28} color="white"/> : <Maximize2 size={28} color="white"/>}
         </nav>
         
         <p className="hint-text">{isOpened ? "Modo Panorámico" : "Modo Pila"}</p>
 
-        {/* Contador de mentores */}
+        /* Contador de mentores */
         <p className="mentor-counter">
           {currentIndex + 1} de {mentoresData.length} mentores
         </p>
 
-        {/* Indicador de conexión DB */}
+        //Aviso de que estamos conectados a la BDD
         <p className="db-indicator">
           🔗 Conectado a NebriMatch DB
         </p>

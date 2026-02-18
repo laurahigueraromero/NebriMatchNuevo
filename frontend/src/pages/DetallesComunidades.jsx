@@ -31,6 +31,7 @@ const getIconoTecnologia = (tecnologia) => {
   if (t.includes("java")) return "☕";
   if (t.includes("node")) return "🟩";
   if (t.includes("docker")) return "🐳";
+  if (t.includes("linux")) return "🐧";
   if (t.includes("git")) return "🐙";
   if (t.includes("game") || t.includes("unity")) return "🎮";
   if (t.includes("security") || t.includes("hacking")) return "🛡️";
@@ -93,7 +94,7 @@ function DetallesComunidades() {
     }
   };
 
-  // --- AQUÍ ESTÁ LA CORRECCIÓN: HEMOS VUELTO A PONER LA RESPUESTA AUTOMÁTICA ---
+ 
   const enviarMensaje = (e) => {
     e.preventDefault();
     if (!mensajeInput.trim()) return;
@@ -122,7 +123,7 @@ function DetallesComunidades() {
         setMensajes(prev => [...prev, respuestaBot]);
     }, 2000);
   };
-  // ---------------------------------------------------------------------------
+  
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
