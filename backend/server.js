@@ -487,6 +487,69 @@ app.get("/api/mentores", async (req, res) => {
   }
 });
 
+// ========== CREAR CONVERSACIÓN (al hacer match) ==========
+app.post("/api/conversaciones", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { usuario1_id, usuario2_id } = req.body;
+
+    // Verificar si ya existe
+    const [existe] = await pool.query(
+      `SELECT id FROM conversaciones 
+       WHERE (usuario1_id = ? AND usuario2_id = ?) 
+          OR (usuario1_id = ? AND usuario2_id = ?)`,
+      [usuario1_id, usuario2_id, usuario2_id, usuario1_id]
+    );
+
+    if (existe.length > 0) return res.json({ id: existe[0].id, yaExistia: true });
+
+    const [result] = await pool.query(
+      "INSERT INTO conversaciones (usuario1_id, usuario2_id) VALUES (?, ?)",
+      [usuario1_id, usuario2_id]
+    );
+
+    res.status(201).json({ id: result.insertId, yaExistia: false });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ========== MENSAJES DE UNA CONVERSACIÓN ==========
+app.get("/api/conversaciones/:id/mensajes", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const [mensajes] = await pool.query(
+      `SELECT m.id, m.mensaje AS texto, m.fecha_envio AS hora,
+              m.remitente_id AS id_emisor, u.nombre_usuario AS emisor
+       FROM mensajes m
+       JOIN usuario u ON u.id = m.remitente_id
+       WHERE m.conversacion_id = ?
+       ORDER BY m.fecha_envio ASC`,
+      [req.params.id]
+    );
+    res.json(mensajes);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ========== ENVIAR MENSAJE ==========
+app.post("/api/conversaciones/:id/mensajes", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { remitente_id, mensaje } = req.body;
+
+    const [result] = await pool.query(
+      "INSERT INTO mensajes (conversacion_id, remitente_id, mensaje) VALUES (?, ?, ?)",
+      [req.params.id, remitente_id, mensaje]
+    );
+
+    res.status(201).json({ id: result.insertId, mensaje, remitente_id });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 // ========== INICIAR SERVIDOR ==========

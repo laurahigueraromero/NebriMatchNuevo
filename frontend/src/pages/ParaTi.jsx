@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../componentes/Header';
 import { getMentores } from '../services/api';
-import { X, Heart, Maximize2, Minimize2, Cross } from 'lucide-react'; 
+import { X, Heart, Maximize2, Minimize2, Cross } from 'lucide-react';
 import '../App.css';
 import './ParaTi.css'
 import Lottie from "lottie-react";
@@ -14,6 +14,7 @@ function ParaTi() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState('');
   const [isOpened, setIsOpened] = useState(false);
+    const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
 
   // Cargar mentores desde la base de datos
   useEffect(() => {
@@ -21,21 +22,21 @@ function ParaTi() {
       .then(data => {
         console.log('Mentores recibidos de la DB:', data);
         
-        
+    
         const mentoresTransformados = data.map(mentor => ({
           id: mentor.id,
           nombre: mentor.nombre_usuario,
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
           imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent (mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
-          online: Math.random() > 0.3, // Para que no siempre este online, sino que haya un pequeño porcentaje de que no haya online
+          online: Math.random() > 0.3, // 70% probabilidad de estar online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
           email: mentor.email,
           numero_matches: mentor.numero_matches || 0
         }));
         
-        // Para poder mezclar los mentores
+        // Mezclar mentores aleatoriamente para variedad
         const mentoresMezclados = mentoresTransformados.sort(() => Math.random() - 0.5);
         
         setMentoresData(mentoresMezclados);
@@ -48,33 +49,34 @@ function ParaTi() {
       });
   }, []);
 
+
+
+
   // LOGICA MATCH
   const handleMatch = async () => {
-    if (!isOpened) setIsOpened(true);
-    setSwipeDirection('slide-out-left');
-    
-    const mentorActual = mentoresData[currentIndex];
-    const chatsGuardados = JSON.parse(localStorage.getItem('mis_chats_nebrimatch')) || [];
-    
-    if (!chatsGuardados.find(c => c.id === mentorActual.id)) {
-        const matchData = {
-          ...mentorActual,
-          fechaMatch: new Date().toISOString(),
-          ultimoMensaje: `¡Hola! Me interesa aprender ${mentorActual.lenguajes_a_ensenar?.split(',')[0]?.trim()}`,
-          tipoMatch: 'mentor'
-        };
-        
-        chatsGuardados.push(matchData);
-        localStorage.setItem('mis_chats_nebrimatch', JSON.stringify(chatsGuardados));
-        
-        console.log(`✅ Match guardado con ${mentorActual.nombre}`);
-        
-        
-    }
 
-    setTimeout(() => { avanzarCarta(); }, 400);
-  };
+    
+  if (!isOpened) setIsOpened(true);
+  setSwipeDirection('slide-out-left');
 
+  const mentorActual = mentoresData[currentIndex];
+
+  // Crear conversación en la BD
+  try {
+    await fetch('http://localhost:4004/api/conversaciones', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        usuario1_id: usuarioActual.id,
+        usuario2_id: mentorActual.id
+      })
+    });
+  } catch (err) {
+    console.error('Error creando conversación:', err);
+  }
+
+  setTimeout(() => { avanzarCarta(); }, 400);
+};
   // LOGICA PASS
   const handlePass = () => {
     if (!isOpened) setIsOpened(true);
@@ -152,16 +154,16 @@ function ParaTi() {
           Para Ti
           <div className="emoji-fire">
             
-            
+            {/* Controlamos el tamaño aquí */}
             <Lottie animationData={fireAnim} loop={true} />
           </div>
         </h1>
         <p className="subtitle-stack">Conecta con mentores de tu base de datos</p>
 
-        
+        {/* CONTENEDOR DEL MAZO */}
         <div className={`card-stack ${isOpened ? 'opened' : ''}`}>
           
-            
+            {/* CARTA 3 (FONDO - IZQUIERDA) */}
             {card3 && (
                 <div className="card card-bottom">
                     <div className="card-image-area">
@@ -170,7 +172,7 @@ function ParaTi() {
                 </div>
             )}
 
-           
+            {/* CARTA 2 (FONDO - DERECHA) */}
             {card2 && (
                 <div className="card card-middle">
                     <div className="card-image-area">
@@ -179,7 +181,7 @@ function ParaTi() {
                 </div>
             )}
 
-            
+            {/* CARTA 1 (PRINCIPAL - CENTRO) */}
             <div className={`card card-top ${swipeDirection}`}>
                 <div className="card-image-area">
                     <img src={card1.imagen} alt={card1.nombre} />
@@ -191,7 +193,7 @@ function ParaTi() {
                     <span className="card-role">{card1.especialidad}</span>
                     <p className="card-bio">{card1.bio}</p>
 
-                    
+                    {/* Mostrar habilidades del mentor */}
                     <div className="mentor-skills-preview">
                       <strong>🎯 Enseña:</strong>
                       <div className="skills-mini">
@@ -220,19 +222,19 @@ function ParaTi() {
 
         </div>
 
-        
+        {/* BOTÓN REDONDO */}
         <nav className={`nav-circle ${isOpened ? 'opened' : ''}`} onClick={() => setIsOpened(!isOpened)}>
             {isOpened ? <Minimize2 size={28} color="white"/> : <Maximize2 size={28} color="white"/>}
         </nav>
         
         <p className="hint-text">{isOpened ? "Modo Panorámico" : "Modo Pila"}</p>
 
-        
+        {/* Contador de mentores */}
         <p className="mentor-counter">
           {currentIndex + 1} de {mentoresData.length} mentores
         </p>
 
-        
+        {/* Indicador de conexión DB */}
         <p className="db-indicator">
           🔗 Conectado a NebriMatch DB
         </p>

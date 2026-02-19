@@ -1,118 +1,199 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chats.css";
-import Header from "../componentes/Header"; 
+import Header from "../componentes/Header";
+
+const API_URL = 'http://localhost:4004/api';
 
 function Chats() {
-  const listaChats = [
-    { id: 1, nombre: "Usuario 1", ultimoMensaje: "Último mensaje", hora: "12:10" },
-    { id: 2, nombre: "Usuario 2", ultimoMensaje: "¿Tienes los apuntes?", hora: "12:20" },
-    { id: 3, nombre: "Usuario 3", ultimoMensaje: "Gracias!", hora: "12:30" },
-    { id: 4, nombre: "Usuario 4", ultimoMensaje: "Nos vemos luego", hora: "12:40" },
-  ];
+  const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
 
-  const mensajesIniciales = [
-    { id: 1, emisor: "U1", texto: "Hola 👋", hora: "12:10", esMio: false },
-    { id: 2, emisor: "YO", texto: "Hey! ¿Qué tal?", hora: "12:11", esMio: true },
-  ];
-
-  const [chatActivo, setChatActivo] = useState(1);
-  const [mensajes, setMensajes] = useState(mensajesIniciales);
+  const [listaChats, setListaChats] = useState([]);
+  const [chatActivo, setChatActivo] = useState(null);
+  const [mensajes, setMensajes] = useState([]);
   const [nuevoMensaje, setNuevoMensaje] = useState("");
+  const [loading, setLoading] = useState(true);
+  const mensajesEndRef = useRef(null);
 
-  const chatActual = listaChats.find(chat => chat.id === chatActivo) || listaChats[0];
+  // Cargar conversaciones del usuario
+  useEffect(() => {
+    if (!usuarioActual) return;
 
-  const enviarMensaje = (e) => {
-    e.preventDefault(); 
-    if (!nuevoMensaje.trim()) return;
+    fetch(`${API_URL}/usuarios/${usuarioActual.nombre_usuario}/chats`)
+      .then(res => res.json())
+      .then(data => {
+        setListaChats(data);
+        if (data.length > 0) setChatActivo(data[0]);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error cargando chats:', err);
+        setLoading(false);
+      });
+  }, []);
 
-    const mensajeNuevo = {
-      id: Date.now(),
-      emisor: "YO",
-      texto: nuevoMensaje,
-      hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      esMio: true
-    };
+  // Cargar mensajes cuando cambia el chat activo
+  useEffect(() => {
+    if (!chatActivo) return;
 
-    setMensajes([...mensajes, mensajeNuevo]);
-    setNuevoMensaje(""); 
+    fetch(`${API_URL}/conversaciones/${chatActivo.id}/mensajes`)
+      .then(res => res.json())
+      .then(data => setMensajes(data));
+  }, [chatActivo]);
+
+  // Scroll al último mensaje
+  useEffect(() => {
+    mensajesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [mensajes]);
+
+  const enviarMensaje = async (e) => {
+    e.preventDefault();
+    if (!nuevoMensaje.trim() || !chatActivo) return;
+
+    try {
+      const res = await fetch(`${API_URL}/conversaciones/${chatActivo.id}/mensajes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          remitente_id: usuarioActual.id,
+          mensaje: nuevoMensaje
+        })
+      });
+
+      const msgGuardado = await res.json();
+
+      setMensajes(prev => [...prev, {
+        ...msgGuardado,
+        texto: nuevoMensaje,
+        hora: new Date().toISOString(),
+        emisor: usuarioActual.nombre_usuario
+      }]);
+
+      setNuevoMensaje("");
+    } catch (err) {
+      console.error('Error enviando mensaje:', err);
+    }
   };
+
+  if (!usuarioActual) return (
+    <div className="app-layout">
+      <Header />
+      <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+        Debes iniciar sesión para ver tus chats.
+      </p>
+    </div>
+  );
+
+  if (loading) return (
+    <div className="app-layout">
+      <Header />
+      <p style={{ textAlign: 'center', marginTop: '2rem' }}>Cargando chats...</p>
+    </div>
+  );
 
   return (
     <div className="app-layout">
       <Header />
-      
       <div className="nm-page">
         <div className="nm-chat-layout">
-          
+
+          {/* SIDEBAR */}
           <aside className="nm-sidebar">
             <div className="nm-sidebar-header">
               <h3>Mensajes</h3>
-              <button className="nm-btn-new">+</button>
             </div>
-
             <div className="nm-sidebar-search">
               <input type="text" placeholder="Buscar conversación..." />
             </div>
 
             <div className="nm-chat-list">
-              {listaChats.map((chat) => (
-                <div
-                  key={chat.id}
-                  className={`nm-chat-item ${chatActivo === chat.id ? "active" : ""}`}
-                  onClick={() => setChatActivo(chat.id)}
-                >
-                  <div className="nm-avatar">U{chat.id}</div>
-                  <div className="nm-chat-info">
-                    <div className="nm-chat-top">
-                      <span className="nm-chat-name">{chat.nombre}</span>
-                      <span className="nm-chat-time">{chat.hora}</span>
+              {listaChats.length === 0 ? (
+                <p style={{ padding: '1rem', color: '#888' }}>
+                  Aún no tienes matches. ¡Ve a Para Ti!
+                </p>
+              ) : (
+                listaChats.map((chat) => (
+                  <div
+                    key={chat.id}
+                    className={`nm-chat-item ${chatActivo?.id === chat.id ? "active" : ""}`}
+                    onClick={() => setChatActivo(chat)}
+                  >
+                    <div className="nm-avatar">
+                      {chat.otro_usuario?.charAt(0).toUpperCase()}
                     </div>
-                    <p className="nm-chat-preview">{chat.ultimoMensaje}</p>
+                    <div className="nm-chat-info">
+                      <div className="nm-chat-top">
+                        <span className="nm-chat-name">{chat.otro_usuario}</span>
+                        <span className="nm-chat-time">
+                          {chat.ultima_actividad
+                            ? new Date(chat.ultima_actividad).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                            : ''}
+                        </span>
+                      </div>
+                      <p className="nm-chat-preview">
+                        {chat.ultimo_mensaje || '¡Nuevo match! 🎉'}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </aside>
 
+          {/* ÁREA DE CHAT */}
           <section className="nm-chat-area">
-            
-            <div className="nm-chat-header">
-              <div className="nm-chat-user">
-                <div className="nm-avatar large">U{chatActual.id}</div>
-                <div>
-                  <h4>{chatActual.nombre}</h4>
-                  <span className="nm-status">En línea</span>
-                </div>
+            {!chatActivo ? (
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                <p>Selecciona un chat para empezar</p>
               </div>
-            </div>
-
-            <div className="nm-messages">
-              <div className="nm-date-divider">
-                <span>Hoy</span>
-              </div>
-
-              {mensajes.map((msg) => (
-                <div key={msg.id} className={`nm-message-row ${msg.esMio ? "me" : ""}`}>
-                  <div className="nm-avatar small">{msg.emisor}</div>
-                  <div className={`nm-bubble ${msg.esMio ? "me" : ""}`}>
-                    <p>{msg.texto}</p>
-                    <span className="nm-time">{msg.hora}</span>
+            ) : (
+              <>
+                <div className="nm-chat-header">
+                  <div className="nm-chat-user">
+                    <div className="nm-avatar large">
+                      {chatActivo.otro_usuario?.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <h4>{chatActivo.otro_usuario}</h4>
+                      <span className="nm-status">Mentor</span>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <form className="nm-input-bar" onSubmit={enviarMensaje}>
-              <input 
-                type="text" 
-                placeholder="Escribe un mensaje..." 
-                value={nuevoMensaje}
-                onChange={(e) => setNuevoMensaje(e.target.value)}
-              />
-              <button type="submit" className="nm-send-btn">➤</button>
-            </form>
+                <div className="nm-messages">
+                  <div className="nm-date-divider"><span>Hoy</span></div>
 
+                  {mensajes.map((msg) => {
+                    const esMio = msg.id_emisor === usuarioActual.id;
+                    return (
+                      <div key={msg.id} className={`nm-message-row ${esMio ? "me" : ""}`}>
+                        <div className="nm-avatar small">
+                          {esMio ? usuarioActual.nombre_usuario?.charAt(0).toUpperCase() : chatActivo.otro_usuario?.charAt(0).toUpperCase()}
+                        </div>
+                        <div className={`nm-bubble ${esMio ? "me" : ""}`}>
+                          <p>{msg.texto}</p>
+                          <span className="nm-time">
+                            {new Date(msg.hora).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div ref={mensajesEndRef} />
+                </div>
+
+                <form className="nm-input-bar" onSubmit={enviarMensaje}>
+                  <input
+                    type="text"
+                    placeholder="Escribe un mensaje..."
+                    value={nuevoMensaje}
+                    onChange={(e) => setNuevoMensaje(e.target.value)}
+                  />
+                  <button type="submit" className="nm-send-btn">➤</button>
+                </form>
+              </>
+            )}
           </section>
+
         </div>
       </div>
     </div>

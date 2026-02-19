@@ -118,6 +118,7 @@ const crearTablas = async () => {
 
 
 
+
 /* const insert = async () => {
   const { pool } = require("./config/database");
   try {
@@ -160,4 +161,4 @@ SELECT id, 'profesor' FROM usuario WHERE nombre_usuario IN (
 
 // ============ EXPORTAR ============
 crearTablas()
-module.exports = { pool, crearTablas };
+module.exports = { pool, crearTablas};
