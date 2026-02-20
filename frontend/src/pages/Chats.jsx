@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { io } from "socket.io-client";
 import "./Chats.css";
 import Header from "../componentes/Header";
-import { getChats, getMensajes, enviarMensaje } from "../services/api";
+import { getChats, getMensajes } from "../services/api";
+
+const socket = io("http://localhost:4004");
 
 function Chats() {
   const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
@@ -29,13 +32,35 @@ function Chats() {
       });
   }, []);
 
-  // Cargar mensajes cuando cambia el chat activo
+  // Unirse a sala y cargar mensajes cuando cambia el chat activo
   useEffect(() => {
     if (!chatActivo) return;
 
+    // Cargar mensajes anteriores
     getMensajes(chatActivo.id)
       .then(data => setMensajes(data))
       .catch(err => console.error('Error cargando mensajes:', err));
+
+    // Unirse a la sala de esta conversación
+    socket.emit("unirse_conversacion", chatActivo.id);
+
+    // Escuchar mensajes nuevos en tiempo real
+    socket.on("nuevo_mensaje", (msg) => {
+      setMensajes(prev => [...prev, {
+        id: msg.id,
+        texto: msg.texto,
+        hora: msg.hora,
+        id_emisor: msg.remitente_id,
+        emisor: msg.remitente_id === usuarioActual.id
+          ? usuarioActual.nombre_usuario
+          : chatActivo.otro_usuario
+      }]);
+    });
+
+    // Limpiar listener al cambiar de chat
+    return () => {
+      socket.off("nuevo_mensaje");
+    };
   }, [chatActivo]);
 
   // Scroll al último mensaje
@@ -43,26 +68,19 @@ function Chats() {
     mensajesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [mensajes]);
 
-  const handleEnviarMensaje = async (e) => {
+  const handleEnviarMensaje = (e) => {
+    //para que no recarge la pagina
     e.preventDefault();
     if (!nuevoMensaje.trim() || !chatActivo) return;
 
-    try {
-      const msgGuardado = await enviarMensaje(chatActivo.id, usuarioActual.id, nuevoMensaje);
+    // Enviar por WebSocket; socket.emit es la funcion de socket para enviar al server los datos que cogemos del front
+    socket.emit("enviar_mensaje", {
+      conversacion_id: chatActivo.id,
+      remitente_id: usuarioActual.id,
+      mensaje: nuevoMensaje
+    });
 
-      setMensajes(prev => [...prev, {
-        ...msgGuardado,
-        texto: nuevoMensaje,
-        hora: new Date().toISOString(),
-        emisor: usuarioActual.nombre_usuario,
-        //esto lo ponemos para solucionar el problema del chat: Con esto la comparación msg.id_emisor === usuarioActual.id siempre dará true para tus mensajes y los pondrá a la derecha correctamente.
-        id_emisor: usuarioActual.id 
-      }]);
-
-      setNuevoMensaje("");
-    } catch (err) {
-      console.error('Error enviando mensaje:', err);
-    }
+    setNuevoMensaje("");
   };
 
   if (!usuarioActual) return (
