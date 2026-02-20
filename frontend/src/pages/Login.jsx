@@ -1,8 +1,15 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, crearUsuario } from "../services/api";
 import "../App.css";
-import { User, Plus , Check } from "lucide-react";
+import { User, Plus, Check } from "lucide-react";
+
+
+// esto a la hora de escalar el proyecto lo registraremos en la bbdd ==>
+const LENGUAJES = [
+  "JavaScript", "Python", "Java", "React", "Node.js",
+  "CSS", "MySQL", "MongoDB", "TypeScript", "PHP"
+];
 
 function Login() {
   const navigate = useNavigate();
@@ -12,21 +19,22 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Registro
   const [registro, setRegistro] = useState({
     nombre_usuario: "",
     email: "",
     password: "",
-    rol: ""
+    rol: "",
+    lenguajes_a_ensenar: "",
+    lenguajes_a_aprender: "",
+    descripcion: ""
   });
-  
 
-const handleLogin = async () => {
+  const handleLogin = async () => {
     setError(null);
     try {
       const res = await login(email, password);
       if (res.usuario) {
-      localStorage.setItem("usuario_nebrimatch", JSON.stringify(res.usuario));
+        localStorage.setItem("usuario_nebrimatch", JSON.stringify(res.usuario));
         navigate("/comunidades");
       } else {
         alert("Usuario no registrado");
@@ -36,38 +44,49 @@ const handleLogin = async () => {
     }
   };
 
-const handleRegistro = async () => {
-  setError(null);
+  const handleRegistro = async () => {
+    setError(null);
 
-  // Validación
-  if (!registro.nombre_usuario || !registro.email || !registro.password) {
-    setError("Por favor rellena todos los campos");
-    return;
-  }
-
-  if (!registro.rol) {
-    setError("Por favor selecciona un perfil");
-    return;
-  }
-
-  console.log("📋 Datos a enviar:", registro);
-  
-  try {
-    const res = await crearUsuario(registro);
-    if (res.id) {
-      setVista("login");
-      setEmail(registro.email);
-      setPassword(registro.password);
-    } else {
-      setError(res.error);
+    if (!registro.nombre_usuario || !registro.email || !registro.password) {
+      setError("Por favor rellena todos los campos");
+      return;
     }
-  } catch (err) {
-    setError("Error de conexión con el servidor");
-  }
-};
+
+    if (!registro.rol) {
+      setError("Por favor selecciona un perfil");
+      return;
+    }
+
+    if (registro.rol === "profesor" && !registro.lenguajes_a_ensenar) {
+      setError("Por favor selecciona al menos un lenguaje que enseñas");
+      return;
+    }
+
+    console.log("📋 Datos a enviar:", registro);
+
+    try {
+      const res = await crearUsuario(registro);
+      console.log("✅ Respuesta recibida:", res);
+
+      if (res.id) {
+        setVista("login");
+        setEmail(registro.email);
+        setPassword(registro.password);
+      } else {
+        setError(res.error);
+      }
+    } catch (err) {
+      setError("Error de conexión con el servidor");
+    }
+  };
 
   const handleRegistroChange = (e) => {
     setRegistro({ ...registro, [e.target.name]: e.target.value });
+  };
+
+  const handleLenguajes = (e, campo) => {
+    const seleccionados = Array.from(e.target.selectedOptions, op => op.value).join(', ');
+    setRegistro({ ...registro, [campo]: seleccionados });
   };
 
   return (
@@ -82,8 +101,8 @@ const handleRegistro = async () => {
         {vista === "inicio" && (
           <>
             <div className="icons-container">
-              <span><User/> <Check/></span>
-              <span><User/> <Plus/></span>
+              <span><User /> <Check /></span>
+              <span><User /> <Plus /></span>
             </div>
             <div className="buttons-container">
               <button className="btn-red" onClick={() => { setVista("login"); setError(null); }}>
@@ -168,6 +187,51 @@ const handleRegistro = async () => {
               <option value="estudiante">Quiero aprender (Alumno)</option>
               <option value="profesor">Quiero enseñar (Profesor)</option>
             </select>
+
+            {/* CAMPOS EXTRA PARA PROFESORES */}
+            {registro.rol === "profesor" && (
+              <>
+                <p style={{ color: '#888', fontSize: '0.85rem', margin: '0.5rem 0' }}>
+                  Como mentor, cuéntanos más sobre ti:
+                </p>
+
+                <label style={{ color: '#888', fontSize: '0.85rem' }}>
+                  ¿Qué lenguajes enseñas? (Ctrl + click para varios)
+                </label>
+                <select
+                  multiple
+                  className="input-field-select"
+                  onChange={(e) => handleLenguajes(e, 'lenguajes_a_ensenar')}
+                  style={{ height: '120px' }}
+                >
+                  {LENGUAJES.map(lang => (
+                    <option key={lang} value={lang}>{lang}</option>
+                  ))}
+                </select>
+
+                <label style={{ color: '#888', fontSize: '0.85rem' }}>
+                  ¿Qué lenguajes quieres aprender? (Ctrl + click para varios)
+                </label>
+                <select
+                  multiple
+                  className="input-field-select"
+                  onChange={(e) => handleLenguajes(e, 'lenguajes_a_aprender')}
+                  style={{ height: '120px' }}
+                >
+                  {LENGUAJES.map(lang => (
+                    <option key={lang} value={lang}>{lang}</option>
+                  ))}
+                </select>
+
+                <textarea
+                  name="descripcion"
+                  placeholder="Descríbete como mentor (experiencia, metodología...)"
+                  onChange={handleRegistroChange}
+                  rows={3}
+                  style={{ width: '100%', padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+                />
+              </>
+            )}
 
             <button className="btn-red" onClick={handleRegistro}>
               CREAR CUENTA

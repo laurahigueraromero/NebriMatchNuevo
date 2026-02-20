@@ -54,7 +54,9 @@ function Chats() {
         ...msgGuardado,
         texto: nuevoMensaje,
         hora: new Date().toISOString(),
-        emisor: usuarioActual.nombre_usuario
+        emisor: usuarioActual.nombre_usuario,
+        //esto lo ponemos para solucionar el problema del chat: Con esto la comparación msg.id_emisor === usuarioActual.id siempre dará true para tus mensajes y los pondrá a la derecha correctamente.
+        id_emisor: usuarioActual.id 
       }]);
 
       setNuevoMensaje("");
