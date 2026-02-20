@@ -1,0 +1,65 @@
+/* Barra de Navegación */
+.navbar {
+  background-color: #bf2a2a; /* Rojo Nebrimatch */
+  color: white;
+  padding: 15px 50px; /* Espacio arriba/abajo y a los lados */
+
+  /* Flexbox para mandar a los extremos */
+  display: flex;
+  justify-content: space-between; /* ESTO ES LA MAGIA: Logo izq, Menú der */
+  align-items: center; /* Centrado vertical */
+
+  /* Obligamos a que ocupe toda la pantalla de lado a lado */
+  width: 100%;
+  box-sizing: border-box; /* Evita que el padding sume ancho extra */
+  margin: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* El Logo a la izquierda */
+.navbar-logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin: 0; /* Quitamos márgenes raros por si acaso */
+}
+
+/* El contenedor del menú a la derecha */
+.navbar-menu {
+  display: flex;
+  gap: 30px; /* Espacio de 30px entre cada botón */
+  align-items: center;
+  margin: 0;
+  background-color: transparent; /* Quitamos ese fondo rojo oscuro raro */
+}
+
+/* Los enlaces individuales */
+.navbar-menu .nav-link {
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+}
+
+/* Efecto al pasar el ratón */
+.navbar-menu .nav-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 5px; /* Separa el subrayado un poquito del texto */
+}
+.principal-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.target-group {
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}

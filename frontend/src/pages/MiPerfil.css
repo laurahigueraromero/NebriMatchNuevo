@@ -1,0 +1,219 @@
+/* =========================================
+   SECCIÓN FAQ
+   ========================================= */
+.distribuccionFAQ-home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding-bottom: 80px;
+}
+.body-perfil {
+ 
+  width: 100vw;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  gap: 5%;
+}
+
+.contenido-perfil {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  width: 50%;
+  height: auto;
+  border-radius: 2%;
+  border: 1px solid gray;
+}
+
+.sugerencias-perfil {
+  width: 25%;
+  height: auto;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* 👈 arriba */
+  align-items: stretch;
+  /* 👈 ancho completo */
+  gap: 30px;
+  background-image: url("./assets/imagenes/fondo.jpg");
+}
+
+.editar-perfil button {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.editar-perfil {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+.intereses-perfil {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.titulo-intereses {
+  font-size: 1.5rem;
+  font-family: cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.fila1-perfil {
+  width: 100%;
+  height: 100px;
+  background-image: url("./assets/imagenes/fondo.jpg");
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  border-radius: 2%;
+}
+
+.fila2-perfil {
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-left: 110px;
+  font-size: 1.3rem;
+}
+
+.fila3-perfil {
+  
+  width: 100%;
+  height: auto;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  padding: 20px;
+}
+
+.fila3-perfil p {
+   font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.fila4-perfil {
+  width: 100%;
+  height: auto; /* deja que el contenido defina la altura */
+  display: flex;
+  flex-wrap: wrap; /*  permite que bajen si no caben */
+  justify-content: center;
+  align-items: flex-start; /* mejor que center para que tarjetas no se desalineen verticalmente */
+  gap: 20px;
+  padding-bottom: 20px;
+}
+.img2-perfil img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  top: 75px;
+}
+
+.img2-perfil {
+  width: 50%;
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 50px;
+}
+
+.col2-perfil {
+  width: 50%;
+  height: auto;
+  justify-content: flex-end;
+}
+
+/* =========================================
+   LISTA 3D PARA INTERESES
+   ========================================= */
+
+/* El contenedor (ul) */
+.lista-3d-container {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Empiezan pegados */
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  transition: 0.5s ease-in-out;
+}
+
+/* Al pasar el ratón por la zona roja, se separan */
+.sugerencias-perfil:hover .lista-3d-container {
+  gap: 15px;
+  transform: translateY(10px);
+}
+
+/* Cada elemento de la lista (li) que envuelve a tu componente */
+.item-3d {
+  list-style: none;
+  width: 100%;
+  position: relative;
+  transition: 0.5s;
+  transition-delay: calc(var(--i) * 100ms); /* Efecto cascada */
+  cursor: pointer;
+}
+
+/* --- ESTADOS APILADOS (INICIO) --- */
+
+/* 1. La de más atrás (Fondo) */
+.item-3d:nth-child(1) {
+  transform: translateZ(-60px) translateY(40px) scale(0.9);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* 2. La de en medio */
+.item-3d:nth-child(2) {
+  transform: translateZ(-30px) translateY(20px) scale(0.95);
+  opacity: 0.8;
+  z-index: 2;
+}
+
+/* 3. La de enfrente */
+.item-3d:nth-child(3) {
+  transform: translateZ(0) translateY(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+/* --- ESTADO DESPLEGADO (HOVER) --- */
+.sugerencias-perfil:hover .item-3d {
+  transform: translateZ(0) translateY(0) scale(1);
+  opacity: 1;
+}
+
+.item-3d > .Perfiles-interesantes {
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

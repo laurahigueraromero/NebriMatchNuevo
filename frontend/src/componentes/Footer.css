@@ -1,0 +1,160 @@
+/* =========================================
+   ESTILOS PÁGINAS LEGALES Y CONTACTO
+   ========================================= */
+
+.legal-content {
+  text-align: left;
+  margin-top: 20px;
+  line-height: 1.6;
+  color: #444;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.legal-content h3 {
+  color: #bf2a2a;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.legal-content ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+}
+
+/* .legal-date {
+  color: #888;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+} */
+.legal-page {
+  padding: 40px 20px; /* Espacio arriba/abajo y a los lados */
+  max-width: 800px; /* Ancho máximo para que sea legible */
+  margin: 0 auto; /* Centrado horizontal */
+  text-align: center; /* Título y botón centrados */
+}
+
+.legal-page h1 {
+  color: #bf2a2a; /* Rojo Nebrimatch */
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+}
+
+/* 2. La fecha pequeña debajo del título */
+.legal-date {
+  color: #888;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+
+/* 3. La caja blanca con el texto (El contenido) */
+.legal-content {
+  text-align: left; /* El texto de lectura mejor a la izquierda */
+  background: white; /* Fondo blanco */
+  padding: 40px; /* Espacio interior amplio */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  line-height: 1.6; /* Altura de línea para leer cómodo */
+  color: #444; /* Gris oscuro */
+  margin-bottom: 30px;
+}
+
+/* Títulos dentro del texto (1. Responsable, 2. Datos...) */
+.legal-content h3 {
+  color: #333;
+  margin-top: 25px; /* Separación superior */
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #f0f0f0; /* Una línea sutil debajo del título */
+  padding-bottom: 5px;
+}
+
+/* Listas con puntos */
+.legal-content ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.legal-content li {
+  margin-bottom: 10px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 55px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form textarea.input-field {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.input-field {
+  border-radius: 5px;
+  border: solid #888;
+}
+
+/*ESTILO DE FOOTER*/
+
+/* --- Estilos del Footer --- */
+.main-footer {
+  background-color: #bf2a2a;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/*AYUDA*/
+
+.ayuda-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center; /* Centramos el título y la intro */
+}
+
+.ayuda-container h1 {
+  color: #bf2a2a; /* Rojo Nebrimatch */
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.ayuda-intro {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}

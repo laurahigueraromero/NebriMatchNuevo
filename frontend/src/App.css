@@ -1780,20 +1780,20 @@ html,
    ========================================= */
 
 @media (max-width: 768px) {
-  /* 1. Ajustar el Layout principal */
+ 
   .app-layout,
   .app-comunidades {
-    flex-direction: column; /* Pone el menú arriba y el contenido abajo */
+    flex-direction: column; 
     width: 100vw;
-    overflow-x: hidden; /* Evita scroll lateral indeseado */
+    overflow-x: hidden; 
   }
 
   /* 2. El contenido principal ocupa todo el ancho */
   .principal-content,
   .detalle-content {
     width: 100%;
-    padding: 15px; /* Menos padding en móvil */
-    padding-bottom: 80px; /* Espacio para que no se corte el final */
+    padding: 15px; 
+    padding-bottom: 80px; 
   }
 
   /* 3. Cabecera de Grupo (Banner) */
@@ -1812,7 +1812,7 @@ html,
     font-size: 1.5rem; /* Título un poco más pequeño */
   }
 
-  /* 4. Pestañas (Tabs) scrolleables */
+  
   .tabs-container {
     display: flex;
     overflow-x: auto; /* Permite deslizar si no caben */
