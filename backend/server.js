@@ -101,7 +101,7 @@ app.post("/api/usuarios", async (req, res) => {
       "INSERT INTO usuario (nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender) VALUES (?, ?, ?, ?, ?, ?)",
       [nombre_usuario, email, password, descripcion, lenguajes_a_ensenar, lenguajes_a_aprender]
     );
-
+    // esta parte es importante porque si el rol es mentor (profesor) le damos un estilo distinto al chat
     if (rol) {
       await pool.query(
         "INSERT INTO rol_usuario (usuario_id, rol) VALUES (?, ?)",
@@ -197,7 +197,7 @@ app.get("/api/usuarios/id/:id", async (req, res) => {
   }
 });
 
-// Editar perfil
+// Editar perfil==> por eso ponemos put() porque es para EDITAR!!
 app.put("/api/usuarios/:id", async (req, res) => {
   const { pool } = require("./config/database");
   try {
@@ -230,6 +230,7 @@ app.put("/api/usuarios/:id", async (req, res) => {
 app.get("/api/usuarios/:usuario/chats", async (req, res) => {
   const { pool } = require("./config/database");
   try {
+    // req.params y no de body porque se coje de la ruta!!
     const { usuario } = req.params;
 
     const [usuarioResult] = await pool.query(
@@ -242,7 +243,7 @@ app.get("/api/usuarios/:usuario/chats", async (req, res) => {
     }
 
     const usuarioId = usuarioResult[0].id;
-
+    // aquí cargamos las convers ==>
     const [conversaciones] = await pool.query(
       `SELECT 
         c.id,
@@ -272,6 +273,7 @@ app.get("/api/para-ti", async (req, res) => {
   const { pool } = require("./config/database");
   try {
     const [usuarios] = await pool.query(
+      // aquí directamente coge a los mentores porque los alumnos no introducen ningun lenguaje en el login==>
       `SELECT * FROM usuario WHERE lenguajes_a_ensenar IS NOT NULL ORDER BY numero_matches DESC LIMIT 20`
     );
     res.json(usuarios);
@@ -315,7 +317,7 @@ app.get("/api/comunidades", async (req, res) => {
   }
 });
 
-// Crear comunidad
+// Crear comunidad ==> ESTO NO ESTA DISPONIBLE (futura implementación)
 app.post("/api/comunidades", async (req, res) => {
   const { pool } = require("./config/database");
   try {
@@ -387,7 +389,7 @@ app.get("/api/seed/comunidades", async (req, res) => {
   }
 });
 
-// Comunidad por ID
+// Comunidad por ID==> esto es lo que nos permite buscar la comunidad en cuestión
 app.get("/api/comunidades/:id", async (req, res) => {
   const { pool } = require("./config/database");
   try {
@@ -472,7 +474,7 @@ app.get("/api/conversaciones/:id/mensajes", async (req, res) => {
   }
 });
 
-// ========== INICIAR SERVIDOR ==========
+// ========== INICIAR SERVIDOR ========== en vez de app es server porque ahora socket es el que gestiona todo el tema de conexiones en tiempo real
 server.listen(port, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 });
