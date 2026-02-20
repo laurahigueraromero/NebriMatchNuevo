@@ -19,6 +19,7 @@ function Login() {
     password: "",
     rol: ""
   });
+  
 
 const handleLogin = async () => {
     setError(null);
@@ -35,24 +36,32 @@ const handleLogin = async () => {
     }
   };
 
- const handleRegistro = async () => {
+const handleRegistro = async () => {
   setError(null);
+
+  // Validación
+  if (!registro.nombre_usuario || !registro.email || !registro.password) {
+    setError("Por favor rellena todos los campos");
+    return;
+  }
+
+  if (!registro.rol) {
+    setError("Por favor selecciona un perfil");
+    return;
+  }
+
   console.log("📋 Datos a enviar:", registro);
   
   try {
     const res = await crearUsuario(registro);
-    console.log("✅ Respuesta recibida:", res);
-    
     if (res.id) {
       setVista("login");
       setEmail(registro.email);
       setPassword(registro.password);
     } else {
-      console.error("❌ Error en respuesta:", res.error);
       setError(res.error);
     }
   } catch (err) {
-    console.error("💥 Error de conexión:", err);
     setError("Error de conexión con el servidor");
   }
 };

@@ -341,3 +341,22 @@
     height: 60vh;
   }
 }
+/*si el rol es profesor==>*/
+.nm-bubble.mentor {
+  background-color: #1a73e8;
+  color: white;
+}
+
+.mentor-avatar {
+  background-color: #1a73e8 !important;
+}
+
+.badge-mentor {
+  background-color: #1a73e8;
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+  vertical-align: middle;
+}

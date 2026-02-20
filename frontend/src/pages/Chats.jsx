@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chats.css";
 import Header from "../componentes/Header";
-
-const API_URL = 'http://localhost:4004/api';
+import { getChats, getMensajes, enviarMensaje } from "../services/api";
 
 function Chats() {
   const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
@@ -18,8 +17,7 @@ function Chats() {
   useEffect(() => {
     if (!usuarioActual) return;
 
-    fetch(`${API_URL}/usuarios/${usuarioActual.nombre_usuario}/chats`)
-      .then(res => res.json())
+    getChats(usuarioActual.nombre_usuario)
       .then(data => {
         setListaChats(data);
         if (data.length > 0) setChatActivo(data[0]);
@@ -35,9 +33,9 @@ function Chats() {
   useEffect(() => {
     if (!chatActivo) return;
 
-    fetch(`${API_URL}/conversaciones/${chatActivo.id}/mensajes`)
-      .then(res => res.json())
-      .then(data => setMensajes(data));
+    getMensajes(chatActivo.id)
+      .then(data => setMensajes(data))
+      .catch(err => console.error('Error cargando mensajes:', err));
   }, [chatActivo]);
 
   // Scroll al último mensaje
@@ -45,21 +43,12 @@ function Chats() {
     mensajesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [mensajes]);
 
-  const enviarMensaje = async (e) => {
+  const handleEnviarMensaje = async (e) => {
     e.preventDefault();
     if (!nuevoMensaje.trim() || !chatActivo) return;
 
     try {
-      const res = await fetch(`${API_URL}/conversaciones/${chatActivo.id}/mensajes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          remitente_id: usuarioActual.id,
-          mensaje: nuevoMensaje
-        })
-      });
-
-      const msgGuardado = await res.json();
+      const msgGuardado = await enviarMensaje(chatActivo.id, usuarioActual.id, nuevoMensaje);
 
       setMensajes(prev => [...prev, {
         ...msgGuardado,
@@ -117,12 +106,17 @@ function Chats() {
                     className={`nm-chat-item ${chatActivo?.id === chat.id ? "active" : ""}`}
                     onClick={() => setChatActivo(chat)}
                   >
-                    <div className="nm-avatar">
+                    <div className={`nm-avatar ${chat.rol === 'profesor' ? 'mentor-avatar' : ''}`}>
                       {chat.otro_usuario?.charAt(0).toUpperCase()}
                     </div>
                     <div className="nm-chat-info">
                       <div className="nm-chat-top">
-                        <span className="nm-chat-name">{chat.otro_usuario}</span>
+                        <span className="nm-chat-name">
+                          {chat.otro_usuario}
+                          {chat.rol === 'profesor' && (
+                            <span className="badge-mentor">Mentor</span>
+                          )}
+                        </span>
                         <span className="nm-chat-time">
                           {chat.ultima_actividad
                             ? new Date(chat.ultima_actividad).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -149,12 +143,14 @@ function Chats() {
               <>
                 <div className="nm-chat-header">
                   <div className="nm-chat-user">
-                    <div className="nm-avatar large">
+                    <div className={`nm-avatar large ${chatActivo.rol === 'profesor' ? 'mentor-avatar' : ''}`}>
                       {chatActivo.otro_usuario?.charAt(0).toUpperCase()}
                     </div>
                     <div>
                       <h4>{chatActivo.otro_usuario}</h4>
-                      <span className="nm-status">Mentor</span>
+                      <span className="nm-status">
+                        {chatActivo.rol === 'profesor' ? 'Mentor' : 'Estudiante'}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -164,12 +160,16 @@ function Chats() {
 
                   {mensajes.map((msg) => {
                     const esMio = msg.id_emisor === usuarioActual.id;
+                    const esMentor = chatActivo.rol === 'profesor';
+
                     return (
                       <div key={msg.id} className={`nm-message-row ${esMio ? "me" : ""}`}>
                         <div className="nm-avatar small">
-                          {esMio ? usuarioActual.nombre_usuario?.charAt(0).toUpperCase() : chatActivo.otro_usuario?.charAt(0).toUpperCase()}
+                          {esMio
+                            ? usuarioActual.nombre_usuario?.charAt(0).toUpperCase()
+                            : chatActivo.otro_usuario?.charAt(0).toUpperCase()}
                         </div>
-                        <div className={`nm-bubble ${esMio ? "me" : ""}`}>
+                        <div className={`nm-bubble ${esMio ? "me" : ""} ${!esMio && esMentor ? "mentor" : ""}`}>
                           <p>{msg.texto}</p>
                           <span className="nm-time">
                             {new Date(msg.hora).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -181,7 +181,7 @@ function Chats() {
                   <div ref={mensajesEndRef} />
                 </div>
 
-                <form className="nm-input-bar" onSubmit={enviarMensaje}>
+                <form className="nm-input-bar" onSubmit={handleEnviarMensaje}>
                   <input
                     type="text"
                     placeholder="Escribe un mensaje..."

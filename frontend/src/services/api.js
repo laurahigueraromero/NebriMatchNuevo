@@ -84,9 +84,24 @@ export const editarPerfil = async (id, datos) => {
 
 // ============ CHATS ============
 
-// GET conversaciones de un usuario
+// GET conversaciones de un usuario; esto no carga los mensajes si no el sidebar que es lo que esta a la izquierda; no confundir!
 export const getChats = async (nombreUsuario) => {
   const res = await fetch(`${API_URL}/api/usuarios/${nombreUsuario}/chats`);
+  return res.json();
+};
+// ============ CONVERSACIONES ============
+// este si que carga los mensajes:
+export const getMensajes = async (conversacionId) => {
+  const res = await fetch(`${API_URL}/api/conversaciones/${conversacionId}/mensajes`);
+  return res.json();
+};
+
+export const enviarMensaje = async (conversacionId, remitente_id, mensaje) => {
+  const res = await fetch(`${API_URL}/api/conversaciones/${conversacionId}/mensajes`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ remitente_id, mensaje })
+  });
   return res.json();
 };
 

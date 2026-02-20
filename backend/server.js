@@ -191,20 +191,23 @@ app.get("/api/usuarios/:usuario/chats", async (req, res) => {
     const usuarioId = usuarioResult[0].id;
 
     // Obtener conversaciones
-    const [conversaciones] = await pool.query(
-      `SELECT 
-        c.id,
-        c.fecha_creacion,
-        c.ultima_actividad,
-        IF(c.usuario1_id = ?, u2.nombre_usuario, u1.nombre_usuario) as otro_usuario,
-        (SELECT mensaje FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
-      FROM conversaciones c
-      JOIN usuario u1 ON c.usuario1_id = u1.id
-      JOIN usuario u2 ON c.usuario2_id = u2.id
-      WHERE c.usuario1_id = ? OR c.usuario2_id = ?
-      ORDER BY c.ultima_actividad DESC`,
-      [usuarioId, usuarioId, usuarioId]
-    );
+  const [conversaciones] = await pool.query(
+  `SELECT 
+    c.id,
+    c.fecha_creacion,
+    c.ultima_actividad,
+    IF(c.usuario1_id = ?, u2.nombre_usuario, u1.nombre_usuario) as otro_usuario,
+    IF(c.usuario1_id = ?, r2.rol, r1.rol) as rol,
+    (SELECT mensaje FROM mensajes WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) as ultimo_mensaje
+  FROM conversaciones c
+  JOIN usuario u1 ON c.usuario1_id = u1.id
+  JOIN usuario u2 ON c.usuario2_id = u2.id
+  LEFT JOIN rol_usuario r1 ON c.usuario1_id = r1.usuario_id
+  LEFT JOIN rol_usuario r2 ON c.usuario2_id = r2.usuario_id
+  WHERE c.usuario1_id = ? OR c.usuario2_id = ?
+  ORDER BY c.ultima_actividad DESC`,
+  [usuarioId, usuarioId, usuarioId, usuarioId]
+);
 
     res.json(conversaciones);
   } catch (error) {
