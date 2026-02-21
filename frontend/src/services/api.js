@@ -1,5 +1,6 @@
 // const API_URL = 'http://localhost:4004';
 const API_URL = import.meta.env.VITE_API_URL;
+
 // ============ AUTENTICACIÓN ============
 
 export const login = async (email, password) => {
