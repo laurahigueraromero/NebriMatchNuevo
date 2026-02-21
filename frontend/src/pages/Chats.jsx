@@ -4,7 +4,8 @@ import "./Chats.css";
 import Header from "../componentes/Header";
 import { getChats, getMensajes } from "../services/api";
 
-const socket = io(import.meta.env.VITE_API_URL);
+const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:4004';
+const socket = io(SOCKET_URL);
 
 function Chats() {
 
