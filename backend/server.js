@@ -17,7 +17,7 @@ const io = new Server(server, {
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/uploads", express.static("uploads")); 
 crearTablas();
 
 // ========== WEBSOCKET ==========
@@ -156,25 +156,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Perfil por nombre de usuario
-app.get("/api/usuarios/:usuario", async (req, res) => {
-  const { pool } = require("./config/database");
-  try {
-    const { usuario } = req.params;
-    const [result] = await pool.query(
-      "SELECT u.*, r.rol FROM usuario u LEFT JOIN rol_usuario r ON u.id = r.usuario_id WHERE u.nombre_usuario = ?",
-      [usuario]
-    );
 
-    if (result.length === 0) {
-      return res.status(404).json({ mensaje: "Usuario no encontrado" });
-    }
-
-    res.json(result[0]);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 // Perfil por ID
 app.get("/api/usuarios/id/:id", async (req, res) => {
@@ -196,6 +178,46 @@ app.get("/api/usuarios/id/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// Perfil por nombre de usuario
+app.get("/api/usuarios/:usuario", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { usuario } = req.params;
+    const [result] = await pool.query(
+      "SELECT u.*, r.rol FROM usuario u LEFT JOIN rol_usuario r ON u.id = r.usuario_id WHERE u.nombre_usuario = ?",
+      [usuario]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({ mensaje: "Usuario no encontrado" });
+    }
+
+    res.json(result[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// Subir foto de perfil : sube la foto con multer y guarda la ruta en la base de datos.
+const upload = require("./middlewares/upload");
+
+app.put("/api/usuarios/:id/foto", upload.single("foto"), async (req, res) => { //  .single() le dice a multer que espera un solo archivo en la petición 
+// El parámetro "foto" es el nombre del campo del formulario que contiene el archivo. Tiene que coincidir exactamente con lo que enviemos desde el frontend:
+  const { pool } = require("./config/database");
+  try {
+    const { id } = req.params;
+    const fotoUrl = `/uploads/fotos-perfil/${req.file.filename}`;
+
+    await pool.query(
+      "UPDATE usuario SET foto_perfil = ? WHERE id = ?",
+      [fotoUrl, id]
+    );
+
+    res.json({ foto_perfil: fotoUrl });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Editar perfil==> por eso ponemos put() porque es para EDITAR!!
 app.put("/api/usuarios/:id", async (req, res) => {
@@ -225,6 +247,7 @@ app.put("/api/usuarios/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 // Chats del usuario
 app.get("/api/usuarios/:usuario/chats", async (req, res) => {

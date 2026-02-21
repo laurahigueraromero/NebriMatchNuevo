@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getPerfil } from "../services/api";
 import EditarPerfilModal from "../componentes/EditarPerfilModal/EditarPerfilModal";
 import InteresPerfil from "../componentes/InteresPerfil/InteresPerfil";
-import persona1 from "../assets/imagenes/Captura.JPG";
+
 import TarjetaHome from "../componentes/TarjetaHome";
 import Header from "../componentes/Header";
 
@@ -60,6 +60,11 @@ const usuario = JSON.parse(localStorage.getItem("usuario_nebrimatch"));
     ? datosActuales.lenguajes_a_aprender.split(",").map((l) => l.trim())
     : [];
 
+
+    const fotoSrc = datosActuales.foto_perfil
+  ? `http://localhost:4004${datosActuales.foto_perfil}`
+  : "/default-avatar.png";
+
   return (
     <div className="app-layout">
       <Header />
@@ -68,10 +73,10 @@ const usuario = JSON.parse(localStorage.getItem("usuario_nebrimatch"));
         <div className="contenido-perfil">
           <div className="fila1-perfil">
             <div className="img2-perfil">
-              <img
-                src={persona1}
-                alt={`Foto de perfil de ${datosActuales.nombre_usuario}`}
-              />
+            <img
+  src={fotoSrc}
+  alt={`Foto de perfil de ${datosActuales.nombre_usuario}`}
+/>
             </div>
 
             <div className="col2-perfil">

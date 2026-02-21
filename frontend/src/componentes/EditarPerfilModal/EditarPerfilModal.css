@@ -139,3 +139,34 @@ td:first-child {
 td:last-child {
   width: 65%;
 }
+/* Foto de perfil */
+.foto-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.preview-foto {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d71820;
+  box-shadow: 0 3px 10px rgba(215, 24, 32, 0.2);
+}
+
+.btn-subir-foto {
+  cursor: pointer;
+  background-color: #d71820;
+  color: white;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.btn-subir-foto:hover {
+  background-color: #a51418;
+}

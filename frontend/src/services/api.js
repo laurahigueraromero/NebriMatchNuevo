@@ -164,3 +164,16 @@ export const unirseComunidad = async (comunidadId, usuarioId) => {
   const res = await fetch(`${API_URL}/api/mentores`);
   return res.json();
 };
+// editar perfil ==> subir foto
+export const subirFotoPerfil = async (usuarioId, archivo) => {
+  const formData = new FormData();
+  formData.append("foto", archivo);
+
+  const res = await fetch(`${API_URL}/api/usuarios/${usuarioId}/foto`, {
+    method: "PUT",
+    body: formData, // sin Content-Type, el navegador lo gestiona solo
+  });
+
+  if (!res.ok) throw new Error("Error al subir la foto");
+  return res.json();
+};
