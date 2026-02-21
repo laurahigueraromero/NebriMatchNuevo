@@ -4,7 +4,7 @@ import "./Chats.css";
 import Header from "../componentes/Header";
 import { getChats, getMensajes } from "../services/api";
 
-const socket = io("http://localhost:4004");
+const socket = io("http://192.168.1.47:4004");
 
 function Chats() {
 
