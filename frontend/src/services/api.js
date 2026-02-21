@@ -177,3 +177,20 @@ export const subirFotoPerfil = async (usuarioId, archivo) => {
   if (!res.ok) throw new Error("Error al subir la foto");
   return res.json();
 };
+
+// ============ CONTACTO ============
+
+export const enviarContacto = async (datos) => {
+  const res = await fetch(`${API_URL}/api/contacto`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(datos)
+  });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.error || 'Error al enviar el mensaje');
+  }
+
+  return res.json();
+};

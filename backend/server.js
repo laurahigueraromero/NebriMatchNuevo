@@ -497,6 +497,28 @@ app.get("/api/conversaciones/:id/mensajes", async (req, res) => {
   }
 });
 
+
+// Contacto
+app.post("/api/contacto", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { nombre, email, mensaje } = req.body;
+
+    if (!nombre || !email || !mensaje) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+    }
+
+    await pool.query(
+      "INSERT INTO contacto (nombre, email, mensaje) VALUES (?, ?, ?)",
+      [nombre, email, mensaje]
+    );
+
+    res.status(201).json({ mensaje: "Mensaje enviado correctamente" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ========== INICIAR SERVIDOR ========== en vez de app es server porque ahora socket es el que gestiona todo el tema de conexiones en tiempo real
 server.listen(port, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
