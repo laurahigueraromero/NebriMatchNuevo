@@ -14,7 +14,7 @@ function MiPerfil() {
   const navigate = useNavigate();
   const location = useLocation();
 
-const usuario = JSON.parse(localStorage.getItem("usuario_nebrimatch"));
+const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
 
   useEffect(() => {
     if (location.pathname.includes("editarPerfil")) {

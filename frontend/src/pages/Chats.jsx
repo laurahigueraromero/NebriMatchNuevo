@@ -7,7 +7,8 @@ import { getChats, getMensajes } from "../services/api";
 const socket = io("http://localhost:4004");
 
 function Chats() {
-  const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
+
+const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
 
   const [listaChats, setListaChats] = useState([]);
   const [chatActivo, setChatActivo] = useState(null);

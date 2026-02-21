@@ -34,7 +34,8 @@ function Login() {
     try {
       const res = await login(email, password);
       if (res.usuario) {
-        localStorage.setItem("usuario_nebrimatch", JSON.stringify(res.usuario));
+sessionStorage.setItem('usuario_nebrimatch', JSON.stringify(res.usuario));
+sessionStorage.setItem('token', res.token); // ✅
         navigate("/comunidades");
       } else {
         alert("Usuario no registrado");

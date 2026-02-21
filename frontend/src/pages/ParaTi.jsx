@@ -14,7 +14,7 @@ function ParaTi() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState('');
   const [isOpened, setIsOpened] = useState(false);
-    const usuarioActual = JSON.parse(localStorage.getItem('usuario_nebrimatch'));
+ const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
 
   // Cargar mentores desde la base de datos
   useEffect(() => {
