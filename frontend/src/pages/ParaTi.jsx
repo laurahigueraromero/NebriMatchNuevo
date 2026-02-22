@@ -14,7 +14,7 @@ function ParaTi() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swipeDirection, setSwipeDirection] = useState('');
   const [isOpened, setIsOpened] = useState(false);
- const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
+  const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
 
   // Cargar mentores desde la base de datos
   useEffect(() => {
@@ -22,14 +22,18 @@ function ParaTi() {
       .then(data => {
         console.log('Mentores recibidos de la DB:', data);
         
-    
         const mentoresTransformados = data.map(mentor => ({
           id: mentor.id,
           nombre: mentor.nombre_usuario,
           especialidad: mentor.lenguajes_a_ensenar?.split(',')[0]?.trim() || 'Mentor',
           bio: mentor.descripcion || 'Mentor especializado en tecnología',
-          imagen: `https://ui-avatars.com/api/?name=${ encodeURIComponent (mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
-          online: Math.random() > 0.3, // 70% probabilidad de estar online
+          
+          // 👇 AQUÍ ESTÁ LA LÓGICA DE LA FOTO IMPLEMENTADA 👇
+          imagen: mentor.foto_perfil 
+            ? `http://localhost:4004${mentor.foto_perfil}` 
+            : `https://ui-avatars.com/api/?name=${encodeURIComponent(mentor.nombre_usuario)}&background=d71820&color=fff&size=400&bold=true`,
+          
+          online: Math.random() > 0.3, // 30% probabilidad de estar online
           lenguajes_a_ensenar: mentor.lenguajes_a_ensenar,
           lenguajes_a_aprender: mentor.lenguajes_a_aprender,
           email: mentor.email,
@@ -49,34 +53,30 @@ function ParaTi() {
       });
   }, []);
 
-
-
-
   // LOGICA MATCH
   const handleMatch = async () => {
+    if (!isOpened) setIsOpened(true);
+    setSwipeDirection('slide-out-left');
 
-    
-  if (!isOpened) setIsOpened(true);
-  setSwipeDirection('slide-out-left');
+    const mentorActual = mentoresData[currentIndex];
 
-  const mentorActual = mentoresData[currentIndex];
+    // Crear conversación en la BD
+    try {
+      await fetch('http://localhost:4004/api/conversaciones', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          usuario1_id: usuarioActual?.id,
+          usuario2_id: mentorActual.id
+        })
+      });
+    } catch (err) {
+      console.error('Error creando conversación:', err);
+    }
 
-  // Crear conversación en la BD
-  try {
-    await fetch('http://localhost:4004/api/conversaciones', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        usuario1_id: usuarioActual.id,
-        usuario2_id: mentorActual.id
-      })
-    });
-  } catch (err) {
-    console.error('Error creando conversación:', err);
-  }
+    setTimeout(() => { avanzarCarta(); }, 400);
+  };
 
-  setTimeout(() => { avanzarCarta(); }, 400);
-};
   // LOGICA PASS
   const handlePass = () => {
     if (!isOpened) setIsOpened(true);
@@ -148,12 +148,9 @@ function ParaTi() {
       <Header />
       
       <div className="stack-container">
-        <h1 className="texto-inicial"
-          
-        >
+        <h1 className="texto-inicial">
           Para Ti
           <div className="emoji-fire">
-            
             {/* Controlamos el tamaño aquí */}
             <Lottie animationData={fireAnim} loop={true} />
           </div>

@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, crearUsuario } from "../services/api";
-import "../App.css";
-import { User, Plus, Check } from "lucide-react";
+import { login, crearUsuario, subirFotoPerfil } from "../services/api";
+import "../App.css"; // Asegúrate de que los estilos anteriores estén aquí
+import { User, Plus, Check, Upload } from "lucide-react";
 
-
-// esto a la hora de escalar el proyecto lo registraremos en la bbdd ==>
 const LENGUAJES = [
   "JavaScript", "Python", "Java", "React", "Node.js",
   "CSS", "MySQL", "MongoDB", "TypeScript", "PHP"
@@ -15,6 +13,7 @@ function Login() {
   const navigate = useNavigate();
   const [vista, setVista] = useState("inicio");
   const [error, setError] = useState(null);
+  const [nombreArchivo, setNombreArchivo] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,13 +28,15 @@ function Login() {
     descripcion: ""
   });
 
+  const [fotoPerfil, setFotoPerfil] = useState(null);
+
   const handleLogin = async () => {
     setError(null);
     try {
       const res = await login(email, password);
       if (res.usuario) {
-sessionStorage.setItem('usuario_nebrimatch', JSON.stringify(res.usuario));
-sessionStorage.setItem('token', res.token); // ✅
+        sessionStorage.setItem('usuario_nebrimatch', JSON.stringify(res.usuario));
+        sessionStorage.setItem('token', res.token); 
         navigate("/comunidades");
       } else {
         alert("Usuario no registrado");
@@ -63,18 +64,25 @@ sessionStorage.setItem('token', res.token); // ✅
       return;
     }
 
-    console.log("📋 Datos a enviar:", registro);
-
     try {
       const res = await crearUsuario(registro);
-      console.log("✅ Respuesta recibida:", res);
+      const nuevoUsuarioId = res.id || (res.usuario && res.usuario.id);
 
-      if (res.id) {
+      if (nuevoUsuarioId) {
+        if (fotoPerfil) {
+          try {
+            await subirFotoPerfil(nuevoUsuarioId, fotoPerfil);
+          } catch (fotoErr) {
+            console.error("El usuario se creó pero la foto falló", fotoErr);
+          }
+        }
+
         setVista("login");
         setEmail(registro.email);
         setPassword(registro.password);
+        alert("¡Cuenta creada con éxito! Ahora inicia sesión.");
       } else {
-        setError(res.error);
+        setError(res.error || "No se pudo obtener el ID del usuario al registrar");
       }
     } catch (err) {
       setError("Error de conexión con el servidor");
@@ -83,6 +91,13 @@ sessionStorage.setItem('token', res.token); // ✅
 
   const handleRegistroChange = (e) => {
     setRegistro({ ...registro, [e.target.name]: e.target.value });
+  };
+
+  const handleFotoChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setFotoPerfil(e.target.files[0]);
+      setNombreArchivo(e.target.files[0].name);
+    }
   };
 
   const handleLenguajes = (e, campo) => {
@@ -179,6 +194,35 @@ sessionStorage.setItem('token', res.token); // ✅
               required
             />
 
+            {/* ====== INPUT FOTO BONITO LIMPIO ====== */}
+            <div className="upload-container">
+              <label className="upload-label">
+                Foto de perfil (Opcional):
+              </label>
+              
+              <div className="upload-btn-wrapper">
+                <label 
+                  htmlFor="file-upload-login" 
+                  className="btn-upload-style"
+                >
+                  <Upload size={18} /> Seleccionar archivo
+                </label>
+                <span className="upload-filename">
+                  {nombreArchivo || "Ningún archivo seleccionado"}
+                </span>
+              </div>
+
+              <input
+                id="file-upload-login"
+                type="file"
+                name="foto_perfil"
+                accept="image/*"
+                onChange={handleFotoChange}
+                className="hidden-input"
+              />
+            </div>
+            {/* =============================== */}
+
             <select
               name="rol"
               className="input-field-select"
@@ -189,35 +233,32 @@ sessionStorage.setItem('token', res.token); // ✅
               <option value="profesor">Quiero enseñar (Profesor)</option>
             </select>
 
-            {/* CAMPOS EXTRA PARA PROFESORES */}
             {registro.rol === "profesor" && (
               <>
-                <p style={{ color: '#888', fontSize: '0.85rem', margin: '0.5rem 0' }}>
+                <p className="mentor-hint">
                   Como mentor, cuéntanos más sobre ti:
                 </p>
 
-                <label style={{ color: '#888', fontSize: '0.85rem' }}>
+                <label className="mentor-label">
                   ¿Qué lenguajes enseñas? (Ctrl + click para varios)
                 </label>
                 <select
                   multiple
-                  className="input-field-select"
+                  className="input-field-select select-multiple"
                   onChange={(e) => handleLenguajes(e, 'lenguajes_a_ensenar')}
-                  style={{ height: '120px' }}
                 >
                   {LENGUAJES.map(lang => (
                     <option key={lang} value={lang}>{lang}</option>
                   ))}
                 </select>
 
-                <label style={{ color: '#888', fontSize: '0.85rem' }}>
+                <label className="mentor-label">
                   ¿Qué lenguajes quieres aprender? (Ctrl + click para varios)
                 </label>
                 <select
                   multiple
-                  className="input-field-select"
+                  className="input-field-select select-multiple"
                   onChange={(e) => handleLenguajes(e, 'lenguajes_a_aprender')}
-                  style={{ height: '120px' }}
                 >
                   {LENGUAJES.map(lang => (
                     <option key={lang} value={lang}>{lang}</option>
@@ -229,7 +270,7 @@ sessionStorage.setItem('token', res.token); // ✅
                   placeholder="Descríbete como mentor (experiencia, metodología...)"
                   onChange={handleRegistroChange}
                   rows={3}
-                  style={{ width: '100%', padding: '0.5rem', borderRadius: '8px', border: '1px solid #ccc' }}
+                  className="input-field-textarea"
                 />
               </>
             )}

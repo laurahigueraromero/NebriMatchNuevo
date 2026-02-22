@@ -14,7 +14,7 @@ function MiPerfil() {
   const navigate = useNavigate();
   const location = useLocation();
 
-const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
+  const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
 
   useEffect(() => {
     if (location.pathname.includes("editarPerfil")) {
@@ -60,10 +60,10 @@ const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
     ? datosActuales.lenguajes_a_aprender.split(",").map((l) => l.trim())
     : [];
 
-
-    const fotoSrc = datosActuales.foto_perfil
-  ? `http://localhost:4004${datosActuales.foto_perfil}`
-  : "/default-avatar.png";
+  // AQUÍ ESTÁ EL CAMBIO: Misma lógica que en ParaTi para las iniciales si no hay foto
+  const fotoSrc = datosActuales.foto_perfil
+    ? `http://localhost:4004${datosActuales.foto_perfil}`
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(datosActuales.nombre_usuario || 'Usuario')}&background=d71820&color=fff&size=400&bold=true`;
 
   return (
     <div className="app-layout">
@@ -73,10 +73,10 @@ const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
         <div className="contenido-perfil">
           <div className="fila1-perfil">
             <div className="img2-perfil">
-            <img
-  src={fotoSrc}
-  alt={`Foto de perfil de ${datosActuales.nombre_usuario}`}
-/>
+              <img
+                src={fotoSrc}
+                alt={`Foto de perfil de ${datosActuales.nombre_usuario}`}
+              />
             </div>
 
             <div className="col2-perfil">
@@ -135,7 +135,6 @@ const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
               Podría interesarte
             </p>
 
-          
             <ul className="lista-3d-container">
               
               <li className="item-3d" >

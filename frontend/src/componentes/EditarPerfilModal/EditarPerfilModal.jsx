@@ -15,7 +15,9 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    // CORRECCIÓN CLAVE: Usamos sessionStorage y la clave correcta
+    const usuario = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
+    
     if (usuario) {
       setFormData({
         nombre_usuario: usuario.nombre_usuario || '',
@@ -46,22 +48,30 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
     setError('');
 
     try {
+      // 1. Actualizamos datos de texto
       await editarPerfil(usuarioId, formData);
 
-      let foto_perfil = null;
+      // 2. Si hay foto nueva, la subimos y guardamos la URL que nos devuelve el back
+      let rutaFotoNueva = null;
       if (archivoFoto) {
         const resFoto = await subirFotoPerfil(usuarioId, archivoFoto);
-        foto_perfil = resFoto.foto_perfil;
+        // Asegúrate de que tu API devuelve { foto_perfil: "/uploads/..." }
+        rutaFotoNueva = resFoto.foto_perfil; 
       }
 
-      const usuarioActual = JSON.parse(localStorage.getItem('usuario'));
+      // 3. Actualizamos la sesión local con los datos nuevos para que se vea al instante
+      const usuarioActual = JSON.parse(sessionStorage.getItem('usuario_nebrimatch'));
+      
       const usuarioActualizado = {
         ...usuarioActual,
         ...formData,
-        ...(foto_perfil && { foto_perfil })
+        // Si subimos foto nueva, usamos esa. Si no, mantenemos la que ya tenía.
+        foto_perfil: rutaFotoNueva || usuarioActual.foto_perfil
       };
-      localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+      
+      sessionStorage.setItem('usuario_nebrimatch', JSON.stringify(usuarioActualizado));
 
+      // Avisamos al componente padre (MiPerfil) para que se repinte
       if (onActualizar) onActualizar(usuarioActualizado);
 
       alert('Perfil actualizado correctamente');
@@ -93,20 +103,38 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
 
         <div className="foto-upload-container">
           <img
-            src={preview || "/default-avatar.png"}
+            src={preview || `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.nombre_usuario || 'User')}&background=d71820&color=fff`}
             alt="Preview foto de perfil"
             className="preview-foto"
+            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '50%', border: '4px solid white', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}
           />
-          <label htmlFor="foto-input" className="btn-subir-foto">
-            📷 Cambiar foto
-          </label>
+          
+          {/* Input oculto + Label bonito */}
           <input
-            id="foto-input"
+            id="foto-input-modal"
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept="image/*"
             onChange={handleFotoChange}
             style={{ display: "none" }}
           />
+          <label 
+            htmlFor="foto-input-modal" 
+            className="btn-subir-foto"
+            style={{
+              marginTop: '10px',
+              display: 'inline-block',
+              padding: '8px 16px',
+              background: '#e9ecef',
+              color: '#333',
+              borderRadius: '20px',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              transition: '0.2s'
+            }}
+          >
+            📷 Cambiar foto
+          </label>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -122,7 +150,6 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
                     onChange={handleChange}
                     className="grande"
                     required
-                    placeholder="Tu nombre de usuario"
                   />
                 </td>
               </tr>
@@ -135,7 +162,6 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
                     onChange={handleChange}
                     className="grande"
                     rows="4"
-                    placeholder="Cuéntanos sobre ti, tus intereses y objetivos..."
                   />
                 </td>
               </tr>
@@ -148,7 +174,6 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
                     value={formData.lenguajes_a_ensenar}
                     onChange={handleChange}
                     className="grande"
-                    placeholder="Ej: JavaScript, Python, React"
                   />
                 </td>
               </tr>
@@ -161,7 +186,6 @@ function EditarPerfilModal({ cerrar, usuarioId, onActualizar }) {
                     value={formData.lenguajes_a_aprender}
                     onChange={handleChange}
                     className="grande"
-                    placeholder="Ej: Node.js, Vue.js, TypeScript"
                   />
                 </td>
               </tr>

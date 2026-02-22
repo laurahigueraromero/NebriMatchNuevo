@@ -1875,3 +1875,86 @@ html,
     padding: 20px;
   }
 }
+/* =========================================
+   SUBIDA DE FOTO Y EXTRAS DEL REGISTRO
+   ========================================= */
+
+.upload-container {
+  width: 100%;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.upload-label {
+  color: #666;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.upload-btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-upload-style {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-upload-style:hover {
+  background: #e4e4e4;
+  transform: translateY(-2px);
+}
+
+.upload-filename {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.mentor-hint {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  width: 100%;
+}
+
+.mentor-label {
+  color: #888;
+  font-size: 0.85rem;
+  text-align: left;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.select-multiple {
+  height: 120px !important;
+}
+
+.input-field-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  margin-top: 10px;
+  resize: vertical; /* Permite al usuario hacer más grande la caja solo hacia abajo */
+}

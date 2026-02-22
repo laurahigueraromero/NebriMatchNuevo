@@ -197,6 +197,7 @@ app.get("/api/usuarios/:usuario", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 // Subir foto de perfil : sube la foto con multer y guarda la ruta en la base de datos.
 const upload = require("./middlewares/upload");
 
@@ -442,7 +443,8 @@ app.get("/api/mentores", async (req, res) => {
   try {
     const [mentores] = await pool.query(`
       SELECT u.id, u.nombre_usuario, u.email, u.descripcion, 
-             u.lenguajes_a_ensenar, u.lenguajes_a_aprender, u.numero_matches
+             u.lenguajes_a_ensenar, u.lenguajes_a_aprender, u.numero_matches, 
+             u.foto_perfil 
       FROM usuario u 
       JOIN rol_usuario r ON u.id = r.usuario_id 
       WHERE r.rol = 'profesor'
