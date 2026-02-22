@@ -1,135 +1,66 @@
-/*PÁGINA COMUNIDADES*/
-.target-groups {
-  display: grid;
-  /* Esto crea columnas automáticas. Mínimo 300px ancho, si cabe más, pone más columnas */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+.app-comunidades {
+  min-height: 100vh;
+  background-color: #f4f4f4;
 }
 
-/* Diseño de cada Tarjeta Individual */
-.card-comunidad {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-  border: 1px solid #eee;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Para que el botón se vaya al fondo si hay poco texto */
+.principal-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-/* Efecto al pasar el ratón por encima */
-.card-comunidad:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15);
-  border-color: #bf2a2a;
-}
-
-/* Cabecera de la tarjeta (Categoría y Miembros) */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-}
-.num-miembros {
-  color: #888;
-}
-
-.card-comunidad h3 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 1.2rem;
-}
-
-.card-comunidad p {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.btn-unirse {
-  background-color: white;
-  color: #bf2a2a;
-  border: 2px solid #bf2a2a;
-  padding: 8px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-  width: 100%;
-}
-
-.btn-unirse:hover {
-  background-color: #bf2a2a;
-  color: white;
-}
-
-.main-footer span:hover {
-  text-decoration: underline;
-}
-
-/*diseño para unirse a comunidad*/
-.ya-miembro {
-  color: green;
-  font-weight: bold;
-}
-
-.mensaje {
-  color: orange;
-  padding: 10px;
-}
-
-.miembros-section {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-}
-
-.miembro-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-}
-/* --- Estilos del Buscador y Cabecera --- */
 
 .header-section {
   display: flex;
-  justify-content: space-between; /* Título a la izq, Buscador a la der */
-  align-items: center; /* Centrados verticalmente */
-  flex-wrap: wrap; /* Si es móvil, que baje el buscador */
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 30px;
 }
 
 .search-bar {
-  padding: 12px 20px;
-  width: 300px; /* Ancho fijo bonito */
-  border: 1px solid #ddd;
-  border-radius: 50px; /* Bordes muy redondos (estilo píldora) */
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 12px 20px; width: 300px; border: 1px solid #ddd; border-radius: 50px; font-size: 1rem; outline: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .search-bar:focus {
-  border-color: #bf2a2a; /* Se pone rojo al escribir */
-  box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
-  width: 320px; /* Pequeño efecto de "crecer" al clicar */
+  border-color: #bf2a2a; box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15); width: 320px;
 }
 
-/* Ajuste Responsive para móvil */
+.target-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.target-group {
+  background: white; padding: 50px; border-radius: 10px; text-align: center; margin-top: 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card-comunidad {
+  background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between;
+}
+
+.card-comunidad:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15); border-color: #bf2a2a; }
+
+.card-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.9rem; }
+.num-miembros { color: #888; }
+.card-comunidad h3 { margin: 0 0 10px 0; color: #333; font-size: 1.2rem; }
+.card-comunidad p { color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+
+.btn-unirse { background-color: white; color: #bf2a2a; border: 2px solid #bf2a2a; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s; width: 100%; }
+.btn-unirse:hover { background-color: #bf2a2a; color: white; }
+
+.ya-miembro { color: green; font-weight: bold; }
+.mensaje { color: orange; padding: 10px; }
+.miembros-section { margin-top: 20px; border-top: 1px solid #ccc; }
+.miembro-item { display: flex; justify-content: space-between; padding: 8px 0; }
+
 @media (max-width: 768px) {
-  .header-section {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-bar {
-    width: 100%; /* En móvil que ocupe todo el ancho */
-  }
+  .app-comunidades { flex-direction: column; width: 100vw; overflow-x: hidden; }
+  .principal-content { width: 100%; padding: 15px; padding-bottom: 80px; }
+  .header-section { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .search-bar { width: 100%; }
+  .target-groups { grid-template-columns: 1fr; gap: 20px; }
+  .card-comunidad { padding: 20px; }
 }

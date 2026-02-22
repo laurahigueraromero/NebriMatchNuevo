@@ -6,6 +6,7 @@ import InteresPerfil from "../componentes/InteresPerfil/InteresPerfil";
 
 import TarjetaHome from "../componentes/TarjetaHome";
 import Header from "../componentes/Header";
+import './MiPerfil.css';
 
 function MiPerfil() {
   const [modalAbierto, setModalAbierto] = useState(false);

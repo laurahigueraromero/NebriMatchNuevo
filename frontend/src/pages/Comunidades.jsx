@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getComunidades } from "../services/api";
 import "../App.css";
 import Header from "../componentes/Header";
+import './Comunidades.css';
 
 function Comunidades() {
   const [busqueda, setBusqueda] = useState("");

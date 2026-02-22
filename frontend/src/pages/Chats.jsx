@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import "./Chats.css";
 import Header from "../componentes/Header";
 import { getChats, getMensajes } from "../services/api";
+import './Chats.css';
 
 const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:4004';
 const socket = io(SOCKET_URL);

@@ -2,6 +2,8 @@ import TarjetaHome from "../componentes/TarjetaHome";
 import imagen2 from "../assets/imagenes/imagen2-home.jpg";
 import FAQItem from "../componentes/FAQItem/FAQItem"; 
 import { useNavigate } from "react-router-dom";
+import './Home.css';
+
 
 function Home() {
   const navigate = useNavigate(); 

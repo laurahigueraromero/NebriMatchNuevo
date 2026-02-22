@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login, crearUsuario, subirFotoPerfil } from "../services/api";
 import "../App.css"; // Asegúrate de que los estilos anteriores estén aquí
 import { User, Plus, Check, Upload } from "lucide-react";
+import './Login.css';
 
 const LENGUAJES = [
   "JavaScript", "Python", "Java", "React", "Node.js",

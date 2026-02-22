@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getComunidad, unirseComunidad } from "../services/api";
 import "../App.css";
 import Header from "../componentes/Header";
+import './DetallesComunidades.css';
 
 // Solo usamos iconos de Lucide (que ya tienes y funcionan)
 import {
