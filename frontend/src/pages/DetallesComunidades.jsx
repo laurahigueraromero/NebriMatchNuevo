@@ -58,6 +58,8 @@ function DetallesComunidades() {
 
   const chatEndRef = useRef(null);
   const fileInputRef = useRef(null);
+  // ref para tener siempre el conversacionId actualizado en enviarMensaje
+  const conversacionIdRef = useRef(null);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   const scrollToBottom = () => {
@@ -88,6 +90,8 @@ function DetallesComunidades() {
         // 1. Obtener (o crear) la conversación de esta comunidad
         const { conversacion_id } = await inicializarChatComunidad(id);
         setConversacionId(conversacion_id);
+        // guardamos también en el ref para que enviarMensaje lo lea bien
+        conversacionIdRef.current = conversacion_id;
 
         // 2. Cargar mensajes con el ID real usando getMensajes de api.js
         const data = await getMensajes(conversacion_id);
@@ -144,11 +148,12 @@ function DetallesComunidades() {
 
   const enviarMensaje = (e) => {
     e.preventDefault();
-    if (!mensajeInput.trim() || !usuario || !conversacionId) return;
+    // usamos el ref en lugar del estado para evitar que sea null por el ciclo de React
+    if (!mensajeInput.trim() || !usuario || !conversacionIdRef.current) return;
 
     // Emitir por Socket.IO (el servidor lo guarda en BD y hace broadcast)
     socket.emit("enviar_mensaje", {
-      conversacion_id: conversacionId,
+      conversacion_id: conversacionIdRef.current,
       remitente_id: usuario.id,
       mensaje: mensajeInput
     });

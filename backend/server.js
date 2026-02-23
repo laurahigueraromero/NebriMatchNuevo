@@ -392,19 +392,18 @@ app.post("/api/comunidades/:id/inicializar-chat", async (req, res) => {
       "SELECT conversacion_id, creador_id FROM comunidades WHERE id = ?", [id]
     );
 
-    // si ya tiene conversacion_id la devolvemos directamente
+    console.log("🔍 Comunidad encontrada:", comunidad[0]); // añade esto
+
     if (comunidad[0].conversacion_id) {
       return res.json({ conversacion_id: comunidad[0].conversacion_id });
     }
 
-    // si no tiene, creamos una nueva conversación usando el creador como usuario1 y usuario2
     const creadorId = comunidad[0].creador_id;
     const [result] = await pool.query(
       "INSERT INTO conversaciones (usuario1_id, usuario2_id) VALUES (?, ?)",
       [creadorId, creadorId]
     );
 
-    // guardamos el conversacion_id en la comunidad para no volver a crearla
     await pool.query(
       "UPDATE comunidades SET conversacion_id = ? WHERE id = ?",
       [result.insertId, id]
@@ -412,6 +411,7 @@ app.post("/api/comunidades/:id/inicializar-chat", async (req, res) => {
 
     res.json({ conversacion_id: result.insertId });
   } catch (error) {
+    console.error("💥 Error en inicializar-chat:", error.message); // añade esto
     res.status(500).json({ error: error.message });
   }
 });
