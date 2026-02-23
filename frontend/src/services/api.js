@@ -159,6 +159,13 @@ export const unirseComunidad = async (comunidadId, usuarioId) => {
   return res.json();
 };
 
+export const inicializarChatComunidad = async (comunidadId) => {
+  const res = await fetch(`${API_URL}/api/comunidades/${comunidadId}/inicializar-chat`, {
+    method: 'POST'
+  });
+  return res.json();
+};
+
 // mentores ==>
   export const getMentores = async () => {
   const res = await fetch(`${API_URL}/api/mentores`);

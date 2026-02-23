@@ -156,8 +156,6 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-
-
 // Perfil por ID
 app.get("/api/usuarios/id/:id", async (req, res) => {
   const { pool } = require("./config/database");
@@ -178,6 +176,7 @@ app.get("/api/usuarios/id/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 // Perfil por nombre de usuario
 app.get("/api/usuarios/:usuario", async (req, res) => {
   const { pool } = require("./config/database");
@@ -219,7 +218,6 @@ app.put("/api/usuarios/:id/foto", upload.single("foto"), async (req, res) => { /
   }
 });
 
-
 // Editar perfil==> por eso ponemos put() porque es para EDITAR!!
 app.put("/api/usuarios/:id", async (req, res) => {
   const { pool } = require("./config/database");
@@ -248,7 +246,6 @@ app.put("/api/usuarios/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // Chats del usuario
 app.get("/api/usuarios/:usuario/chats", async (req, res) => {
@@ -383,6 +380,42 @@ app.post("/api/comunidades/:id/unirse", async (req, res) => {
   }
 });
 
+// Inicializar chat de comunidad ==> crea una conversación en la tabla conversaciones si no existe
+// y guarda su id en la columna conversacion_id de la tabla comunidades
+// así cada comunidad tiene su propio chat persistente
+app.post("/api/comunidades/:id/inicializar-chat", async (req, res) => {
+  const { pool } = require("./config/database");
+  try {
+    const { id } = req.params;
+
+    const [comunidad] = await pool.query(
+      "SELECT conversacion_id, creador_id FROM comunidades WHERE id = ?", [id]
+    );
+
+    // si ya tiene conversacion_id la devolvemos directamente
+    if (comunidad[0].conversacion_id) {
+      return res.json({ conversacion_id: comunidad[0].conversacion_id });
+    }
+
+    // si no tiene, creamos una nueva conversación usando el creador como usuario1 y usuario2
+    const creadorId = comunidad[0].creador_id;
+    const [result] = await pool.query(
+      "INSERT INTO conversaciones (usuario1_id, usuario2_id) VALUES (?, ?)",
+      [creadorId, creadorId]
+    );
+
+    // guardamos el conversacion_id en la comunidad para no volver a crearla
+    await pool.query(
+      "UPDATE comunidades SET conversacion_id = ? WHERE id = ?",
+      [result.insertId, id]
+    );
+
+    res.json({ conversacion_id: result.insertId });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Seed comunidades
 app.get("/api/seed/comunidades", async (req, res) => {
   const { pool } = require("./config/database");
@@ -498,7 +531,6 @@ app.get("/api/conversaciones/:id/mensajes", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 // Contacto
 app.post("/api/contacto", async (req, res) => {
