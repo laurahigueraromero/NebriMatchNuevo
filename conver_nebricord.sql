@@ -1,0 +1,1 @@
+ALTER TABLE comunidades ADD COLUMN conversacion_id INT NULL;
