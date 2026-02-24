@@ -39,13 +39,13 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      {/* El Footer ahora sí sabe en qué página está */}
+      
       {!ocultarFooter && <Footer />}
     </div>
   );
 }
 
-// 2. El componente principal que exportas solo envuelve todo con el BrowserRouter
+
 function AppRouter() {
   return (
     <BrowserRouter>
