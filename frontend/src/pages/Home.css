@@ -20,7 +20,9 @@ html,
   width: auto;
   height: auto;
   padding-bottom: 56.25%;
-  
+
+  background-image: url("../assets/imagenes/imagen-home.jpg");
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -81,7 +83,7 @@ html,
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  gap: 10%; 
+  gap: 10%;
   padding: 20px;
   margin-bottom: 50px;
   flex-wrap: wrap; /* Para que en pantallas pequeñas bajen a otra línea */

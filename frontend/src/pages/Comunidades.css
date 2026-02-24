@@ -19,11 +19,20 @@
 }
 
 .search-bar {
-  padding: 12px 20px; width: 300px; border: 1px solid #ddd; border-radius: 50px; font-size: 1rem; outline: none; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 12px 20px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .search-bar:focus {
-  border-color: #bf2a2a; box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15); width: 320px;
+  border-color: #bf2a2a;
+  box-shadow: 0 4px 10px rgba(191, 42, 42, 0.15);
+  width: 320px;
 }
 
 .target-groups {
@@ -34,33 +43,113 @@
 }
 
 .target-group {
-  background: white; padding: 50px; border-radius: 10px; text-align: center; margin-top: 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .card-comunidad {
-  background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.card-comunidad:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15); border-color: #bf2a2a; }
+.card-comunidad:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(191, 42, 42, 0.15);
+  border-color: #bf2a2a;
+}
 
-.card-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.9rem; }
-.num-miembros { color: #888; }
-.card-comunidad h3 { margin: 0 0 10px 0; color: #333; font-size: 1.2rem; }
-.card-comunidad p { color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+.num-miembros {
+  color: #888;
+}
+.card-comunidad h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+.card-comunidad p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
 
-.btn-unirse { background-color: white; color: #bf2a2a; border: 2px solid #bf2a2a; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.3s; width: 100%; }
-.btn-unirse:hover { background-color: #bf2a2a; color: white; }
+.btn-unirse {
+  background-color: white;
+  color: #bf2a2a;
+  border: 2px solid #bf2a2a;
+  padding: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+.btn-unirse:hover {
+  background-color: #bf2a2a;
+  color: white;
+}
 
-.ya-miembro { color: green; font-weight: bold; }
-.mensaje { color: orange; padding: 10px; }
-.miembros-section { margin-top: 20px; border-top: 1px solid #ccc; }
-.miembro-item { display: flex; justify-content: space-between; padding: 8px 0; }
+.ya-miembro {
+  color: green;
+  font-weight: bold;
+}
+.mensaje {
+  color: orange;
+  padding: 10px;
+}
+.miembros-section {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+.miembro-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
 
 @media (max-width: 768px) {
-  .app-comunidades { flex-direction: column; width: 100vw; overflow-x: hidden; }
-  .principal-content { width: 100%; padding: 15px; padding-bottom: 80px; }
-  .header-section { flex-direction: column; align-items: flex-start; gap: 15px; }
-  .search-bar { width: 100%; }
-  .target-groups { grid-template-columns: 1fr; gap: 20px; }
-  .card-comunidad { padding: 20px; }
+  .app-comunidades {
+    flex-direction: column;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  .principal-content {
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 80px;
+  }
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .search-bar {
+    width: 100%;
+  }
+  .target-groups {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .card-comunidad {
+    padding: 20px;
+  }
 }
